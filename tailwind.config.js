@@ -5,6 +5,15 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      blue:'#3383F9',
+      white:'#FFFFFF',
+      darkGray:'#2A2A2A',
+      lightGray:'#F6F8FA',
+
+    },
   },
   plugins: [],
 }
