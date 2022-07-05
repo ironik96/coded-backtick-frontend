@@ -12,7 +12,7 @@ function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
     authStore.register(user);
-    if (user) navigate('/dashboard');
+    if(authStore.user) navigate('/dashboard');
   };
   return (
  <main className='flex justify-around'>
