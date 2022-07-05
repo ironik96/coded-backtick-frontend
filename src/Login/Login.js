@@ -13,7 +13,7 @@ function Login() {
     const handleSubmit = (event) => {
       event.preventDefault();
       authStore.signin(user);
-      if(user) navigate('/Profile');
+      if(authStore.user) navigate('/Profile');
     };
   
   return (
