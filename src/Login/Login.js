@@ -1,15 +1,19 @@
 import loginimage from './../images/rafiki.png';
 import { Link } from 'react-router-dom';
 import authStore from "../stores/authStore";
+import { observer } from 'mobx-react';
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 function Login() {
   const [user, setUser] = useState();
+  const navigate = useNavigate();
   const handleChange = (event) =>{
     setUser({ ...user, [event.target.name]: event.target.value });
   }
     const handleSubmit = (event) => {
       event.preventDefault();
       authStore.signin(user);
+      if(user) navigate('/Profile');
     };
   
   return (
@@ -33,4 +37,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default observer(Login);

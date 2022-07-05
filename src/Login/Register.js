@@ -1,14 +1,18 @@
 import registerimage from './../images/register.png';
 import { useState } from "react";
 import authStore from "../stores/authStore";
+import { useNavigate } from 'react-router-dom';
+import { observer } from 'mobx-react';
 function Register() {
   const [user, setUser] = useState();
+  const navigate = useNavigate();
   const handleChange = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
   }
   const handleSubmit = (event) => {
     event.preventDefault();
-    authStore.signup(user);
+    authStore.register(user);
+    if (user) navigate('/dashboard');
   };
   return (
  <main className='flex justify-around'>
@@ -30,4 +34,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default  observer(Register);

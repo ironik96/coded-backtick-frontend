@@ -8,14 +8,16 @@ class AuthStore {
   }
   user = null;
 
-  signup = async (userData) => {
+  register = async (userData) => {
     try {
-      const response = await instance.post('/signup', userData);
-      this.signin(response.data);
+      const response = await instance.post('/register', userData);
+      const decoded = jwt_decode(response.data);
+      this.signin({...decoded,"password": userData.password});
     } catch (error) {}
   };
 
   signin = async (userData) => {
+    console.log(userData)
     try {
       const response = await instance.post('/signin', userData);
       this.setUser(response.data);

@@ -6,7 +6,7 @@ function Navbar() {
       <div className="flex justify-end gap-4">
       <Link to={`/Login`}>
           <button className="bg-transparent text-darkGray font-light py-2 px-4 ">
-                   LOG IN
+                   LOGIN
           </button>
      </Link>
       <div className="border-l border-indigo-600"></div>
