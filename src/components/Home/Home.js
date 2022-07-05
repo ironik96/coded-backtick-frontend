@@ -4,7 +4,7 @@ import StaticCardList from "./StaticCardList";
 
 const Home = () => {
   return (
-    <div className="container">
+    <div className="wrapper">
       <StaticCardList />
       <BoardCardList />
     </div>
