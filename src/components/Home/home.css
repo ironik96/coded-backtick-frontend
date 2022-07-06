@@ -1,0 +1,19 @@
+.wrapper {
+  @apply flex flex-col gap-4 bg-light-grey justify-center items-center w-full h-full;
+}
+
+.card-list {
+  @apply flex gap-4 w-11/12 h-max;
+}
+
+.card {
+  @apply w-56 aspect-square shrink-0 bg-white rounded-3xl flex flex-col items-center p-4;
+}
+
+.card-header {
+  @apply flex justify-between w-full items-center;
+}
+
+.card-content {
+  @apply w-full grow;
+}
