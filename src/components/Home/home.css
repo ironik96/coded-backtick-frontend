@@ -3,11 +3,12 @@
 }
 
 .card-list {
-  @apply flex gap-4 w-[710px] h-max;
+  @apply flex gap-4 h-max;
+  width: calc(3 * 15rem + 2rem);
 }
 
 .card {
-  @apply w-56 aspect-square shrink-0 bg-white rounded-3xl flex flex-col items-center p-4;
+  @apply w-60 aspect-square shrink-0 bg-white rounded-3xl flex flex-col items-center p-4;
 }
 
 .card-header {

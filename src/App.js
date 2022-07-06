@@ -16,7 +16,7 @@ function App() {
       <div className="h-[4rem]">
         <Navbar />
       </div>
-      <div className="h-[calc(100%-4rem)]">
+      <div className="h-[calc(100%-4rem)] overflow-auto">
         <Routes>
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />

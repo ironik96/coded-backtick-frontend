@@ -17,8 +17,7 @@ class BoardStore {
   };
 
   createBoard = async (board, userId) => {
-    board.startDate = new Date(board.startDate).toISOString();
-    board.endDate = new Date(board.endDate).toISOString();
+    this.makeBoardDatesISO(board);
 
     const [response, error] = await tryCatch(() =>
       instance.post(URL, { ...board, userId })
@@ -27,13 +26,23 @@ class BoardStore {
     userStore.addBoard(response.data);
   };
 
-  updateBoard = async (board, userId) => {
-    console.log("update board");
+  updateBoard = async (board) => {
+    this.makeBoardDatesISO(board);
+
+    const [response, error] = await tryCatch(() => instance.put(URL, board));
+    if (error) return console.error(error);
+    userStore.updateBoard(response.data);
   };
 
   makeBoardEditable = (board) => {
     board.startDate = dateToInputValue(new Date(board.startDate));
     board.endDate = dateToInputValue(new Date(board.endDate));
+    return board;
+  };
+
+  makeBoardDatesISO = (board) => {
+    board.startDate = new Date(board.startDate).toISOString();
+    board.endDate = new Date(board.endDate).toISOString();
     return board;
   };
 }

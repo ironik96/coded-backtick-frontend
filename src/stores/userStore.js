@@ -26,6 +26,12 @@ class UserStore {
   };
 
   addBoard = (board) => (this.userBoards = [...this.userBoards, board]);
+  updateBoard = (updatedBoard) =>
+    (this.userBoards = this.userBoards.map((board) =>
+      board._id === updatedBoard._id ? updatedBoard : board
+    ));
+  deleteBoard = (boardId) =>
+    (this.userBoards = this.userBoards.filter(({ _id }) => _id !== boardId));
 }
 
 async function tryCatch(promise) {
