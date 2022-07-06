@@ -3,7 +3,7 @@
 }
 
 .card-list {
-  @apply flex gap-4 w-11/12 h-max;
+  @apply flex gap-4 w-[710px] h-max;
 }
 
 .card {
