@@ -1,7 +1,6 @@
-const Card = ({ leading, trailing, content, onClick }) => {
-  const cardClass = onClick ? "card cursor-pointer" : "card";
+const Card = ({ leading, trailing, content }) => {
   return (
-    <div className={cardClass} onClick={onClick}>
+    <div className="card">
       <div className="card-header">
         <div>{leading}</div>
         {trailing}
