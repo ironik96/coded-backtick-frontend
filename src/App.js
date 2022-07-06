@@ -8,6 +8,7 @@ import ResetPassword from "./Login/ResetPassword";
 import { Route, Routes } from "react-router-dom";
 
 import { observer } from "mobx-react";
+import CreateBoard from "./components/CreateBoard/CreateBoard";
 
 function App() {
   return (
@@ -16,14 +17,15 @@ function App() {
         <Navbar />
       </div>
       <div className="h-[calc(100%-4rem)]">
-        <Routes>
+        <CreateBoard />
+        {/* <Routes>
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/ResetPassword" element={<ResetPassword />} />
           <Route path="/" element={<Welcome />} />
           <Route path="/dashboard" element={<Home />} />
-        </Routes>
+        </Routes> */}
       </div>
     </div>
   );
