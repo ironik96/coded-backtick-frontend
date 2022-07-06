@@ -24,7 +24,7 @@ function App() {
           <Route path="/ResetPassword" element={<ResetPassword />} />
           <Route path="/" element={<Welcome />} />
           <Route path="/dashboard" element={<Home />} />
-          <Route path="/create-board" element={<CreateBoard />} />
+          <Route path="/board/:boardSlug" element={<CreateBoard />} />
         </Routes>
       </div>
     </div>

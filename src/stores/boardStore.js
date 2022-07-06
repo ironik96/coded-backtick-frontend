@@ -26,6 +26,16 @@ class BoardStore {
     if (error) return console.error(error);
     userStore.addBoard(response.data);
   };
+
+  updateBoard = async (board, userId) => {
+    console.log("update board");
+  };
+
+  makeBoardEditable = (board) => {
+    board.startDate = dateToInputValue(new Date(board.startDate));
+    board.endDate = dateToInputValue(new Date(board.endDate));
+    return board;
+  };
 }
 
 async function tryCatch(promise) {

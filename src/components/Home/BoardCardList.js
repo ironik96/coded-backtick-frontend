@@ -4,12 +4,15 @@ import Card from "./Card";
 import ScrollContainer from "react-indiana-drag-scroll";
 import BoardChart from "./card_components/BoardChart";
 import userStore from "../../stores/userStore";
+import { Link } from "react-router-dom";
 
 const BoardCardList = () => {
   const boards = userStore.userBoards;
 
   const cards = boards.map((board) => (
-    <Card key={board.slug} leading={board.title} content={<BoardChart />} />
+    <Link key={board._id} to={`/board/${board.slug}`}>
+      <Card leading={board.title} content={<BoardChart />} />
+    </Link>
   ));
   return (
     <ScrollContainer vertical={false} className="card-list">
