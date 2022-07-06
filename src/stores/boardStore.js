@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable } from "mobx";
 import instance from "./instance";
 import userStore from "./userStore";
 
@@ -13,10 +13,13 @@ class BoardStore {
     title: "",
     description: "",
     startDate: dateToInputValue(new Date()),
-    endDate: "",
+    endDate: dateToInputValue(new Date(), 7),
   };
 
   createBoard = async (board, userId) => {
+    board.startDate = new Date(board.startDate).toISOString();
+    board.endDate = new Date(board.endDate).toISOString();
+
     const [response, error] = await tryCatch(() =>
       instance.post(URL, { ...board, userId })
     );
@@ -34,7 +37,9 @@ async function tryCatch(promise) {
   }
 }
 
-function dateToInputValue(date) {
+function dateToInputValue(date, days) {
+  if (days) date.setDate(date.getDate() + days);
+
   let dd = date.getDate();
   let mm = date.getMonth() + 1;
   let yyyy = date.getFullYear();
