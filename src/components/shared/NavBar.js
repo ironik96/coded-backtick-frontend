@@ -13,7 +13,7 @@ const Navbar = () => {
   const homeLink = user ? "/dashboard" : "/";
 
   return (
-    <nav className="w-full h-full flex bg-white p-4">
+    <nav className="w-full h-full flex bg-white items-center p-4">
       <Link to={homeLink} className="flex gap-3 items-center">
         <img src={logo} width={logoSize} height={logoSize} alt="logo" />
         <div className="text-3xl font-bold">Backtick</div>
@@ -57,14 +57,14 @@ const AuthTrailing = () => {
     <div className="flex justify-end gap-4">
       <Link
         to={`/Login`}
-        className="bg-transparent text-darkGray font-light py-2 px-4 "
+        className="bg-transparent text-darkGray font-light py-2 px-4 m-auto "
       >
         LOGIN
       </Link>
       <div className="border-l border-indigo-600"></div>
       <Link
         to={`/Register`}
-        className="bg-blue text-white font-light py-2 px-4 rounded"
+        className="bg-blue text-white font-light py-2 px-4 rounded m-auto"
       >
         REGISTER
       </Link>
