@@ -49,20 +49,25 @@ const CreateBoard = () => {
           name={"description"}
           value={board.description}
         />
-        <TextInput
-          handleChange={handleChange}
-          placeholder={"Start date"}
-          name={"startDate"}
-          value={board.startDate}
-          type={"date"}
-        />
-        <TextInput
-          handleChange={handleChange}
-          placeholder={"End date"}
-          name={"endDate"}
-          value={board.endDate}
-          type={"date"}
-        />
+        <div className="flex gap-6">
+          <TextInput
+            handleChange={handleChange}
+            placeholder={"Start date"}
+            name={"startDate"}
+            value={board.startDate}
+            type={"date"}
+            twClass="grow"
+          />
+
+          <TextInput
+            handleChange={handleChange}
+            placeholder={"End date"}
+            name={"endDate"}
+            value={board.endDate}
+            type={"date"}
+            twClass="grow"
+          />
+        </div>
         <button
           type="submit"
           className="bg-blue text-white font-bold py-2 px-20 rounded self-end focus:outline-none"

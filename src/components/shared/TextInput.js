@@ -1,6 +1,13 @@
-function TextInput({ type = "text", placeholder, value, name, handleChange }) {
+function TextInput({
+  type = "text",
+  placeholder,
+  value,
+  name,
+  twClass,
+  handleChange,
+}) {
   return (
-    <div className="input-container">
+    <div className={"input-container " + twClass}>
       <input
         type={type}
         id={name}
