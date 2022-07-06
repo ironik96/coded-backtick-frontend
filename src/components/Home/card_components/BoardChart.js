@@ -4,10 +4,13 @@ import crown from "../../../icons/crown.svg";
 const iconSize = 16;
 
 const BoardChart = ({
-  totalpoints = 5,
-  firstPlacePoints = 5,
-  secondPlacePoints = 3,
-  thirdPlacePoints = 1,
+  totalpoints = 1,
+  firstPlacePoints = 0.1,
+  secondPlacePoints = 0.1,
+  thirdPlacePoints = 0.1,
+  firstPlaceName = "",
+  secondPlaceName = "",
+  thirdPlaceName = "",
 }) => {
   const styles = {
     thirdPlaceBar: {
@@ -31,17 +34,17 @@ const BoardChart = ({
         <Bar
           firstplace={false}
           placementStyle={styles.thirdPlaceBar}
-          name={"Abdullah"}
+          name={thirdPlaceName}
         />
         <Bar
           firstplace={true}
           placementStyle={styles.firstPlaceBar}
-          name={"Ahmad"}
+          name={firstPlaceName}
         />
         <Bar
           firstplace={false}
           placementStyle={styles.secondPlaceBar}
-          name={"Ahmad"}
+          name={secondPlaceName}
         />
       </div>
     </>
@@ -53,7 +56,13 @@ const Bar = ({ placementStyle, name, firstplace }) => {
     <div className="w-12 relative" style={placementStyle}>
       <div className="absolute t-0 -translate-y-8 inset-x-0 text-[10px] flex flex-col h-8 justify-end items-center">
         {firstplace && (
-          <img src={crown} width={iconSize} height={iconSize} alt="crown" />
+          <img
+            className="grow"
+            src={crown}
+            width={iconSize}
+            height={iconSize}
+            alt="crown"
+          />
         )}
         {name}
       </div>

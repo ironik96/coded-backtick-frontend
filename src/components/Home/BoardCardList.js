@@ -6,7 +6,8 @@ import BoardChart from "./card_components/BoardChart";
 import userStore from "../../stores/userStore";
 
 const BoardCardList = () => {
-  const { boards } = userStore.user;
+  const boards = userStore.userBoards;
+
   const cards = boards.map((board) => (
     <Card key={board.slug} leading={board.title} content={<BoardChart />} />
   ));

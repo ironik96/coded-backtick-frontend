@@ -17,15 +17,15 @@ function App() {
         <Navbar />
       </div>
       <div className="h-[calc(100%-4rem)]">
-        <CreateBoard />
-        {/* <Routes>
+        <Routes>
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/ResetPassword" element={<ResetPassword />} />
           <Route path="/" element={<Welcome />} />
           <Route path="/dashboard" element={<Home />} />
-        </Routes> */}
+          <Route path="/create-board" element={<CreateBoard />} />
+        </Routes>
       </div>
     </div>
   );

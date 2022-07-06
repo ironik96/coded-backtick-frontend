@@ -18,7 +18,6 @@ class AuthStore {
   };
 
   signin = async (userData) => {
-    console.log(userData);
     try {
       const response = await instance.post("/signin", userData);
       this.setUser(response.data);

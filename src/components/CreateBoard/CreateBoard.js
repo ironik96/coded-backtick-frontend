@@ -3,6 +3,7 @@ import boardStore from "../../stores/boardStore";
 import TextInput from "../shared/TextInput";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import userStore from "../../stores/userStore";
 
 const CreateBoard = () => {
   const [board, setBoard] = useState(boardStore.initialBoard);
@@ -12,9 +13,9 @@ const CreateBoard = () => {
     setBoard({ ...board, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(board);
+    await boardStore.createBoard(board, userStore.user._id);
     navigate("/dashboard", { replace: true });
   };
 
@@ -23,7 +24,7 @@ const CreateBoard = () => {
       className="bg-light-grey h-full w-full flex flex-col justify-center  gap-6"
       onSubmit={handleSubmit}
     >
-      <div className="bg-white w-8/12 mx-auto p-12 h-5/6 overflow-y-auto rounded-3xl flex flex-col gap-5">
+      <div className="bg-white w-8/12 mx-auto p-12 h-5/6 overflow-y-auto rounded-3xl flex flex-col justify-center gap-5">
         <h1 className="font-bold text-3xl">Create board</h1>
         <TextInput
           handleChange={handleChange}
