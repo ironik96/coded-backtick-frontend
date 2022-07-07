@@ -10,9 +10,9 @@ function Login() {
   const handleChange = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    authStore.signin(user);
+    await authStore.signin(user);
     if (authStore.user) navigate("/dashboard");
   };
 
