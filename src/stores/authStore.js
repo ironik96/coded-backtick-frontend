@@ -13,7 +13,7 @@ class AuthStore {
     try {
       const response = await instance.post("/register", userData);
       const decoded = jwt_decode(response.data);
-      this.signin({ ...decoded, password: userData.password });
+      await this.signin({ ...decoded, password: userData.password });
     } catch (error) {}
   };
 
@@ -21,6 +21,8 @@ class AuthStore {
     try {
       const response = await instance.post("/signin", userData);
       this.setUser(response.data);
+      const decoded = jwt_decode(response.data);
+      await userStore.fetchUser(decoded._id);
     } catch (error) {}
   };
 
@@ -44,7 +46,7 @@ class AuthStore {
     if (token) {
       const currentTime = Date.now();
       const user = jwt_decode(token);
-      if (user.exp >= currentTime) {
+      if (user.expires >= currentTime) {
         this.setUser(token);
       } else {
         this.signout();
