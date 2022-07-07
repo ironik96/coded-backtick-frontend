@@ -2,9 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --theme-green: #1dad91;
+  --theme-black: #2a2a2a;
+  --theme-blue: #3383f9;
+  --theme-grey: #869199;
+  --theme-grey-background: #8b8d8f;
+  --theme-red: #df6d45;
+  --theme-light-grey: #f6f8fa;
+  --theme-yellow: #fdca4b;
+  --theme-white: #ffffff;
+}
+
 body {
   background-color: #F6F8FA;
   margin: 0;
+  color: var(--theme-black);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -15,4 +28,48 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* Input style */
+.input-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-container:focus-within label {
+  transform: translate(0, 12px) scale(0.8);
+  color: var(--theme-blue);
+}
+
+.input-container .filled {
+  transform: translate(0, 12px) scale(0.8);
+}
+
+.input-container label {
+  position: absolute;
+  pointer-events: none;
+  transform: translate(0, 23px) scale(1);
+  transform-origin: top left;
+  transition: 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  color: var(--theme-grey);
+  font-size: 16px;
+  line-height: 1;
+  left: 16px;
+}
+
+.input-container input {
+  height: 64px;
+  border-radius: 4px;
+  border: none;
+  padding: 24px 16px 4px 16px;
+  font-size: 16px;
+  line-height: 1;
+  outline: none;
+  box-shadow: none;
+  transition: 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+}
+
+.input-container input:focus {
+  box-shadow: 0 0 0 2px var(--theme-blue);
 }
