@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const StaticCardList = () => {
   return (
     <div className="card-list">
-      <Link to={"/board/new"}>
+      <Link to={"/form/board/new"}>
         <Card leading="Create New Board" content={<AddBoard />} />
       </Link>
       <Card

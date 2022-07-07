@@ -5,6 +5,7 @@ import Login from "./Login/Login";
 import Register from "./Login/Register";
 import Profile from "./Profile/Profile";
 import ResetPassword from "./Login/ResetPassword";
+import BoardPage from "./Componets/Board/BoardPage";
 import { Route, Routes } from "react-router-dom";
 
 import { observer } from "mobx-react";
@@ -24,7 +25,8 @@ function App() {
           <Route path="/ResetPassword" element={<ResetPassword />} />
           <Route path="/" element={<Welcome />} />
           <Route path="/dashboard" element={<Home />} />
-          <Route path="/board/:boardSlug" element={<CreateBoard />} />
+          <Route path="/form/board/:boardSlug" element={<CreateBoard />} />
+          <Route path="/board/:boardSlug" element={<BoardPage />} />
         </Routes>
       </div>
     </div>
