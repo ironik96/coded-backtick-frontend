@@ -19,14 +19,15 @@ function App() {
       </div>
       <div className="h-[calc(100%-4rem)] overflow-auto">
         <Routes>
-          <Route path="/Login" element={<Login />} />
+          {/* <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/ResetPassword" element={<ResetPassword />} />
           <Route path="/" element={<Welcome />} />
           <Route path="/dashboard" element={<Home />} />
-          <Route path="/form/board/:boardSlug" element={<CreateBoard />} />
+          <Route path="/form/board/:boardSlug" element={<CreateBoard />} /> */}
           <Route path="/board/:boardSlug" element={<BoardPage />} />
+          <Route path="/" element={<BoardPage />} />
         </Routes>
       </div>
     </div>
