@@ -1,9 +1,8 @@
 import React from "react";
 import { observer } from "mobx-react";
 import coin from "../../../images/coin.png";
-import RankLeaderboard from "./LeaderboardMember";
-
-function LeaderboardTab() {
+import MemberItem from "./MemberItem"
+function MemberTab() {
   const members = [
     {
       name: "Bodour Alrashidi",
@@ -22,14 +21,13 @@ function LeaderboardTab() {
     },
   ];
   const memberList = members.map((member) => (
-    <RankLeaderboard member={member} />
+    <MemberItem member={member} />
   ));
-
   return (
-    <div className="bg-theme-light-grey w-screen p-[20px] space-y-4  flex place-content-center">
+    <div className="bg-theme-light-grey w-screen p-[20px] space-y-4  place-content-center">
       {memberList}
   
     </div>
   );
 }
-export default observer(LeaderboardTab);
+export default observer(MemberTab);

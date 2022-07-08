@@ -4,6 +4,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { useState } from 'react';
 import BoardTab from './BoardTabComponets/BoardTab';
 import LeaderboardTab from './LeadBoard/LeaderboardTab';
+import MemberTab from './MembersTab/MemberTab';
 
 function BoardPage() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -24,7 +25,7 @@ function BoardPage() {
 
         <TabPanel ><BoardTab/></TabPanel>
        <TabPanel ><LeaderboardTab/></TabPanel>
-       <TabPanel ></TabPanel>
+       <TabPanel ><MemberTab/></TabPanel>
        <TabPanel ></TabPanel>
        <TabPanel ></TabPanel>
       </Tabs>
