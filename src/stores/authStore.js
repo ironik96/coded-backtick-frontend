@@ -2,7 +2,7 @@ import { makeAutoObservable } from "mobx";
 import instance from "./instance";
 import jwt_decode from "jwt-decode";
 import userStore from "./userStore";
-// import { Redirect } from 'react-router/cjs/react-router';
+
 class AuthStore {
   constructor() {
     makeAutoObservable(this);
@@ -14,16 +14,18 @@ class AuthStore {
       const response = await instance.post("/register", userData);
       const decoded = jwt_decode(response.data);
       await this.signin({ ...decoded, password: userData.password });
-    } catch (error) {}
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   signin = async (userData) => {
     try {
       const response = await instance.post("/signin", userData);
       this.setUser(response.data);
-      const decoded = jwt_decode(response.data);
-      await userStore.fetchUser(decoded._id);
-    } catch (error) {}
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   setUser = async (token) => {
@@ -31,7 +33,6 @@ class AuthStore {
     instance.defaults.headers.common.Authorization = `Bearer ${token}`;
     const decoded = jwt_decode(token);
     this.user = decoded;
-    userStore.fetchUser(decoded._id);
   };
 
   signout = () => {
