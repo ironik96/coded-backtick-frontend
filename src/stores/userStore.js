@@ -1,5 +1,4 @@
 import { makeAutoObservable } from "mobx";
-import authStore from "./authStore";
 import boardStore from "./boardStore";
 import instance from "./instance";
 
