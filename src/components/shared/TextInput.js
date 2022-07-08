@@ -5,6 +5,7 @@ function TextInput({
   name,
   twClass,
   handleChange,
+  inputClass = "bg-light-grey"
 }) {
   return (
     <div className={"input-container " + twClass}>
@@ -14,7 +15,7 @@ function TextInput({
         name={name}
         value={value}
         onChange={handleChange}
-        className="bg-light-grey"
+        className={inputClass}
       />
       <label
         className={value || type === "date" ? "filled" : undefined}
