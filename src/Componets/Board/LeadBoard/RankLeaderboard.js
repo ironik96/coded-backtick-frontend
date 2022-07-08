@@ -5,7 +5,7 @@ import RankAvatar from "./RankAvatar";
 
 function RankLeaderboard({ member }) {
   return (
-    <div className="place-content-center">
+    <div className="place-content-center flex">
       <div className="container bg-white h-[70px] rounded-full px-6 py-2 flex items-center gap-4">
         <RankAvatar
           rank={member.rank}

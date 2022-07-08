@@ -21,13 +21,12 @@ function BoardTab () {
     (
       <Task task = {task}/>
     )
-    
   )
   
 
 
   return (
-    <div className='bg-theme-light-grey w-screen p-[20px] flex space-x-10 place-content-center'>
+    <div className='bg-theme-light-grey w-screen p-[20px] flex space-x-10 place-content-center flex-row'>
       <div className='container bg-theme-grey w-[300px] h-[500px] rounded-lg p-[10px] space-y-3'>
         <div className='  rounded-lg bg-white object-contain  w-fit p-[5px]'>ICEBOX : {tasks.length}</div>
    {taskList}
