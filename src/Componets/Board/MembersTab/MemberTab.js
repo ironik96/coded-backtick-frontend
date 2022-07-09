@@ -1,34 +1,33 @@
-import React, {useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react";
 import coin from "../../../images/coin.png";
-import MemberItem from "./MemberItem"
+import MemberItem from "./MemberItem";
 import boardMembersStore from "../../../stores/boardMembersStore";
 import boardStore from "../../../stores/boardStore";
-async function getUsers() {
-  await boardMembersStore.getBoardMembers("62c74d1eba596f957262c517")
 
-  boardMembersStore.users = boardMembersStore.members.map(async member=>  await boardMembersStore.getUser(member.userId))
-}
+const boardMembersList = ["62c9c64a45d1aa300d7bca6f"];
 function MemberTab() {
- useEffect(() => {
-  getUsers()
-   return () => {
-boardMembersStore.members = []
-   }
- },[])
- 
-  const members = boardMembersStore.users
+  const [members, setMembers] = useState(null);
 
-  
-if(!members ) return <div>loading</div>
+  useEffect(() => {
+    (async () => {
+      await boardMembersStore.fetchMembers(boardMembersList);
+      setMembers(boardMembersStore.members);
+    })();
 
-  const memberList = members.map((member,id) => (
-    <MemberItem user={member}  key= {id}/>
+    return () => {
+      boardMembersStore.members = null;
+    };
+  }, []);
+
+  if (!members) return <div>loading</div>;
+
+  const memberList = members.map((member, id) => (
+    <MemberItem member={member} key={id} />
   ));
   return (
     <div className="bg-theme-light-grey w-screen p-[20px] space-y-4 flex-col place-content-center">
       {memberList}
-  
     </div>
   );
 }

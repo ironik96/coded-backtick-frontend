@@ -1,10 +1,9 @@
-import React , {useEffect}from "react";
-import { observer } from "mobx-react";
+import React from "react";
 import deleteButton from "../../../images/deleteCross.png";
-import boardMembersStore from "../../../stores/boardMembersStore";
 
-function Memberitem({ user }) {
-console.log(user,"//userrr")
+function Memberitem({ member }) {
+  const { userId: user } = member;
+
   return (
     <div className=" flex place-content-center ">
       <div className=" bg-white h-[70px] rounded-lg p-2 flex justify-between  w-[70%]">
@@ -12,10 +11,10 @@ console.log(user,"//userrr")
           <img
             className="rounded-[100%] w-[60px] h-[60px]   object-cover relative  left-[20px]
         "
-            src = {user.image}
+            src={user.image}
           />
           <div className="items-center">
-            <h1 className=""> {user.fname +  user.lname}</h1>
+            <h1 className=""> {user.fname + user.lname}</h1>
             <h5 className="text-[10px]">View Profile</h5>
           </div>
         </div>
@@ -26,4 +25,4 @@ console.log(user,"//userrr")
     </div>
   );
 }
-export default observer(Memberitem);
+export default Memberitem;

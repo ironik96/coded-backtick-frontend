@@ -28,7 +28,6 @@ class BoardStore {
 
   updateBoard = async (board) => {
     this.makeBoardDatesISO(board);
-
     const [response, error] = await tryCatch(() => instance.put(URL, board));
     if (error) return console.error(error);
     userStore.updateBoard(response.data);
