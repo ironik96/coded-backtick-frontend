@@ -1,14 +1,11 @@
 import React from "react";
-import { observer } from "mobx-react";
 
 function Task({ task }) {
   return (
-    <div>
-      <div className="  rounded-lg bg-white object-contain h-[100px] text-left p-[10px] space-y-2">
-        <h3 className="text-theme-green font-bold">Point:{task.point}</h3>
-        <h3 className="text-black font-bold">{task.title}</h3>
-      </div>
+    <div className="rounded-lg bg-white h-[100px] p-[10px] flex flex-col gap-4 items-start">
+      <p className="text-theme-green">Point:{task.point}</p>
+      <p className="text-black">{task.title}</p>
     </div>
   );
 }
-export default observer(Task);
+export default Task;

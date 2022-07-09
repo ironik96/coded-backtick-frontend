@@ -14,7 +14,7 @@ function RankLeaderboard({ member }) {
         <h1>{member.name}</h1>
         <div className=" flex items-center p-[10px] h-[100%] w-[70px] rounded-lg bg-theme-light-grey place-content-center ml-auto">
           <span>{member.point}</span>
-          <img src={coin} className= "w-[20px]" />
+          <img src={coin} className="w-[20px]" />
         </div>
       </div>
     </div>

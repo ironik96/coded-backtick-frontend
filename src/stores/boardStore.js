@@ -2,14 +2,23 @@ import { makeAutoObservable } from "mobx";
 import instance from "./instance";
 import userStore from "./userStore";
 
-const URL = "/boards";
-
+const BASE_URL = "/boards";
 class BoardStore {
   constructor() {
     makeAutoObservable(this);
   }
 
-  initialBoard = {
+  board;
+
+  fetchBoard = async (id) => {
+    const [response, error] = await tryCatch(() =>
+      instance.get(`${BASE_URL}/${id}`)
+    );
+    if (error) return console.error(error.message, response.data);
+    this.board = response.data;
+  };
+
+  emptyBoard = {
     title: "",
     description: "",
     startDate: dateToInputValue(new Date()),
@@ -20,7 +29,7 @@ class BoardStore {
     this.makeBoardDatesISO(board);
 
     const [response, error] = await tryCatch(() =>
-      instance.post(URL, { ...board, userId })
+      instance.post(BASE_URL, { ...board, userId })
     );
     if (error) return console.error(error);
     userStore.addBoard(response.data);
@@ -28,7 +37,10 @@ class BoardStore {
 
   updateBoard = async (board) => {
     this.makeBoardDatesISO(board);
-    const [response, error] = await tryCatch(() => instance.put(URL, board));
+
+    const [response, error] = await tryCatch(() =>
+      instance.put(BASE_URL, board)
+    );
     if (error) return console.error(error);
     userStore.updateBoard(response.data);
   };
@@ -44,6 +56,10 @@ class BoardStore {
     board.endDate = new Date(board.endDate).toISOString();
     return board;
   };
+
+  // addTask=(task)=>{
+  //   this.board = {this.}
+  // }
 }
 
 async function tryCatch(promise) {

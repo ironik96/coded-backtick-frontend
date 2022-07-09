@@ -10,7 +10,7 @@ const BoardCardList = () => {
   const boards = userStore.userBoards;
 
   const cards = boards.map((board) => (
-    <Link key={board._id} to={`/board/${board.slug}`}>
+    <Link key={board._id} to={`/board/${board.slug}`} state={{ id: board._id }}>
       <Card leading={board.title} content={<BoardChart />} />
     </Link>
   ));

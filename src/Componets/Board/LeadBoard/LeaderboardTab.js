@@ -28,7 +28,6 @@ function LeaderboardTab() {
   return (
     <div className="bg-theme-light-grey w-screen p-[20px] space-y-4 flex-col place-content-center">
       {memberList}
-  
     </div>
   );
 }

@@ -10,7 +10,7 @@ const CreateBoard = () => {
   const { boardSlug } = useParams();
   const isNew = boardSlug === "new";
   const initialBoard = isNew
-    ? boardStore.initialBoard
+    ? boardStore.emptyBoard
     : userStore.getEditableBoard(boardSlug);
 
   const [board, setBoard] = useState(initialBoard);
