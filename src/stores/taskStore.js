@@ -16,6 +16,10 @@ class TaskStore {
     assignedTo: "",
   };
 
+  createTask = (boardId) => {
+    
+  }
+
   isNew = (task) => JSON.stringify(task) === JSON.stringify(this.emptyTask);
 }
 

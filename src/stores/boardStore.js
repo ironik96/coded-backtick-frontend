@@ -56,6 +56,10 @@ class BoardStore {
     board.endDate = new Date(board.endDate).toISOString();
     return board;
   };
+
+  // addTask=(task)=>{
+  //   this.board = {this.}
+  // }
 }
 
 async function tryCatch(promise) {

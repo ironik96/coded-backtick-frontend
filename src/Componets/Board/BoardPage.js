@@ -18,6 +18,7 @@ function BoardPage() {
       await boardStore.fetchBoard(id);
       setBoard(boardStore.board);
     })();
+    return () => (boardStore.board = null);
   }, []);
 
   if (!board) return <Loading />;
