@@ -13,21 +13,15 @@ import CreateBoard from "./components/CreateBoard/CreateBoard";
 import userStore from "./stores/userStore";
 import authStore from "./stores/authStore";
 import { useEffect } from "react";
-import MemberTab from "./Componets/Board/MembersTab/MemberTab";
+import Loading from "./components/shared/Loading";
 
 function App() {
-  // const id = authStore.user?._id;
-  // useEffect(() => {
-  //   userStore.updateUserStore(id);
-  // }, [id]);
+  const id = authStore.user?._id;
+  useEffect(() => {
+    userStore.updateUserStore(id);
+  }, [id]);
 
-  const appRoutes = userStore.user ? (
-    <AppRoutes />
-  ) : (
-    <div className="h-full w-full flex justify-center items-center">
-      Loading
-    </div>
-  );
+  const appRoutes = userStore.user ? <AppRoutes /> : <Loading />;
   return (
     <div className="w-screen h-screen">
       <div className="h-[4rem]">

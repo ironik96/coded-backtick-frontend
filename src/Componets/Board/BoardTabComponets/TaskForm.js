@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import boardStore from "../../../stores/boardStore";
 import taskStore from "../../../stores/taskStore";
 
-const TaskForm = ({ task, setTask }) => {
+const TaskForm = ({ task, setTask, closeModal }) => {
   const [isNew, setIsNew] = useState(taskStore.isNew(task));
 
   const handleChange = (event) => {
@@ -10,7 +11,8 @@ const TaskForm = ({ task, setTask }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("submit");
+    taskStore.createTask(boardStore.board._id, task);
+    closeModal();
   };
 
   return (
