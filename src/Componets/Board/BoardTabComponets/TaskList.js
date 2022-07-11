@@ -3,6 +3,7 @@ import { observer } from "mobx-react";
 import BasicModal from "../../../components/shared/BasicModal";
 import TaskForm from "./TaskForm";
 import taskStore from "../../../stores/taskStore";
+import { useDrop } from "react-dnd";
 
 const listWithButtons = ["Icebox", "Todo"];
 const TaskList = ({ listTitle, taskList }) => {
@@ -14,13 +15,31 @@ const TaskList = ({ listTitle, taskList }) => {
     setTask(initialTask);
     setShowModal(false);
   };
+
+  const handleDrop = (item) => {
+    if (item.list === listTitle.toLowerCase()) return;
+
+    // new reference to avoid mobx warning
+    const updateTask = { ...item };
+    updateTask.list = listTitle;
+    taskStore.updateTask(updateTask);
+  };
+
+  const [, drop] = useDrop(() => ({
+    accept: "TASK",
+    drop: handleDrop,
+  }));
+
   return (
     <>
       <div className="bg-theme-grey shrink-0 w-[220px] max-h-full rounded-3xl p-[10px] flex flex-col gap-3">
         <div className="rounded-lg bg-white w-fit p-[5px] h-[30px]">
           {listTitle}: {taskList.length}
         </div>
-        <div className="task-list-wrapper space-y-3 overflow-y-auto">
+        <div
+          ref={drop}
+          className="task-list-wrapper space-y-3 overflow-y-auto  min-h-[50px]"
+        >
           {taskList}
         </div>
         {listWithButtons.includes(listTitle) && (

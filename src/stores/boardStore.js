@@ -61,6 +61,12 @@ class BoardStore {
     this.board.tasks = [...this.board.tasks, task];
   };
 
+  updateTask = (updatedTask) => {
+    this.board.tasks = this.board.tasks.map((task) =>
+      task._id === updatedTask._id ? updatedTask : task
+    );
+  };
+
   dispose = () => {
     this.board = null;
   };

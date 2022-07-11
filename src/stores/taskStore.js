@@ -24,10 +24,20 @@ class TaskStore {
     const [response, error] = await tryCatch(() =>
       instance.post(BASE_URL, task)
     );
-    if (error) console.error(error.message, response.data);
+    if (error) return console.error(error.message, response.data);
 
     // add it locally
     boardStore.addTask(response.data);
+  };
+
+  updateTask = async (task) => {
+    const [response, error] = await tryCatch(() =>
+      instance.put(BASE_URL, task)
+    );
+    if (error) return console.error(error.message, response.data);
+
+    // update it locally
+    boardStore.updateTask(response.data);
   };
 
   isNew = (task) =>

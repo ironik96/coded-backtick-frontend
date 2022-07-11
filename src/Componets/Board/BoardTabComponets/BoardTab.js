@@ -4,21 +4,6 @@ import boardStore from "../../../stores/boardStore";
 import Task from "./Task";
 import TaskList from "./TaskList";
 
-const tasks = [
-  // {
-  //   title: "create what every lol",
-  //   point: "20",
-  // },
-  // {
-  //   title: "create what every lol",
-  //   point: "20",
-  // },
-  // {
-  //   title: "create what every lol",
-  //   point: "20",
-  // },
-];
-
 function BoardTab() {
   const taskList = (tasks) =>
     tasks.map((task) => <Task key={task._id} task={task} />);
