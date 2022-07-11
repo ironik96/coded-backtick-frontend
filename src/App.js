@@ -34,10 +34,8 @@ function App() {
         <Navbar />
       </div>
       <div className="h-[calc(100%-4rem)] overflow-auto">
-      <Routes>
-      <Route path="/" element={<MemberTab />} />
-        </Routes>
-        {/* {authStore.user ? appRoutes : <AuthRoutes />} */}
+
+        {authStore.user ? appRoutes : <AuthRoutes />}
       </div>
     </div>
   );
