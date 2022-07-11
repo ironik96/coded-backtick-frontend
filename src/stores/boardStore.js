@@ -1,15 +1,24 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import instance from "./instance";
 import userStore from "./userStore";
 
-const URL = "/boards";
-
+const BASE_URL = "/boards";
 class BoardStore {
   constructor() {
     makeAutoObservable(this);
   }
 
-  initialBoard = {
+  board = null;
+
+  fetchBoard = async (id) => {
+    const [response, error] = await tryCatch(() =>
+      instance.get(`${BASE_URL}/${id}`)
+    );
+    if (error) return console.error(error.message, response.data);
+    runInAction(() => (this.board = response.data));
+  };
+
+  emptyBoard = {
     title: "",
     description: "",
     startDate: dateToInputValue(new Date()),
@@ -20,17 +29,19 @@ class BoardStore {
     this.makeBoardDatesISO(board);
 
     const [response, error] = await tryCatch(() =>
-      instance.post(URL, { ...board, userId })
+      instance.post(BASE_URL, { ...board, userId })
     );
-    if (error) return console.error(error);
+    if (error) return console.error(error.message, response.data);
     userStore.addBoard(response.data);
   };
 
   updateBoard = async (board) => {
     this.makeBoardDatesISO(board);
 
-    const [response, error] = await tryCatch(() => instance.put(URL, board));
-    if (error) return console.error(error);
+    const [response, error] = await tryCatch(() =>
+      instance.put(BASE_URL, board)
+    );
+    if (error) return console.error(error.message, response.data);
     userStore.updateBoard(response.data);
   };
 
@@ -44,6 +55,14 @@ class BoardStore {
     board.startDate = new Date(board.startDate).toISOString();
     board.endDate = new Date(board.endDate).toISOString();
     return board;
+  };
+
+  addTask = (task) => {
+    this.board.tasks = [...this.board.tasks, task];
+  };
+
+  dispose = () => {
+    this.board = null;
   };
 }
 
