@@ -1,5 +1,8 @@
 import { makeAutoObservable } from "mobx";
+import boardStore from "./boardStore";
 import instance from "./instance";
+
+const BASE_URL = "/tasks";
 
 class TaskStore {
   constructor() {
@@ -16,11 +19,19 @@ class TaskStore {
     assignedTo: "",
   };
 
-  createTask = (boardId) => {
-    
-  }
+  createTask = async (boardId, task) => {
+    task.boardId = boardId;
+    const [response, error] = await tryCatch(() =>
+      instance.post(BASE_URL, task)
+    );
+    if (error) console.error(error.message, response.data);
 
-  isNew = (task) => JSON.stringify(task) === JSON.stringify(this.emptyTask);
+    // add it locally
+    boardStore.addTask(response.data);
+  };
+
+  isNew = (task) =>
+    JSON.stringify({ ...task, list: "" }) === JSON.stringify(this.emptyTask);
 }
 
 async function tryCatch(promise) {

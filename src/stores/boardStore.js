@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import instance from "./instance";
 import userStore from "./userStore";
 
@@ -8,14 +8,14 @@ class BoardStore {
     makeAutoObservable(this);
   }
 
-  board;
+  board = null;
 
   fetchBoard = async (id) => {
     const [response, error] = await tryCatch(() =>
       instance.get(`${BASE_URL}/${id}`)
     );
     if (error) return console.error(error.message, response.data);
-    this.board = response.data;
+    runInAction(() => (this.board = response.data));
   };
 
   emptyBoard = {
@@ -31,7 +31,7 @@ class BoardStore {
     const [response, error] = await tryCatch(() =>
       instance.post(BASE_URL, { ...board, userId })
     );
-    if (error) return console.error(error);
+    if (error) return console.error(error.message, response.data);
     userStore.addBoard(response.data);
   };
 
@@ -41,7 +41,7 @@ class BoardStore {
     const [response, error] = await tryCatch(() =>
       instance.put(BASE_URL, board)
     );
-    if (error) return console.error(error);
+    if (error) return console.error(error.message, response.data);
     userStore.updateBoard(response.data);
   };
 
@@ -57,9 +57,13 @@ class BoardStore {
     return board;
   };
 
-  // addTask=(task)=>{
-  //   this.board = {this.}
-  // }
+  addTask = (task) => {
+    this.board.tasks = [...this.board.tasks, task];
+  };
+
+  dispose = () => {
+    this.board = null;
+  };
 }
 
 async function tryCatch(promise) {

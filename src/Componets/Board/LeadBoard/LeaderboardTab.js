@@ -26,8 +26,8 @@ function LeaderboardTab() {
       rank: 4,
     },
   ];
-  const memberList = members.map((member) => (
-    <RankLeaderboard member={member} />
+  const memberList = members.map((member, i) => (
+    <RankLeaderboard member={member} key={i} />
   ));
 
   return (

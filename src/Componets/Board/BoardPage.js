@@ -11,17 +11,17 @@ import Loading from "../../components/shared/Loading";
 CustomTab.tabsRole = "Tab";
 function BoardPage() {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [board, setBoard] = useState(null);
   const { id } = useLocation().state;
   useEffect(() => {
-    (async () => {
-      await boardStore.fetchBoard(id);
-      setBoard(boardStore.board);
-    })();
-    return () => (boardStore.board = null);
+    fetchBoard();
+    return () => boardStore.dispose();
   }, []);
 
-  if (!board) return <Loading />;
+  async function fetchBoard() {
+    await boardStore.fetchBoard(id);
+  }
+
+  if (!boardStore.board) return <Loading />;
 
   return (
     <div className="h-full bg-theme-light-grey text-sm font-medium text-center text-gray-500  dark:text-gray-400">
@@ -30,7 +30,7 @@ function BoardPage() {
         onSelect={(tabIndex) => setSelectedIndex(tabIndex)}
         className="h-full"
       >
-        <TabList className="bg-white h-[52px]">
+        <TabList className="h-[52px] bg-white flex justify-center">
           <CustomTab>Board</CustomTab>
           <CustomTab>Leaderboard</CustomTab>
           <CustomTab>Members</CustomTab>
@@ -60,7 +60,7 @@ function CustomTab(props) {
     <Tab
       {...props}
       className={
-        "inline-block p-4 rounded-t-lg hover:text-theme-blue hover:bg-gray-50 dark:hover:bg-theme-light-grey dark:hover:text-theme-blue" +
+        "p-4 rounded-t-lg hover:text-theme-blue hover:bg-gray-50 dark:hover:bg-theme-light-grey dark:hover:text-theme-blue" +
         selectedStyle
       }
     ></Tab>
