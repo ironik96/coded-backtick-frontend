@@ -1,9 +1,13 @@
 import React from "react";
 import deleteButton from "../../../images/deleteCross.png";
-
-function Memberitem({ member }) {
+import boardMembersStore from "../../../stores/boardMembersStore";
+function Memberitem({ member, boardId }) {
   const { userId: user } = member;
 
+const handleOnClick = (e) =>
+{
+ boardMembersStore.deleteMember(boardId,member._id)
+}
   return (
     <div className=" flex place-content-center ">
       <div className=" bg-white h-[70px] rounded-lg p-2 flex justify-between  w-[70%]">
@@ -19,7 +23,8 @@ function Memberitem({ member }) {
           </div>
         </div>
         <div className=" flex items-center p-[10px] h-[100%] w-[80px] rounded-lg  place-content-center">
-          <img className="w-[20px]" src={deleteButton} />
+          <button  onClick = {handleOnClick}>
+          <img className="w-[20px]" src={deleteButton} /></button>
         </div>
       </div>
     </div>

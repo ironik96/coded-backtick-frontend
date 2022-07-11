@@ -13,12 +13,13 @@ import CreateBoard from "./components/CreateBoard/CreateBoard";
 import userStore from "./stores/userStore";
 import authStore from "./stores/authStore";
 import { useEffect } from "react";
+import MemberTab from "./Componets/Board/MembersTab/MemberTab";
 
 function App() {
-  const id = authStore.user?._id;
-  useEffect(() => {
-    userStore.updateUserStore(id);
-  }, [id]);
+  // const id = authStore.user?._id;
+  // useEffect(() => {
+  //   userStore.updateUserStore(id);
+  // }, [id]);
 
   const appRoutes = userStore.user ? (
     <AppRoutes />
@@ -33,8 +34,8 @@ function App() {
         <Navbar />
       </div>
       <div className="h-[calc(100%-4rem)] overflow-auto">
-        <Routes>
-          <Route path="/" element={<BoardPage />} />
+      <Routes>
+      <Route path="/" element={<MemberTab />} />
         </Routes>
         {/* {authStore.user ? appRoutes : <AuthRoutes />} */}
       </div>

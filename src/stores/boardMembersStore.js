@@ -8,7 +8,7 @@ class BoardMembersStore {
     makeAutoObservable(this);
   }
   members;
-
+users;
   fetchMembers = async (membersIds) => {
     const [response, error] = await tryCatch(() =>
       instance.post(`${URL}/get-members`, { membersIds })
@@ -20,6 +20,19 @@ class BoardMembersStore {
   setMembers = (members) => {
     this.members = [...members];
   };
+  addMember = async (boardId, user) => {
+    const [response, error] = await tryCatch(() =>
+    instance.put(`${URL}/${boardId}/`, user)
+  );
+  if (error) return console.error(error);
+  }
+  deleteMember = async (boardId, memberid) => {
+    const [response, error] = await tryCatch(() =>
+    instance.delete(`${URL}/${boardId}/${memberid}`)
+  );
+  if (error) return console.error(error);
+  }
+
 
   // getBoardMembers = async (boardId) => {
   //   const [response, error] = await tryCatch(() =>
@@ -38,13 +51,13 @@ class BoardMembersStore {
   //   if (error) return console.error(error);
   //   this.members.push(response.data);
   // };
-  // getUser = async (id) => {
-  //   const [response, error] = await tryCatch(() =>
-  //     instance.get(`${URL}/user/${id}`)
-  //   );
-  //   if (error) return console.error(error.message);
-  //   return response.data;
-  // };
+  getUsers = async () => {
+    const [response, error] = await tryCatch(() =>
+      instance.get(`/users`)
+    );
+    if (error) return console.error(error.message);
+    this.users = response.data;
+  };
 }
 async function tryCatch(promise) {
   try {

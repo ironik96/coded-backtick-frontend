@@ -1,19 +1,16 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import { useState } from "react";
 import BoardTab from "./BoardTabComponets/BoardTab";
 import LeaderboardTab from "./LeadBoard/LeaderboardTab";
 import { useState, useEffect } from "react";
-import BoardTab from "./BoardTabComponets/BoardTab";
-import LeaderboardTab from "./LeadBoard/LeaderboardTab";
 import { useLocation } from "react-router-dom";
 import boardStore from "../../stores/boardStore";
 import Loading from "../../components/shared/Loading";
 
 CustomTab.tabsRole = "Tab";
 function BoardPage() {
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(2);
   const [board, setBoard] = useState(null);
   const { id } = useLocation().state;
   useEffect(() => {
