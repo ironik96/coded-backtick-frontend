@@ -11,7 +11,7 @@ import MemberTab from "./MembersTab/MemberTab";
 
 CustomTab.tabsRole = "Tab";
 function BoardPage() {
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(1);
   const { id } = useLocation().state;
   useEffect(() => {
     fetchBoard();

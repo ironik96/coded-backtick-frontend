@@ -4,11 +4,14 @@ import boardMembersStore from "../../../stores/boardMembersStore";
 import plusIcon from "../../../images/plus.png";
 import "../../../styles/searchBar.css";
 import boardStore from "../../../stores/boardStore";
+import { observer } from "mobx-react";
+import MemberTab from "./MemberTab";
+import Alert from "../../../components/shared/Alert";
+
 function SearchBar() {
   const [users, setUsers] = useState([]);
   let [addUser, setaddUser] = useState({});
   const [filteredData, setFilteredData] = useState([]);
-  //const { id } = useLocation().state;
   useEffect(() => {
     (async () => {
       await boardMembersStore.getUsers();
@@ -33,10 +36,6 @@ function SearchBar() {
   };
 
   const handleClick = (e) => {
-    //    setaddUser({
-    //     userId: e._id,
-    //     boardId: "62c74d1eba596f957262c517"
-    //    })
     addUser = {
       userId: e._id,
       boardId: boardStore.board._id,
@@ -44,6 +43,8 @@ function SearchBar() {
     console.log(addUser, "onclick user");
     boardMembersStore.addMember(addUser.boardId, addUser);
     setFilteredData([]);
+    Alert("Member added succefully ", "success")
+
   };
 
   const userList = filteredData.map((user, id) => (
@@ -68,10 +69,7 @@ function SearchBar() {
   return (
     <>
       <div className="w-[300px] place-content-center">
-        <form className="flex items-center">
-          <label htmlFor="simple-search" className="sr-only">
-            Search
-          </label>
+   
           <div className="relative w-full">
             <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
               <svg
@@ -96,7 +94,7 @@ function SearchBar() {
               required=""
             />
           </div>
-        </form>
+
 
         <div className=" flex justify-center ">
           {filteredData.length != 0 && (
@@ -107,4 +105,4 @@ function SearchBar() {
     </>
   );
 }
-export default SearchBar;
+export default observer(SearchBar);

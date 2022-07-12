@@ -2,11 +2,17 @@ import React from "react";
 import deleteButton from "../../../images/deleteCross.png";
 import boardMembersStore from "../../../stores/boardMembersStore";
 import boardStore from "../../../stores/boardStore";
+import MemberTab from "./MemberTab";
+import { observer } from "mobx-react";
+import Alert from "../../../components/shared/Alert";
+
+
 function Memberitem({ member }) {
   const { userId: user } = member;
 
   const handleOnClick = (e) => {
     boardMembersStore.deleteMember(boardStore.board._id, member._id);
+    Alert("Member removed succefully ", "error")
   };
   return (
     <div className=" flex place-content-center ">
@@ -17,7 +23,7 @@ function Memberitem({ member }) {
             src={user.image}
           />
           <div className="items-center">
-            <h1 className=""> {user.fname + user.lname}</h1>
+            <h1 className=""> {user.fname +" "+ user.lname}</h1>
             <h5 className="text-[10px]">View Profile</h5>
           </div>
         </div>
@@ -30,4 +36,4 @@ function Memberitem({ member }) {
     </div>
   );
 }
-export default Memberitem;
+export default observer(Memberitem);
