@@ -7,7 +7,8 @@ import LeaderboardTab from "./LeadBoard/LeaderboardTab";
 import { useLocation } from "react-router-dom";
 import boardStore from "../../stores/boardStore";
 import Loading from "../../components/shared/Loading";
-import MemberTab from "../Board/MembersTab/MemberTab"
+import MemberTab from "./MembersTab/MemberTab";
+
 CustomTab.tabsRole = "Tab";
 function BoardPage() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -16,6 +17,8 @@ function BoardPage() {
     fetchBoard();
     return () => boardStore.dispose();
   }, []);
+
+  const setHidden = (index) => (selectedIndex === index ? "" : " hidden");
 
   async function fetchBoard() {
     await boardStore.fetchBoard(id);
@@ -38,13 +41,15 @@ function BoardPage() {
           <CustomTab>Review</CustomTab>
         </TabList>
 
-        <TabPanel className="h-[calc(100%-52px)]">
+        <TabPanel className={"h-[calc(100%-52px)]" + setHidden(0)}>
           <BoardTab />
         </TabPanel>
-        <TabPanel>
+        <TabPanel className={"h-[calc(100%-52px)]" + setHidden(1)}>
           <LeaderboardTab />
         </TabPanel>
-        <TabPanel><MemberTab/></TabPanel>
+        <TabPanel className={"h-[calc(100%-52px)]" + setHidden(2)}>
+          <MemberTab />
+        </TabPanel>
         <TabPanel></TabPanel>
         <TabPanel></TabPanel>
       </Tabs>

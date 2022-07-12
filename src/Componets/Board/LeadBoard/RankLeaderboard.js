@@ -5,8 +5,8 @@ import RankAvatar from "./RankAvatar";
 
 function RankLeaderboard({ member }) {
   return (
-    <div className="place-content-center flex">
-      <div className="container bg-white h-[70px] rounded-lg px-6 py-2 flex items-center gap-4  w-[70%]">
+    <div className="flex justify-center">
+      <div className="bg-white h-[70px] rounded-lg px-6 py-2 flex items-center gap-4  w-[70%]">
         <RankAvatar
           rank={member.rank}
           image="https://ichef.bbci.co.uk/news/976/cpsprodpb/FD27/production/_101970846_aubreyblanche.jpg"
