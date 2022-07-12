@@ -4,11 +4,10 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { useState, useEffect } from "react";
 import BoardTab from "./BoardTabComponets/BoardTab";
 import LeaderboardTab from "./LeadBoard/LeaderboardTab";
-import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import boardStore from "../../stores/boardStore";
 import Loading from "../../components/shared/Loading";
-
+import MemberTab from "../Board/MembersTab/MemberTab"
 CustomTab.tabsRole = "Tab";
 function BoardPage() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -45,7 +44,7 @@ function BoardPage() {
         <TabPanel>
           <LeaderboardTab />
         </TabPanel>
-        <TabPanel></TabPanel>
+        <TabPanel><MemberTab/></TabPanel>
         <TabPanel></TabPanel>
         <TabPanel></TabPanel>
       </Tabs>
