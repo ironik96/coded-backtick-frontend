@@ -13,13 +13,9 @@ function BoardPage() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const { id } = useLocation().state;
   useEffect(() => {
-    fetchBoard();
+    boardStore.fetchBoard(id);
     return () => boardStore.dispose();
   }, []);
-
-  async function fetchBoard() {
-    await boardStore.fetchBoard(id);
-  }
 
   if (!boardStore.board) return <Loading />;
 
