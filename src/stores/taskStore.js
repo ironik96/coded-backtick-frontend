@@ -40,6 +40,16 @@ class TaskStore {
     boardStore.updateTask(response.data);
   };
 
+  deleteTask = async (id) => {
+    const [response, error] = await tryCatch(() =>
+      instance.delete(`${BASE_URL}/${id}`)
+    );
+    if (error) return console.error(error.message, response.data);
+
+    // delete it locally
+    boardStore.deleteTask(id);
+  };
+
   isNew = (task) =>
     JSON.stringify({ ...task, list: "" }) === JSON.stringify(this.emptyTask);
 }

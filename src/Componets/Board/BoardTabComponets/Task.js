@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDrag } from "react-dnd";
 import BasicModal from "../../../components/shared/BasicModal";
+import taskStore from "../../../stores/taskStore";
 import ModifyTaskButton from "./ModifyTaskButton";
 import TaskForm from "./TaskForm";
 
@@ -8,9 +9,8 @@ function Task({ task, listLength }) {
   const [showModal, setShowModal] = useState(false);
   const [editableTask, setEditableTask] = useState(task);
   const openModal = () => setShowModal(true);
-  const closeModal = () => {
-    setShowModal(false);
-  };
+  const closeModal = () => setShowModal(false);
+  const deleteTask = () => taskStore.deleteTask(task._id);
 
   const [, drag] = useDrag(() => ({
     type: "TASK",
@@ -30,6 +30,7 @@ function Task({ task, listLength }) {
             className="group-hover:opacity-100 transition-opacity"
             openModal={openModal}
             listLength={listLength}
+            deleteTask={deleteTask}
           />
         </div>
 

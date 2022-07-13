@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 
-const ModifyTaskButton = ({ className, openModal, listLength }) => {
+const ModifyTaskButton = ({ className, openModal, listLength, deleteTask }) => {
   const buttonRef = useRef();
 
   const [btnPosition, setBtnPosition] = useState();
@@ -13,6 +13,7 @@ const ModifyTaskButton = ({ className, openModal, listLength }) => {
       .addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("resize", getPosition);
+      document.removeEventListener("scroll", handleScroll);
     };
   }, []);
   useEffect(() => {
@@ -48,6 +49,7 @@ const ModifyTaskButton = ({ className, openModal, listLength }) => {
         showOptions={showOptions}
         closeOptions={closeOptions}
         openModal={openModal}
+        deleteTask={deleteTask}
       />
     </div>
   );
@@ -58,6 +60,7 @@ const TaskOptionsList = ({
   showOptions,
   closeOptions,
   openModal,
+  deleteTask,
 }) => {
   if (!btnPosition) return <div></div>;
   const state = showOptions ? "" : "hidden";
@@ -65,9 +68,6 @@ const TaskOptionsList = ({
   const onClickEdit = () => {
     closeOptions();
     openModal();
-  };
-  const onClickDelete = () => {
-    console.log("wait");
   };
 
   return (
@@ -85,7 +85,7 @@ const TaskOptionsList = ({
       >
         <div className="w-48 text-black bg-white border border-gray-200 rounded-lg ">
           <EditButton onClickEdit={onClickEdit} />
-          <DeleteButton onClickDelete={onClickDelete} />
+          <DeleteButton onClickDelete={deleteTask} />
         </div>
       </div>
     </div>
