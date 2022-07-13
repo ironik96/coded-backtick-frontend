@@ -10,10 +10,14 @@ const ModifyTaskButton = ({ className, openModal, listLength, deleteTask }) => {
     window.addEventListener("resize", getPosition);
     document
       .querySelector("div.scroll-event-div")
-      .addEventListener("scroll", handleScroll);
+      .addEventListener("scroll", handleScrollX);
+    document
+      .querySelector("div.task-list-wrapper")
+      .addEventListener("scroll", handleScrollY);
     return () => {
       window.removeEventListener("resize", getPosition);
-      document.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("scroll", handleScrollX);
+      document.removeEventListener("scroll", handleScrollY);
     };
   }, []);
   useEffect(() => {
@@ -23,16 +27,19 @@ const ModifyTaskButton = ({ className, openModal, listLength, deleteTask }) => {
   const openOptions = () => setShowOptions(true);
   const closeOptions = () => setShowOptions(false);
 
-  function getPosition(left = 0) {
+  function getPosition(left = 0, top = 0) {
     if (!buttonRef.current) return;
     setBtnPosition({
       x: buttonRef.current.offsetLeft - left,
-      y: buttonRef.current.offsetTop + buttonRef.current.clientHeight,
+      y: buttonRef.current.offsetTop + buttonRef.current.clientHeight - top,
     });
   }
 
-  function handleScroll(e) {
+  function handleScrollX(e) {
     getPosition(e.target.scrollLeft);
+  }
+  function handleScrollY(e) {
+    getPosition(0, e.target.scrollTop);
   }
 
   return (

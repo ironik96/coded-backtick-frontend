@@ -18,7 +18,6 @@ const BasicModal = ({ showModal, closeModal, children }) => {
       onMouseDown={handleClose}
       onMouseUp={handleClose}
     >
-      <div className="console-log"></div>
       <div
         className={`${innerClassName} transition-transform px-6 py-3 bg-white rounded-xl z-10`}
         onMouseDown={(e) => e.stopPropagation()}
