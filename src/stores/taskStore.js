@@ -9,8 +9,6 @@ class TaskStore {
     makeAutoObservable(this);
   }
 
-  tasks = [];
-
   emptyTask = {
     title: "",
     boardId: "",

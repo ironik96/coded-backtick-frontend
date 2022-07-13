@@ -1,32 +1,24 @@
 import React from "react";
 import { observer } from "mobx-react";
-import coin from "../../../images/coin.png";
-import MemberItem from "./MemberItem"
+import MemberItem from "./MemberItem";
+import boardStore from "../../../stores/boardStore";
+import SearchBar from "./Searchbar";
+import Loading from "../../../components/shared/Loading";
+
 function MemberTab() {
-  const members = [
-    {
-      name: "Bodour Alrashidi",
-      point: "20",
-      rank: 1,
-    },
-    {
-      name: "Bodour Alrashidi",
-      point: "20",
-      rank: 1,
-    },
-    {
-      name: "Bodour Alrashidi",
-      point: "20",
-      rank: 1,
-    },
-  ];
-  const memberList = members.map((member) => (
-    <MemberItem member={member} />
+  const boardMembers = boardStore.board.boardMembers;
+  if (!boardMembers) return <Loading />;
+
+  const memberList = boardMembers.map((member) => (
+    <MemberItem member={member} key={member._id} />
   ));
   return (
-    <div className="bg-theme-light-grey w-screen p-[20px] space-y-4  place-content-center">
+    <div className="bg-theme-light-grey w-screen p-[20px] space-y-4 flex-col place-content-center">
+      <div className="flex justify-center">
+        <SearchBar />
+      </div>
+
       {memberList}
-  
     </div>
   );
 }

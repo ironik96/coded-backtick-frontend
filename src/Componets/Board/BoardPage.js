@@ -7,6 +7,7 @@ import LeaderboardTab from "./LeadBoard/LeaderboardTab";
 import { useLocation } from "react-router-dom";
 import boardStore from "../../stores/boardStore";
 import Loading from "../../components/shared/Loading";
+import MemberTab from "./MembersTab/MemberTab";
 
 CustomTab.tabsRole = "Tab";
 function BoardPage() {
@@ -41,7 +42,9 @@ function BoardPage() {
         <TabPanel>
           <LeaderboardTab />
         </TabPanel>
-        <TabPanel></TabPanel>
+        <TabPanel>
+          <MemberTab />
+        </TabPanel>
         <TabPanel></TabPanel>
         <TabPanel></TabPanel>
       </Tabs>

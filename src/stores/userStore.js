@@ -15,7 +15,8 @@ class UserStore {
 
     this.setUser(response.data);
   };
-
+  
+  
   getEditableBoard = (boardSlug) => {
     const board = this.user.boards.find(({ slug }) => slug === boardSlug);
     return boardStore.makeBoardEditable(board);

@@ -1,34 +1,28 @@
 import React from "react";
 import { observer } from "mobx-react";
-import coin from "../../../images/coin.png";
 import RankLeaderboard from "./RankLeaderboard";
+import boardStore from "../../../stores/boardStore";
+import Loading from "../../../components/shared/Loading";
 
 function LeaderboardTab() {
-  const members = [
-    {
-      name: "Bodour Alrashidi",
-      point: "20",
-      rank: 1,
-    },
-    {
-      name: "Bodour Alrashidi",
-      point: "20",
-      rank: 2,
-    },
-    {
-      name: "Bodour Alrashidi",
-      point: "20",
-      rank: 3,
-    },
-  ];
-  const memberList = members.map((member, i) => (
-    <RankLeaderboard member={member} key={i} />
+  const boardMembers = boardStore.board.boardMembers;
+
+  if (!boardMembers) return <Loading />;
+
+  let sortedmember = boardMembers.slice().sort((firstmember, secondmember) => {
+    return secondmember.points - firstmember.points;
+  });
+  sortedmember.forEach((member, i) => {
+    member.rank = i + 1;
+  });
+
+  const memberList = sortedmember.map((member) => (
+    <RankLeaderboard member={member} key={member._id} />
   ));
 
   return (
-    <div className="bg-theme-light-grey w-screen p-[20px] space-y-4 flex-col place-content-center">
+    <div className="w-screen p-[20px] space-y-4 flex-col place-content-center">
       {memberList}
-  
     </div>
   );
 }
