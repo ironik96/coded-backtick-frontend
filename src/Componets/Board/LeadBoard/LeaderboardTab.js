@@ -1,6 +1,5 @@
 import React from "react";
 import { observer } from "mobx-react";
-import coin from "../../../images/coin.png";
 import RankLeaderboard from "./RankLeaderboard";
 import boardStore from "../../../stores/boardStore";
 import Loading from "../../../components/shared/Loading";
@@ -10,14 +9,12 @@ function LeaderboardTab() {
 
   if (!boardMembers) return <Loading />;
 
-
-let sortedmember = boardMembers.slice().sort((firstmember,secondmember) => 
-{
- return  secondmember.points - firstmember.points 
-})
- sortedmember.forEach((member, i) => {
-  member.rank = i + 1
-})
+  let sortedmember = boardMembers.slice().sort((firstmember, secondmember) => {
+    return secondmember.points - firstmember.points;
+  });
+  sortedmember.forEach((member, i) => {
+    member.rank = i + 1;
+  });
 
   const memberList = sortedmember.map((member) => (
     <RankLeaderboard member={member} key={member._id} />

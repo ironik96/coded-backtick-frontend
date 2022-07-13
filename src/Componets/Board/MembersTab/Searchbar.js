@@ -1,11 +1,9 @@
-import React, { useEffect, useState, useRef, useLocation } from "react";
-import deleteButton from "../../../images/deleteCross.png";
+import React, { useEffect, useState } from "react";
 import boardMembersStore from "../../../stores/boardMembersStore";
 import plusIcon from "../../../images/plus.png";
 import "../../../styles/searchBar.css";
 import boardStore from "../../../stores/boardStore";
 import { observer } from "mobx-react";
-import MemberTab from "./MemberTab";
 import Alert from "../../../components/shared/Alert";
 
 function SearchBar() {
@@ -43,8 +41,7 @@ function SearchBar() {
     console.log(addUser, "onclick user");
     boardMembersStore.addMember(addUser.boardId, addUser);
     setFilteredData([]);
-    Alert("Member added succefully ", "success")
-
+    Alert("Member added succefully ", "success");
   };
 
   const userList = filteredData.map((user, id) => (
@@ -69,35 +66,33 @@ function SearchBar() {
   return (
     <>
       <div className="w-[300px] place-content-center">
-   
-          <div className="relative w-full">
-            <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-              <svg
-                className="w-5 h-5 text-gray-500 dark:text-gray-400"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-            </div>
-            <input
-              onChange={handleChange}
-              type="text"
-              id="simple-search"
-              className=" border bg-white border-gray-300 text-gray-900 text-sm rounded-lg  block w-full pl-10 p-2.5 outline-none"
-              placeholder="Add Member"
-              required=""
-            />
+        <div className="relative w-full">
+          <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+            <svg
+              className="w-5 h-5 text-gray-500 dark:text-gray-400"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
           </div>
-
+          <input
+            onChange={handleChange}
+            type="text"
+            id="simple-search"
+            className=" border bg-white border-gray-300 text-gray-900 text-sm rounded-lg  block w-full pl-10 p-2.5 outline-none"
+            placeholder="Add Member"
+            required=""
+          />
+        </div>
 
         <div className=" flex justify-center ">
-          {filteredData.length != 0 && (
+          {filteredData.length !== 0 && (
             <div className="dataResult">{userList}</div>
           )}
         </div>

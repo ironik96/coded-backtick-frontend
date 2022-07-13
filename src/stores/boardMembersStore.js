@@ -8,10 +8,6 @@ class BoardMembersStore {
     makeAutoObservable(this);
   }
 
-  setMembers = (members) => {
-    this.members = [...members];
-  };
-
   addMember = async (boardId, user) => {
     const [response, error] = await tryCatch(() =>
       instance.put(`${URL}/${boardId}/`, user)

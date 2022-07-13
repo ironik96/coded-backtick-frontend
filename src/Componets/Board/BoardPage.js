@@ -11,18 +11,12 @@ import MemberTab from "./MembersTab/MemberTab";
 
 CustomTab.tabsRole = "Tab";
 function BoardPage() {
-  const [selectedIndex, setSelectedIndex] = useState(1);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const { id } = useLocation().state;
   useEffect(() => {
-    fetchBoard();
+    boardStore.fetchBoard(id);
     return () => boardStore.dispose();
   }, []);
-
-  const setHidden = (index) => (selectedIndex === index ? "" : " hidden");
-
-  async function fetchBoard() {
-    await boardStore.fetchBoard(id);
-  }
 
   if (!boardStore.board) return <Loading />;
 
@@ -32,6 +26,7 @@ function BoardPage() {
         selectedIndex={selectedIndex}
         onSelect={(tabIndex) => setSelectedIndex(tabIndex)}
         className="h-full"
+        selectedTabPanelClassName="h-[calc(100%-52px)]"
       >
         <TabList className="h-[52px] bg-white flex justify-center">
           <CustomTab>Board</CustomTab>
@@ -41,13 +36,13 @@ function BoardPage() {
           <CustomTab>Review</CustomTab>
         </TabList>
 
-        <TabPanel className={"h-[calc(100%-52px)]" + setHidden(0)}>
+        <TabPanel>
           <BoardTab />
         </TabPanel>
-        <TabPanel className={"h-[calc(100%-52px)]" + setHidden(1)}>
+        <TabPanel>
           <LeaderboardTab />
         </TabPanel>
-        <TabPanel className={"h-[calc(100%-52px)]" + setHidden(2)}>
+        <TabPanel>
           <MemberTab />
         </TabPanel>
         <TabPanel></TabPanel>

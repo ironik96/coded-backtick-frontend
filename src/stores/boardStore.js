@@ -71,6 +71,10 @@ class BoardStore {
     );
   };
 
+  deleteTask = (id) => {
+    this.board.tasks = this.board.tasks.filter(({ _id }) => _id !== id);
+  };
+
   dispose = () => {
     this.board = null;
   };

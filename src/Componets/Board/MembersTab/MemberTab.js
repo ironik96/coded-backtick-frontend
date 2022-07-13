@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { observer } from "mobx-react";
-import coin from "../../../images/coin.png";
 import MemberItem from "./MemberItem";
-import boardMembersStore from "../../../stores/boardMembersStore";
 import boardStore from "../../../stores/boardStore";
 import SearchBar from "./Searchbar";
 import Loading from "../../../components/shared/Loading";

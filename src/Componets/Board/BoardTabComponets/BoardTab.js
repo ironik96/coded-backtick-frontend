@@ -6,12 +6,12 @@ import TaskList from "./TaskList";
 
 function BoardTab() {
   const taskList = (tasks) =>
-    tasks.map((task) => <Task key={task._id} task={task} />);
+    tasks.map((task) => <Task key={task._id} task={task} listLength={tasks.length} />);
 
   const { tasks } = boardStore.board;
 
   return (
-    <div className="w-full p-[20px] flex items-start h-full overflow-x-auto gap-5">
+    <div className="w-full p-[20px] flex items-start h-full overflow-x-auto gap-5 scroll-event-div">
       <TaskList
         listTitle={"Icebox"}
         taskList={taskList(tasks.filter((task) => task.list === "icebox"))}
