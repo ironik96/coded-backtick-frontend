@@ -21,16 +21,17 @@ function App() {
     userStore.updateUserStore(id);
   }, [id]);
 
-  const appRoutes = userStore.user ? <AppRoutes /> : <Loading />;
+  const Routes = () => {
+    if (!authStore.user) return <AuthRoutes />;
+    if (!userStore.user) return <Loading />;
+    return <AppRoutes />;
+  };
   return (
     <div className="w-screen h-screen">
       <div className="h-[4rem]">
         <Navbar />
       </div>
-      <div className="h-[calc(100%-4rem)] overflow-auto">
-
-        {authStore.user ? appRoutes : <AuthRoutes />}
-      </div>
+      <div className="h-[calc(100%-4rem)] overflow-auto">{Routes()}</div>
     </div>
   );
 }

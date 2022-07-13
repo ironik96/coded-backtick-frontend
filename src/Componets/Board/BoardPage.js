@@ -29,6 +29,7 @@ function BoardPage() {
         selectedIndex={selectedIndex}
         onSelect={(tabIndex) => setSelectedIndex(tabIndex)}
         className="h-full"
+        selectedTabPanelClassName="h-[calc(100%-52px)]"
       >
         <TabList className="h-[52px] bg-white flex justify-center">
           <CustomTab>Board</CustomTab>
@@ -38,7 +39,7 @@ function BoardPage() {
           <CustomTab>Review</CustomTab>
         </TabList>
 
-        <TabPanel className="h-[calc(100%-52px)]">
+        <TabPanel>
           <BoardTab />
         </TabPanel>
         <TabPanel>
