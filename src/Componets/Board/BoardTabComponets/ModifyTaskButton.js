@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 
-const ModifyTaskButton = ({ className }) => {
+const ModifyTaskButton = ({ className, openModal, listLength }) => {
   const buttonRef = useRef();
 
   const [btnPosition, setBtnPosition] = useState();
@@ -11,12 +11,13 @@ const ModifyTaskButton = ({ className }) => {
     document
       .querySelector("div.scroll-event-div")
       .addEventListener("scroll", handleScroll);
-    getPosition();
-
     return () => {
       window.removeEventListener("resize", getPosition);
     };
   }, []);
+  useEffect(() => {
+    getPosition();
+  }, [listLength]);
 
   const openOptions = () => setShowOptions(true);
   const closeOptions = () => setShowOptions(false);
@@ -46,20 +47,27 @@ const ModifyTaskButton = ({ className }) => {
         btnPosition={btnPosition}
         showOptions={showOptions}
         closeOptions={closeOptions}
+        openModal={openModal}
       />
     </div>
   );
 };
 
-const TaskOptionsList = ({ btnPosition, showOptions, closeOptions }) => {
+const TaskOptionsList = ({
+  btnPosition,
+  showOptions,
+  closeOptions,
+  openModal,
+}) => {
   if (!btnPosition) return <div></div>;
   const state = showOptions ? "" : "hidden";
 
   const onClickEdit = () => {
-    console.log("click edit");
+    closeOptions();
+    openModal();
   };
   const onClickDelete = () => {
-    console.log("click delete");
+    console.log("wait");
   };
 
   return (

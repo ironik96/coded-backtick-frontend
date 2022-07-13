@@ -11,7 +11,9 @@ const TaskForm = ({ task, setTask, closeModal }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    taskStore.createTask(boardStore.board._id, task);
+    isNew
+      ? taskStore.createTask(boardStore.board._id, task)
+      : taskStore.updateTask(task);
     closeModal();
   };
 
@@ -27,14 +29,14 @@ const TaskForm = ({ task, setTask, closeModal }) => {
         onChange={handleChange}
       ></input>
 
-      <input
+      <textarea
         className="p-2 bg-light-grey rounded-md focus-visible:outline-none text-black"
         type="text"
         name="title"
         placeholder="Title"
         value={task.title}
         onChange={handleChange}
-      ></input>
+      ></textarea>
 
       <button type="submit" className="bg-blue text-white rounded-md p-2">
         {isNew ? "Add" : "Update"}

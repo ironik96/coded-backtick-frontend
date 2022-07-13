@@ -19,10 +19,9 @@ const TaskList = ({ listTitle, taskList }) => {
   const handleDrop = (item) => {
     if (item.list === listTitle.toLowerCase()) return;
 
-    // new reference to avoid mobx warning
-    const updateTask = { ...item };
-    updateTask.list = listTitle;
-    taskStore.updateTask(updateTask);
+    const moveTask = { _id: item._id };
+    moveTask.list = listTitle;
+    taskStore.updateTask(moveTask);
   };
 
   const [, drop] = useDrop(() => ({
