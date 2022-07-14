@@ -7,14 +7,20 @@ class BoardMembersStore {
   constructor() {
     makeAutoObservable(this);
   }
-
   addMember = async (boardId, user) => {
     const [response, error] = await tryCatch(() =>
       instance.put(`${URL}/${boardId}/`, user)
     );
     if (error) return console.error(error);
   };
-
+  updateMember = async (member) => {
+    const [response, error] = await tryCatch(() =>
+      instance.put(`${URL}/member/${member._id}/`, member)
+    );
+    if (error) return console.error(error);
+return response.data
+  };
+  
   deleteMember = async (boardId, memberid) => {
     const [response, error] = await tryCatch(() =>
       instance.delete(`${URL}/${boardId}/${memberid}`)

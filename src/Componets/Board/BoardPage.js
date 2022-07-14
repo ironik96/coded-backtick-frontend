@@ -3,11 +3,12 @@ import { observer } from "mobx-react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { useState, useEffect } from "react";
 import BoardTab from "./BoardTabComponets/BoardTab";
-import LeaderboardTab from "./LeadBoard/LeaderboardTab";
+import LeaderboardTab from "./LeaderBoardTab/LeaderboardTab";
 import { useLocation } from "react-router-dom";
 import boardStore from "../../stores/boardStore";
 import Loading from "../../components/shared/Loading";
 import MemberTab from "./MembersTab/MemberTab";
+import ReviewTab from "./ReviewTab/ReviewTab";
 
 CustomTab.tabsRole = "Tab";
 function BoardPage() {
@@ -46,7 +47,7 @@ function BoardPage() {
           <MemberTab />
         </TabPanel>
         <TabPanel></TabPanel>
-        <TabPanel></TabPanel>
+        <TabPanel><ReviewTab/></TabPanel>
       </Tabs>
     </div>
   );
