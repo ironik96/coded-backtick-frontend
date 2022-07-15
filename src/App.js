@@ -14,11 +14,13 @@ import userStore from "./stores/userStore";
 import authStore from "./stores/authStore";
 import { useEffect } from "react";
 import Loading from "./components/shared/Loading";
+import notificationStore from "./stores/notificationStore";
 
 function App() {
   const id = authStore.user?._id;
   useEffect(() => {
     userStore.updateUserStore(id);
+    notificationStore.fetchNotifications(id);
   }, [id]);
 
   const Routes = () => {
@@ -27,7 +29,7 @@ function App() {
     return <AppRoutes />;
   };
   return (
-    <div className="w-screen h-screen">
+    <div className="w-screen h-screen select-none">
       <div className="h-[4rem]">
         <Navbar />
       </div>
