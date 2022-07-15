@@ -14,12 +14,30 @@ import userStore from "./stores/userStore";
 import authStore from "./stores/authStore";
 import { useEffect } from "react";
 import Loading from "./components/shared/Loading";
+import io from "socket.io-client";
+
+export const socket = io("http://localhost:8000");
 
 function App() {
   const id = authStore.user?._id;
+  // const [isConnected, setIsConnected] = useState(socket.connected);
   useEffect(() => {
     userStore.updateUserStore(id);
   }, [id]);
+  useEffect(() => {
+    socket.on("connection", () => {});
+    socket.on("message", (msg) => console.log(msg));
+
+    socket.on("disconnect", () => {
+      // setIsConnected(false);
+      console.log("disconnected");
+    });
+
+    return () => {
+      socket.off("connect");
+      socket.off("disconnect");
+    };
+  }, []);
 
   const Routes = () => {
     if (!authStore.user) return <AuthRoutes />;
