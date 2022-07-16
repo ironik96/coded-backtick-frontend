@@ -62,8 +62,8 @@ class BoardStore {
   };
 
   addBoardMember = (boardMember) => {
-    this.board.boardMembers = [...this.board.boardMembers,boardMember]
-  }
+    this.board.boardMembers = [...this.board.boardMembers, boardMember];
+  };
 
   updateTask = (updatedTask) => {
     this.board.tasks = this.board.tasks.map((task) =>
@@ -77,6 +77,17 @@ class BoardStore {
 
   dispose = () => {
     this.board = null;
+  };
+
+  userIsCreater = () => this.board.createdBy === userStore.user._id;
+
+  userIsAdmin = () => {
+    return (
+      this.userIsCreater() ||
+      this.board.boardMembers.find(
+        ({ userId }) => userId === userStore.user._id
+      ).role === "admin"
+    );
   };
 }
 

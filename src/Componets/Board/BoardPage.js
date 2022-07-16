@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import boardStore from "../../stores/boardStore";
 import Loading from "../../components/shared/Loading";
 import MemberTab from "./MembersTab/MemberTab";
+import CreateBoard from "../../components/CreateBoard/CreateBoard";
 
 CustomTab.tabsRole = "Tab";
 function BoardPage() {
@@ -34,6 +35,7 @@ function BoardPage() {
           <CustomTab>Members</CustomTab>
           <CustomTab>Reward</CustomTab>
           <CustomTab>Review</CustomTab>
+          {boardStore.userIsAdmin() && <CustomTab>Settings</CustomTab>}
         </TabList>
 
         <TabPanel>
@@ -47,6 +49,11 @@ function BoardPage() {
         </TabPanel>
         <TabPanel></TabPanel>
         <TabPanel></TabPanel>
+        {boardStore.userIsAdmin() && (
+          <TabPanel>
+            <CreateBoard />
+          </TabPanel>
+        )}
       </Tabs>
     </div>
   );
