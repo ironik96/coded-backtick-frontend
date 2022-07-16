@@ -15,8 +15,7 @@ class UserStore {
 
     this.setUser(response.data);
   };
-  
-  
+
   getEditableBoard = (boardSlug) => {
     const board = this.user.boards.find(({ slug }) => slug === boardSlug);
     return boardStore.makeBoardEditable(board);
@@ -33,6 +32,49 @@ class UserStore {
 
   deleteBoard = (boardId) =>
     (this.user.boards = this.user.boards.filter(({ _id }) => _id !== boardId));
+
+  boardChartInfo = (board) => {
+    const { boardMembers } = board;
+
+    if (boardMembers.length === 0) return null;
+
+    const total = boardMembers
+      .map(({ points }) => points)
+      .reduce((total, current) => total + current);
+
+    const info = {
+      totalpoints: total === 0 ? 1 : total,
+    };
+
+    if (boardMembers.length === 1) {
+      info.firstPlacePoints =
+        boardMembers[0].points === 0 ? 0.1 : boardMembers[0].points;
+      info.firstPlaceName = boardMembers[0].userId.fname;
+    }
+
+    if (boardMembers.length === 2) {
+      info.firstPlacePoints =
+        boardMembers[0].points === 0 ? 0.1 : boardMembers[0].points;
+      info.firstPlaceName = boardMembers[0].userId.fname;
+      info.secondPlacePoints =
+        boardMembers[1].points === 0 ? 0.1 : boardMembers[1].points;
+      info.secondPlaceName = boardMembers[1].userId.fname;
+    }
+
+    if (boardMembers.length >= 3) {
+      info.firstPlacePoints =
+        boardMembers[0].points === 0 ? 0.1 : boardMembers[0].points;
+      info.firstPlaceName = boardMembers[0].userId.fname;
+      info.secondPlacePoints =
+        boardMembers[1].points === 0 ? 0.1 : boardMembers[1].points;
+      info.secondPlaceName = boardMembers[1].userId.fname;
+      info.thirdPlacePoints =
+        boardMembers[2].points === 0 ? 0.1 : boardMembers[2].points;
+      info.thirdPlaceName = boardMembers[2].userId.fname;
+    }
+
+    return info;
+  };
 }
 
 async function tryCatch(promise) {

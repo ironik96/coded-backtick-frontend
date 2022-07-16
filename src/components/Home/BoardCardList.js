@@ -13,7 +13,10 @@ const BoardCardList = () => {
       : "w-[calc(3*15rem+2rem)]";
   const cards = userStore.user.boards.map((board) => (
     <Link key={board._id} to={`/board/${board.slug}`} state={{ id: board._id }}>
-      <Card leading={board.title} content={<BoardChart />} />
+      <Card
+        leading={board.title}
+        content={<BoardChart {...userStore.boardChartInfo(board)} />}
+      />
     </Link>
   ));
   return (
