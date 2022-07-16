@@ -6,6 +6,7 @@ const ModifyTaskButton = ({ className, openModal, listLength, deleteTask }) => {
   const [btnPosition, setBtnPosition] = useState();
   const [showOptions, setShowOptions] = useState(false);
   const btnState = showOptions ? " z-20 opacity-100" : " opacity-0";
+
   useEffect(() => {
     window.addEventListener("resize", getPosition);
     document
@@ -20,6 +21,7 @@ const ModifyTaskButton = ({ className, openModal, listLength, deleteTask }) => {
       document.removeEventListener("scroll", handleScrollY);
     };
   }, []);
+
   useEffect(() => {
     getPosition();
   }, [listLength]);

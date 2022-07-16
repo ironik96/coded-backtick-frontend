@@ -10,8 +10,7 @@ import NotificationItem from "./NotificationItem";
 const logoSize = 48;
 const iconSize = 36;
 const Navbar = () => {
-  const user = authStore.user;
-  const trailing = user ? <ProfileTrailing /> : <AuthTrailing />;
+  const trailing = authStore.user ? <ProfileTrailing /> : <AuthTrailing />;
 
   return (
     <nav className="w-full h-full flex bg-white items-center p-4">
@@ -26,21 +25,26 @@ const Navbar = () => {
 };
 
 const ProfileTrailing = observer(() => {
+  const { notifications } = notificationStore;
   const [showNotifications, setShowNotifications] = useState(false);
-  const [showPing, setShowPing] = useState(
-    notificationStore.hasNotifications()
-  );
+  const [ping, setPing] = useState(true);
+
+  const showPing =
+    ping && notificationStore.hasUnseenNotifications(notifications);
+
   const onClickBell = () => {
-    if (showPing) setShowPing(false);
+    if (ping) setPing(false);
     setShowNotifications(!showNotifications);
   };
 
   let notificationList;
 
-  if (notificationStore.hasNotifications())
-    notificationList = notificationStore.notifications.map((notification) => (
-      <NotificationItem key={notification._id} notification={notification} />
-    ));
+  if (notificationStore.hasUnseenNotifications(notifications))
+    notificationList = notificationStore
+      .unseenNotifications(notifications)
+      .map((notification) => (
+        <NotificationItem key={notification._id} notification={notification} />
+      ));
   else
     notificationList = (
       <div className="text-grey text-center">no new notifications</div>
@@ -67,7 +71,7 @@ const ProfileTrailing = observer(() => {
             opacity: showNotifications ? 1 : 0,
             visibility: showNotifications ? "visible" : "hidden",
           }}
-          className="absolute transition-opacity duration-300 top-[calc(100%+0.75rem)] w-56 -right-[36px] bg-white p-2 rounded-md shadow-2xl text-sm flex flex-col z-20 gap-3"
+          className="absolute transition-opacity duration-300 top-[calc(100%+1rem)] w-64 -right-[36px] bg-white p-2 rounded-md shadow text-sm flex flex-col z-20 gap-3"
         >
           {notificationList}
         </div>

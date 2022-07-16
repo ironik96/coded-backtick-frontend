@@ -38,10 +38,9 @@ function SearchBar() {
       userId: e._id,
       boardId: boardStore.board._id,
     };
-    console.log(addUser, "onclick user");
-    boardMembersStore.addMember(addUser.boardId, addUser);
+    boardMembersStore.sendInvite(e._id);
     setFilteredData([]);
-    Alert("Member added succefully ", "success");
+    Alert("Invite sent successfully", "success");
   };
 
   const userList = filteredData.map((user, id) => (

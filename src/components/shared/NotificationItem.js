@@ -1,13 +1,20 @@
 import React from "react";
+import boardMembersStore from "../../stores/boardMembersStore";
+import notificationStore from "../../stores/notificationStore";
 
 const NotificationItem = ({ notification }) => {
+  const onClickAccept = () => boardMembersStore.addMember(notification);
+
+  const onClickReject = () =>
+    notificationStore.updateNotification({ ...notification, seen: true });
+
   return (
     <>
-      <div className="flex items-center">
-        <p>{"user sent you an invite"}</p>
+      <div className="flex items-center h-14">
+        <p className="line-clamp-2">{notification.title}</p>
         <div className="grow"></div>
-        <AcceptButton />
-        <RejectButton />
+        <AcceptButton onClickAccept={onClickAccept} />
+        <RejectButton onClickReject={onClickReject} />
       </div>
     </>
   );
@@ -15,9 +22,13 @@ const NotificationItem = ({ notification }) => {
 
 const ICON_SIZE = 24;
 
-const AcceptButton = () => {
+const AcceptButton = ({ onClickAccept }) => {
   return (
-    <button style={{ width: ICON_SIZE, height: ICON_SIZE }}>
+    <button
+      style={{ width: ICON_SIZE, height: ICON_SIZE }}
+      onClick={onClickAccept}
+      className="shrink-0"
+    >
       <svg
         width="24"
         height="24"
@@ -34,9 +45,13 @@ const AcceptButton = () => {
   );
 };
 
-const RejectButton = () => {
+const RejectButton = ({ onClickReject }) => {
   return (
-    <button style={{ width: ICON_SIZE, height: ICON_SIZE }}>
+    <button
+      style={{ width: ICON_SIZE, height: ICON_SIZE }}
+      onClick={onClickReject}
+      className="shrink-0"
+    >
       <svg
         width="20"
         height="20"
