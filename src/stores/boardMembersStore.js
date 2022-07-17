@@ -41,7 +41,10 @@ class BoardMembersStore {
 
   sendInvite = (invited) => {
     if (!invited) return;
-    const inviteTitle = `${userStore.user.fname} sent you an invite to ${boardStore.board.title} board`;
+    // if(boardStore.board.title)
+    let inviteTitle = `${userStore.user.fname} sent you an invite to ${boardStore.board.title}`;
+    if (!boardStore.board.title.toLowerCase().includes("board"))
+      inviteTitle += " board";
 
     const invite = {
       userId: invited,
@@ -66,10 +69,11 @@ class BoardMembersStore {
   };
 
   getMemberTaskList = (userId) => {
-    const {_id:memberId} = this.getMemberByUserId(userId)
-    return boardStore.board.tasks.filter(({assignedTo})=> memberId === assignedTo)
-
-  }
+    const { _id: memberId } = this.getMemberByUserId(userId);
+    return boardStore.board.tasks.filter(
+      ({ assignedTo }) => memberId === assignedTo
+    );
+  };
 }
 
 async function tryCatch(promise) {
