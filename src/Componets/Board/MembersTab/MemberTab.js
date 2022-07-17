@@ -14,7 +14,7 @@ function MemberTab() {
   return (
     <div className="bg-theme-light-grey w-screen p-[20px] space-y-4 flex-col place-content-center">
       <div className="flex justify-center">
-       { boardStore.isCreater() ?
+       { boardStore.userIsCreater() ?
             <SearchBar/>
         : <div/>}
       </div>

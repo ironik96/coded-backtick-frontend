@@ -35,7 +35,7 @@ function BoardPage() {
           <CustomTab>Leaderboard</CustomTab>
           <CustomTab>Members</CustomTab>
           <CustomTab>Reward</CustomTab>
-          {boardStore.isCreater() ? <CustomTab>Review</CustomTab> : <div />}
+          {boardStore.userIsAdmin() ? <CustomTab>Review</CustomTab> : <div />}
           {boardStore.userIsAdmin() && <CustomTab>Settings</CustomTab>}
         </TabList>
 
@@ -49,15 +49,16 @@ function BoardPage() {
           <MemberTab />
         </TabPanel>
         <TabPanel></TabPanel>
-        <TabPanel>
-          <ReviewTab />
-        </TabPanel>
+        {boardStore.userIsAdmin() && (
+          <TabPanel>
+            <ReviewTab />
+          </TabPanel>
+        )}
         {boardStore.userIsAdmin() && (
           <TabPanel>
             <CreateBoard />
           </TabPanel>
         )}
-       
       </Tabs>
     </div>
   );

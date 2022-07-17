@@ -27,7 +27,7 @@ function Memberitem({ member }) {
           </div>
         </div>
         <div className="flex items-center p-[10px] h-[100%] w-[80px] rounded-lg  place-content-center">
-         { boardStore.isCreater() ?
+         { boardStore.userIsCreater() ?
           <button onClick={handleOnClick}>
             <img className="w-[20px]" src={deleteButton} />
           </button>

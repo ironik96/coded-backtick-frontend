@@ -33,14 +33,7 @@ class BoardStore {
     if (error) return console.error(error.message, response.data);
     userStore.addBoard(response.data);
   };
-  isCreater = () =>
-  {
-     return userStore.user._id === this.board.createdBy 
-  }
-isAdmin =(id) =>
-{
-  return this.isCreater() || this.board.boardMembers.some((member)=> member._id === id && member.role === "admin")
-}
+
   updateBoard = async (board) => {
     this.makeBoardDatesISO(board);
 
@@ -91,7 +84,7 @@ isAdmin =(id) =>
     return (
       this.userIsCreater() ||
       this.board.boardMembers.find(
-        ({ userId }) => userId === userStore.user._id
+        ({ userId }) => userId._id === userStore.user._id
       ).role === "admin"
     );
   };
