@@ -5,9 +5,9 @@ const iconSize = 16;
 
 const BoardChart = ({
   totalpoints = 1,
-  firstPlacePoints = 0.1,
-  secondPlacePoints = 0.1,
-  thirdPlacePoints = 0.1,
+  firstPlacePoints = totalpoints / 10,
+  secondPlacePoints = totalpoints / 10,
+  thirdPlacePoints = totalpoints / 10,
   firstPlaceName = "",
   secondPlaceName = "",
   thirdPlaceName = "",
