@@ -37,6 +37,7 @@ function SearchBar() {
     addUser = {
       userId: e._id,
       boardId: boardStore.board._id,
+  
     };
     boardMembersStore.sendInvite(e._id);
     setFilteredData([]);

@@ -4,7 +4,6 @@ import MemberItem from "./MemberItem";
 import boardStore from "../../../stores/boardStore";
 import SearchBar from "./Searchbar";
 import Loading from "../../../components/shared/Loading";
-
 function MemberTab() {
   const boardMembers = boardStore.board.boardMembers;
   if (!boardMembers) return <Loading />;
@@ -15,9 +14,10 @@ function MemberTab() {
   return (
     <div className="bg-theme-light-grey w-screen p-[20px] space-y-4 flex-col place-content-center">
       <div className="flex justify-center">
-        <SearchBar />
+       { boardStore.isCreater() ?
+            <SearchBar/>
+        : <div/>}
       </div>
-
       {memberList}
     </div>
   );

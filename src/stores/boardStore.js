@@ -1,7 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import instance from "./instance";
 import userStore from "./userStore";
-
 const BASE_URL = "/boards";
 class BoardStore {
   constructor() {
@@ -34,7 +33,14 @@ class BoardStore {
     if (error) return console.error(error.message, response.data);
     userStore.addBoard(response.data);
   };
-
+  isCreater = () =>
+  {
+     return userStore.user._id === this.board.createdBy 
+  }
+isAdmin =(id) =>
+{
+  return this.isCreater() || this.board.boardMembers.some((member)=> member._id === id && member.role === "admin")
+}
   updateBoard = async (board) => {
     this.makeBoardDatesISO(board);
 

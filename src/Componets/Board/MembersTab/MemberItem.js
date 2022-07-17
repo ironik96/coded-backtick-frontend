@@ -9,7 +9,6 @@ import Alert from "../../../components/shared/Alert";
 
 function Memberitem({ member }) {
   const { userId: user } = member;
-
   const handleOnClick = (e) => {
     boardMembersStore.deleteMember(boardStore.board._id, member._id);
     Alert("Member removed succefully ", "error")
@@ -28,9 +27,12 @@ function Memberitem({ member }) {
           </div>
         </div>
         <div className="flex items-center p-[10px] h-[100%] w-[80px] rounded-lg  place-content-center">
+         { boardStore.isCreater() ?
           <button onClick={handleOnClick}>
             <img className="w-[20px]" src={deleteButton} />
           </button>
+          : <div/>
+}
         </div>
       </div>
     </div>

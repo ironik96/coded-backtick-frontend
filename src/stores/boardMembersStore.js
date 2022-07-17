@@ -17,13 +17,26 @@ class BoardMembersStore {
     const [response, error] = await tryCatch(() =>
       instance.put(`${URL}/${user.boardId}/`, user)
     );
+    console.log(boardStore.board.boardMembers.push(response.data), "members");
+
     if (error) return console.error(error);
     notificationStore.updateNotification({ ...notification, seen: true });
   };
 
-  deleteMember = async (boardId, memberid) => {
+  updateMember = async (member) => {
     const [response, error] = await tryCatch(() =>
-      instance.delete(`${URL}/${boardId}/${memberid}`)
+      instance.put(`${URL}/member/${member._id}/`, member)
+    );
+    if (error) return console.error(error);
+    return response.data;
+  };
+
+  deleteMember = async (boardId, memberId) => {
+    boardStore.board.boardMembers = boardStore.board.boardMembers.filter(
+      (member) => member._id != memberId
+    );
+    const [response, error] = await tryCatch(() =>
+      instance.delete(`${URL}/${boardId}/${memberId}`)
     );
     if (error) return console.error(error);
   };
@@ -48,7 +61,20 @@ class BoardMembersStore {
     if (error) return console.error(error.message);
     this.users = response.data;
   };
+  getMemberIdByUserId = async (userId) => {
+    const [response, error] = await tryCatch(() =>
+      instance.get(`${URL}/getUserMemberId/${userId}`)
+    );
+    if (error) return console.error(error.message);
+    console.log(
+      "🚀 ~ file: boardMembersStore.js ~ line 44 ~ BoardMembersStore ~ getMemberIdByUserId= ~ response.data",
+      response.data
+    );
+
+    return response.data;
+  };
 }
+
 async function tryCatch(promise) {
   try {
     const response = await promise();
