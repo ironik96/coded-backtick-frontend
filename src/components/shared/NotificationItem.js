@@ -11,9 +11,10 @@ const NotificationItem = ({ notification }) => {
   return (
     <>
       <div className="flex items-center h-14">
-        <p className="line-clamp-2">{notification.title}</p>
-        <div className="grow"></div>
+        <p className="line-clamp-2 border-r">{notification.title}</p>
+        <div className="w-4"></div>
         <AcceptButton onClickAccept={onClickAccept} />
+        <div className="w-6"></div>
         <RejectButton onClickReject={onClickReject} />
       </div>
     </>
