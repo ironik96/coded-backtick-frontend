@@ -11,7 +11,9 @@ function ReviewTask({ task }) {
     (member) => member._id === assignedTo
   );
   const { userId: user } = member[0];
+  console.log(member, "member");
   member = member[0];
+
   const handleOnClick = (e) => {
     // take point and add it to member  and remove to done
     // MUST ADD TASK IN MEMBERS
