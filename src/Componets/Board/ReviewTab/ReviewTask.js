@@ -8,8 +8,10 @@ import Alert from "../../../components/shared/Alert";
 function ReviewTask({ task }) {
     const {assignedTo} = task
    let member = boardStore.board.boardMembers.filter((member) => member._id === assignedTo)
-   const { userId: user } = member
+   const { userId: user } = member[0]
+   console.log(member , "member")
       member = member[0]
+      
    const handleOnClick = (e) => {
     // take point and add it to member  and remove to done
     // MUST ADD TASK IN MEMBERS

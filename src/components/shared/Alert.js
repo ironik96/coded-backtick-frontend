@@ -13,3 +13,4 @@ export default Alert;
 // icons used  in swal:
 // success
 // error
+// warning

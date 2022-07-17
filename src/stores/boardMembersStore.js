@@ -59,18 +59,17 @@ class BoardMembersStore {
     if (error) return console.error(error.message);
     this.users = response.data;
   };
-  getMemberIdByUserId = async (userId) => {
-    const [response, error] = await tryCatch(() =>
-      instance.get(`${URL}/getUserMemberId/${userId}`)
+  getMemberByUserId = async (userId) => {
+    return boardStore.board.boardMembers.find(
+      (member) => member.userId === userId
     );
-    if (error) return console.error(error.message);
-    console.log(
-      "🚀 ~ file: boardMembersStore.js ~ line 44 ~ BoardMembersStore ~ getMemberIdByUserId= ~ response.data",
-      response.data
-    );
-
-    return response.data;
   };
+
+  getMemberTaskList = (userId) => {
+    const {_id:memberId} = this.getMemberByUserId(userId)
+    return boardStore.board.tasks.filter(({assignedTo})=> memberId === assignedTo)
+
+  }
 }
 
 async function tryCatch(promise) {
