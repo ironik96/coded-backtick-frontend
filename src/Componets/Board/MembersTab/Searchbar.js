@@ -37,8 +37,8 @@ function SearchBar() {
     addUser = {
       userId: e._id,
       boardId: boardStore.board._id,
+  
     };
-    console.log(addUser, "onclick user");
     boardMembersStore.addMember(addUser.boardId, addUser);
     setFilteredData([]);
     Alert("Member added succefully ", "success");

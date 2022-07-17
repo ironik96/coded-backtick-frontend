@@ -34,7 +34,10 @@ function BoardPage() {
           <CustomTab>Leaderboard</CustomTab>
           <CustomTab>Members</CustomTab>
           <CustomTab>Reward</CustomTab>
+          { boardStore.isCreater() ? 
           <CustomTab>Review</CustomTab>
+          : <div/>
+          }
         </TabList>
 
         <TabPanel>

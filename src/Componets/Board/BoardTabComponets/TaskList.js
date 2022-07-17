@@ -4,6 +4,9 @@ import BasicModal from "../../../components/shared/BasicModal";
 import TaskForm from "./TaskForm";
 import taskStore from "../../../stores/taskStore";
 import { useDrop } from "react-dnd";
+import userStore from "../../../stores/userStore";
+import boardStore from "../../../stores/boardStore";
+import boardMembersStore from "../../../stores/boardMembersStore";
 
 const listWithButtons = ["Icebox", "Todo"];
 const TaskList = ({ listTitle, taskList }) => {
@@ -19,8 +22,14 @@ const TaskList = ({ listTitle, taskList }) => {
   const handleDrop = (item) => {
     if (item.list === listTitle.toLowerCase()) return;
 
-    const moveTask = { _id: item._id };
+    const moveTask = { _id: item._id};
     moveTask.list = listTitle;
+    if( (moveTask.list === "review" || moveTask.list === "doing" ) )
+    {
+      const memberId = boardMembersStore.getMemberIdByUserId(userStore.user._id)
+      moveTask = { _id: item._id, assignedTo :memberId};
+      console.log("🚀 ~ file: TaskList.js ~ line 28 ~ handleDrop ~ moveTask", moveTask)
+    }
     taskStore.updateTask(moveTask);
   };
 
