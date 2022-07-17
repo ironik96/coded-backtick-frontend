@@ -17,8 +17,6 @@ class BoardMembersStore {
     const [response, error] = await tryCatch(() =>
       instance.put(`${URL}/${user.boardId}/`, user)
     );
-    console.log(boardStore.board.boardMembers.push(response.data), "members");
-
     if (error) return console.error(error);
     notificationStore.updateNotification({ ...notification, seen: true });
   };
