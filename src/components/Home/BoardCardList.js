@@ -7,14 +7,20 @@ import userStore from "../../stores/userStore";
 import { Link } from "react-router-dom";
 
 const BoardCardList = () => {
-  const boards = userStore.userBoards;
-  const cards = boards.map((board) => (
-    <Link key={board._id} to={`/board/${board.slug}`}>
-      <Card leading={board.title} content={<BoardChart />} />
+  const cardListWidth =
+    userStore.user.boards.length > 3
+      ? "w-[calc(3*15rem+8rem)]"
+      : "w-[calc(3*15rem+2rem)]";
+  const cards = userStore.user.boards.map((board) => (
+    <Link key={board._id} to={`/board/${board.slug}`} state={{ id: board._id }}>
+      <Card
+        leading={board.title}
+        content={<BoardChart {...userStore.boardChartInfo(board)} />}
+      />
     </Link>
   ));
   return (
-    <ScrollContainer vertical={false} className="card-list">
+    <ScrollContainer vertical={false} className={"card-list " + cardListWidth}>
       {cards}
     </ScrollContainer>
   );

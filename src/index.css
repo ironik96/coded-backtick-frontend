@@ -73,3 +73,66 @@ code {
 .input-container input:focus {
   box-shadow: 0 0 0 2px var(--theme-blue);
 }
+
+button:focus-visible {
+  outline: none;
+}
+
+@keyframes tick {
+  to {
+    transform: rotate(359deg);
+  }
+}
+.loader {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px;
+  border: 2px solid var(--theme-green);
+}
+
+.loader::after {
+  content: "";
+  position: absolute;
+  bottom: 29px;
+  left: 30px;
+  display: block;
+  transform-origin: 0% 100%;
+  width: 1px;
+  height: 24px;
+  background: var(--theme-green);
+  animation: tick 1s infinite linear;
+}
+
+ul[role="tablist"] > li:focus-visible {
+  outline: none;
+}
+
+div.task-list-wrapper::-webkit-scrollbar {
+  background-color: var(--theme-light-grey);
+  width: 16px;
+}
+
+div.task-list-wrapper::-webkit-scrollbar-track {
+  background-color: var(--theme-light-grey);
+}
+
+div.task-list-wrapper::-webkit-scrollbar-track:hover {
+  background-color: var(--theme-light-grey);
+}
+
+div.task-list-wrapper::-webkit-scrollbar-thumb {
+  background-color: var(--theme-grey);
+  border-radius: 16px;
+  border: 5px solid var(--theme-light-grey);
+}
+
+div.task-list-wrapper::-webkit-scrollbar-thumb:hover {
+  background-color: var(--theme-grey);
+  border: 4px solid var(--theme-light-grey);
+}
+
+div.task-list-wrapper::-webkit-scrollbar-button {
+  display: none;
+}

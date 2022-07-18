@@ -22,7 +22,7 @@ const RankAvatar = ({ rank, image }) => {
         />
       </svg>
       <img
-        className="rounded-full w-[52px] h-[52px] absolute object-cover right-0 top-0"
+        className="rounded-full w-[49px] h-[49px] absolute object-cover right-0.5 top-1/2 -translate-y-1/2"
         src={image}
         alt="avatar"
       />

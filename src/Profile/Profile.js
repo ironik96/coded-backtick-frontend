@@ -1,6 +1,7 @@
 import coin from './../images/coin.png';
 import { observer } from 'mobx-react';
 import authStore from "../stores/authStore";
+import userStore from "../stores/userStore";
 import { Link } from "react-router-dom";
 import Logout  from './../Login/SignoutButton';
 import { useState } from "react";
@@ -18,6 +19,8 @@ function Profile() {
     type: 'application/json',
     headers: {
       'Content-Type': 'application/json',
+      'APIKeyID': 'QQoNUxIBBk7dHYu',
+      'APISecretKey': 'FLmtZ2PGN5sTpeo',
     },
     body:JSON.stringify(body)
   }).then(response => console.log(response))
@@ -40,7 +43,7 @@ function Profile() {
   //       console.log(account.value[0].pubkey.toString());
   //       getTokenAccountBalance(account.value[0].pubkey.toString())
   // })();
-  const user = authStore.profile
+  const user = userStore.user
   const getProvider = () => {
     if ('phantom' in window) {
       const provider = window.phantom?.solana;

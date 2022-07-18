@@ -1,20 +1,49 @@
-import React from 'react'
-import { observer } from "mobx-react";
+import React, { useState } from "react";
+import { useDrag } from "react-dnd";
+import BasicModal from "../../../components/shared/BasicModal";
+import taskStore from "../../../stores/taskStore";
+import ModifyTaskButton from "./ModifyTaskButton";
+import TaskForm from "./TaskForm";
 
-function Task ({task}) {
-    console.log("task is here ", task)
+function Task({ task, listLength }) {
+  const [showModal, setShowModal] = useState(false);
+  const [editableTask, setEditableTask] = useState(task);
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
+  const deleteTask = () => taskStore.deleteTask(task._id);
+
+  const [, drag] = useDrag(() => ({
+    type: "TASK",
+    item: task,
+  }));
   return (
-    
-    <div >
-        <div className='  rounded-lg bg-white object-contain h-[100px] text-left p-[10px] space-y-2'>
-          <h3 className='text-theme-green font-bold'>Point:{task.point}</h3>
-          <h3 className='text-black font-bold'>{task.title}</h3>
-  
+    <>
+      <div
+        ref={drag}
+        className="rounded-lg bg-white  p-[10px] flex flex-col gap-4 items-start group"
+      >
+        <div className="w-full flex justify-between">
+          <p className="text-theme-green group-hover:text-theme-green/70">
+            Points: {task.points}
+          </p>
+          <ModifyTaskButton
+            className="group-hover:opacity-100 transition-opacity"
+            openModal={openModal}
+            listLength={listLength}
+            deleteTask={deleteTask}
+          />
+        </div>
+
+        <p className="text-black group-hover:text-black/70">{task.title}</p>
       </div>
-    </div>
-
-
-  )
+      <BasicModal showModal={showModal} closeModal={closeModal}>
+        <TaskForm
+          task={editableTask}
+          setTask={setEditableTask}
+          closeModal={closeModal}
+        />
+      </BasicModal>
+    </>
+  );
 }
-export default observer(Task);
-
+export default Task;

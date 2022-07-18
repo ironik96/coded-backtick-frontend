@@ -7,31 +7,74 @@ class UserStore {
     makeAutoObservable(this);
   }
   user = null;
-  userBoards = null;
 
-  fetchUser = async (id) => {
+  updateUserStore = async (id) => {
+    if (!id) return;
     const [response, error] = await tryCatch(() => instance.get(`/user/${id}`));
-    if (error) return console.error(error.message);
-    this.setFields(response.data);
+    if (error) return console.error(error.message, response.data);
+
+    this.setUser(response.data);
   };
 
   getEditableBoard = (boardSlug) => {
-    const board = this.userBoards.find(({ slug }) => slug === boardSlug);
+    const board = this.user.boards.find(({ slug }) => slug === boardSlug);
     return boardStore.makeBoardEditable(board);
   };
 
-  setFields = (userData) => {
-    this.user = userData;
-    this.userBoards = userData.boards;
-  };
+  setUser = (userData) => (this.user = userData);
 
-  addBoard = (board) => (this.userBoards = [...this.userBoards, board]);
+  addBoard = (board) => (this.user.boards = [...this.user.boards, board]);
+
   updateBoard = (updatedBoard) =>
-    (this.userBoards = this.userBoards.map((board) =>
+    (this.user.boards = this.user.boards.map((board) =>
       board._id === updatedBoard._id ? updatedBoard : board
     ));
+
   deleteBoard = (boardId) =>
-    (this.userBoards = this.userBoards.filter(({ _id }) => _id !== boardId));
+    (this.user.boards = this.user.boards.filter(({ _id }) => _id !== boardId));
+
+  boardChartInfo = (board) => {
+    const { boardMembers } = board;
+
+    if (boardMembers.length === 0) return null;
+
+    const total = boardMembers
+      .map(({ points }) => points)
+      .reduce((total, current) => total + current);
+
+    const getPoints = (points) => {
+      if (points !== 0) return points;
+      if (total === 0) return 0.1;
+      return total / 10;
+    };
+
+    const info = {
+      totalpoints: total === 0 ? 1 : total,
+    };
+
+    if (boardMembers.length === 1) {
+      info.firstPlacePoints = getPoints(boardMembers[0].points);
+      info.firstPlaceName = boardMembers[0].userId.fname;
+    }
+
+    if (boardMembers.length === 2) {
+      info.firstPlacePoints = getPoints(boardMembers[0].points);
+      info.firstPlaceName = boardMembers[0].userId.fname;
+      info.secondPlacePoints = getPoints(boardMembers[1].points);
+      info.secondPlaceName = boardMembers[1].userId.fname;
+    }
+
+    if (boardMembers.length >= 3) {
+      info.firstPlacePoints = getPoints(boardMembers[0].points);
+      info.firstPlaceName = boardMembers[0].userId.fname;
+      info.secondPlacePoints = getPoints(boardMembers[1].points);
+      info.secondPlaceName = boardMembers[1].userId.fname;
+      info.thirdPlacePoints = getPoints(boardMembers[2].points);
+      info.thirdPlaceName = boardMembers[2].userId.fname;
+    }
+
+    return info;
+  };
 }
 
 async function tryCatch(promise) {
