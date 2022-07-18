@@ -42,34 +42,34 @@ class UserStore {
       .map(({ points }) => points)
       .reduce((total, current) => total + current);
 
+    const getPoints = (points) => {
+      if (points !== 0) return points;
+      if (total === 0) return 0.1;
+      return total / 10;
+    };
+
     const info = {
       totalpoints: total === 0 ? 1 : total,
     };
 
     if (boardMembers.length === 1) {
-      info.firstPlacePoints =
-        boardMembers[0].points === 0 ? total / 10 : boardMembers[0].points;
+      info.firstPlacePoints = getPoints(boardMembers[0].points);
       info.firstPlaceName = boardMembers[0].userId.fname;
     }
 
     if (boardMembers.length === 2) {
-      info.firstPlacePoints =
-        boardMembers[0].points === 0 ? total / 10 : boardMembers[0].points;
+      info.firstPlacePoints = getPoints(boardMembers[0].points);
       info.firstPlaceName = boardMembers[0].userId.fname;
-      info.secondPlacePoints =
-        boardMembers[1].points === 0 ? total / 10 : boardMembers[1].points;
+      info.secondPlacePoints = getPoints(boardMembers[1].points);
       info.secondPlaceName = boardMembers[1].userId.fname;
     }
 
     if (boardMembers.length >= 3) {
-      info.firstPlacePoints =
-        boardMembers[0].points === 0 ? total / 10 : boardMembers[0].points;
+      info.firstPlacePoints = getPoints(boardMembers[0].points);
       info.firstPlaceName = boardMembers[0].userId.fname;
-      info.secondPlacePoints =
-        boardMembers[1].points === 0 ? total / 10 : boardMembers[1].points;
+      info.secondPlacePoints = getPoints(boardMembers[1].points);
       info.secondPlaceName = boardMembers[1].userId.fname;
-      info.thirdPlacePoints =
-        boardMembers[2].points === 0 ? total / 10 : boardMembers[2].points;
+      info.thirdPlacePoints = getPoints(boardMembers[2].points);
       info.thirdPlaceName = boardMembers[2].userId.fname;
     }
 

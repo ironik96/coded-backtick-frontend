@@ -13,12 +13,14 @@ class BoardMembersStore {
 
   addMember = async (notification) => {
     if (!notification) return;
-    const user = { boardId: notification.boardId, userId: notification.userId };
+
     const [response, error] = await tryCatch(() =>
-      instance.put(`${URL}/${user.boardId}/`, user)
+      instance.put(`${URL}/add-member`, { ...notification, seen: true })
     );
     if (error) return console.error(error);
-    notificationStore.updateNotification({ ...notification, seen: true });
+    const { board, notification: updatedNotification } = response.data;
+    userStore.addBoard(board);
+    notificationStore.updateNotificationLocally(updatedNotification);
   };
 
   updateMember = async (member) => {
