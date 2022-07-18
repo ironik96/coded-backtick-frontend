@@ -1,13 +1,17 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable,configure} from "mobx";
 import instance from "./instance";
 import jwt_decode from "jwt-decode";
 import userStore from "./userStore";
 // import { Redirect } from 'react-router/cjs/react-router';
 class AuthStore {
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this ,configure({
+      enforceActions: "never",
+    }));
   }
+  
   user = null;
+  profile= null
 
   register = async (userData) => {
     try {
@@ -19,10 +23,27 @@ class AuthStore {
 
   signin = async (userData) => {
     try {
+  
+      // mobx.toJS
       const response = await instance.post("/signin", userData);
       this.setUser(response.data);
       const decoded = jwt_decode(response.data);
       await userStore.fetchUser(decoded._id);
+      await this.Profile(decoded._id)
+    } catch (error) {}
+  };
+
+  Profile = async (id) => {
+    try {
+      const response = await instance.get(`/you/${id}`);
+      this.profile = response.data;
+    } catch (error) {}
+  };
+
+  UpdateProfile = async (user, id) => {
+    try {
+      const response = await instance.post(`/update/${user._id}`,user);
+      this.profile = response.data;
     } catch (error) {}
   };
 
@@ -46,7 +67,7 @@ class AuthStore {
     if (token) {
       const currentTime = Date.now();
       const user = jwt_decode(token);
-      if (user.expires >= currentTime) {
+      if (user.expires <= currentTime) {
         this.setUser(token);
       } else {
         this.signout();

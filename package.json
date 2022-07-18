@@ -3,23 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@solana/web3.js": "^1.48.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
-    "mobx-react": "^7.5.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-indiana-drag-scroll": "^2.2.0",
-    "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.1",
-    "react-tabs": "^5.1.0",
-    "web-vitals": "^2.1.4",
-  
     "axios": "^0.27.2",
     "jwt-decode": "^3.1.2",
     "mobx": "^6.3.3",
+    "mobx-react": "^7.5.1",
     "passport-jwt": "^4.0.0",
-    "react-router": "^5.2.1"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-indiana-drag-scroll": "^2.2.0",
+    "react-router": "^5.2.1",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
+    "react-tabs": "^5.1.0",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",

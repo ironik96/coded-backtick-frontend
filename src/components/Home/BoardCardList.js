@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 
 const BoardCardList = () => {
   const boards = userStore.userBoards;
-
   const cards = boards.map((board) => (
     <Link key={board._id} to={`/board/${board.slug}`}>
       <Card leading={board.title} content={<BoardChart />} />
