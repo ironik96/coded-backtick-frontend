@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { useDrag } from "react-dnd";
 import BasicModal from "../../../components/shared/BasicModal";
 import taskStore from "../../../stores/taskStore";
+import AssignButton from "./AssignButton";
 import ModifyTaskButton from "./ModifyTaskButton";
 import TaskForm from "./TaskForm";
+import { observer } from "mobx-react";
 
 function Task({ task, listLength }) {
   const [showModal, setShowModal] = useState(false);
@@ -33,8 +35,10 @@ function Task({ task, listLength }) {
             deleteTask={deleteTask}
           />
         </div>
-
-        <p className="text-black group-hover:text-black/70">{task.title}</p>
+        <div className="flex justify-between w-full">
+          <p className="text-black group-hover:text-black/70">{task.title}</p>
+          <AssignButton task={task} />
+        </div>
       </div>
       <BasicModal showModal={showModal} closeModal={closeModal}>
         <TaskForm
@@ -46,4 +50,4 @@ function Task({ task, listLength }) {
     </>
   );
 }
-export default Task;
+export default observer(Task);
