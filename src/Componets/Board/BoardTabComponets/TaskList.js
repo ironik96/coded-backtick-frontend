@@ -5,8 +5,8 @@ import TaskForm from "./TaskForm";
 import taskStore from "../../../stores/taskStore";
 import { useDrop } from "react-dnd";
 import userStore from "../../../stores/userStore";
-import boardStore from "../../../stores/boardStore";
 import boardMembersStore from "../../../stores/boardMembersStore";
+import boardStore from "../../../stores/boardStore";
 
 const listWithButtons = ["Icebox", "Todo"];
 const TaskList = ({ listTitle, taskList }) => {
@@ -29,14 +29,6 @@ const TaskList = ({ listTitle, taskList }) => {
 
     const moveTask = { _id: item._id };
     moveTask.list = listTitle;
-    // if (moveTask.list === "review" || moveTask.list === "doing") {
-    //   const member = boardMembersStore.getMemberByUserId(userStore.user._id);
-    //   moveTask = { _id: item._id, assignedTo: member._id };
-    //   console.log(
-    //     "🚀 ~ file: TaskList.js ~ line 28 ~ handleDrop ~ moveTask",
-    //     moveTask
-    //   );
-    // }
     taskStore.updateTask(moveTask);
   };
 

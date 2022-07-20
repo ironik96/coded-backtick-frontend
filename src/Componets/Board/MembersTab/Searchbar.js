@@ -4,7 +4,7 @@ import plusIcon from "../../../images/plus.png";
 import "../../../styles/searchBar.css";
 import boardStore from "../../../stores/boardStore";
 import { observer } from "mobx-react";
-import Alert from "../../../components/shared/Alert";
+import Alert from "../../../components/shared/Alerts/Alert";
 
 function SearchBar() {
   const [users, setUsers] = useState([]);

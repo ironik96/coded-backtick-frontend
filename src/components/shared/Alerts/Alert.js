@@ -1,5 +1,5 @@
 const Swal = require("sweetalert2");
-const Alert = (message, icon) => {
+export default function  Alert  (message, icon)  {
   return Swal.fire({
     position: "center",
     icon: icon,
@@ -9,7 +9,8 @@ const Alert = (message, icon) => {
   });
 };
 
-export default Alert;
+
+
 // icons used  in swal:
 // success
 // error
