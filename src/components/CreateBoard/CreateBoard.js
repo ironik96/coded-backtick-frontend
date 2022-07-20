@@ -4,8 +4,8 @@ import TextInput from "../shared/TextInput";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import userStore from "../../stores/userStore";
-import { useParams } from "react-router-dom";
-import Alert from "../shared/Alert";
+import { useParams } from "react-router-dom"
+import Alert from "../shared/Alerts/Alert";
 
 const CreateBoard = () => {
   const { boardSlug } = useParams();

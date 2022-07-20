@@ -4,14 +4,17 @@ import boardMembersStore from "../../../stores/boardMembersStore";
 import boardStore from "../../../stores/boardStore";
 import MemberTab from "./MemberTab";
 import { observer } from "mobx-react";
-import Alert from "../../../components/shared/Alert";
-
-
+import AlertWithButton from "../../../components/shared/Alerts/AlertWithButton";
 function Memberitem({ member }) {
   const { userId: user } = member;
+
   const handleOnClick = (e) => {
-    boardMembersStore.deleteMember(boardStore.board._id, member._id);
-    Alert("Member removed succefully ", "error")
+    AlertWithButton(
+      "Are you sure you want to delete",
+      "warning",
+      boardStore.board._id,
+      member._id
+    );
   };
   return (
     <div className=" flex place-content-center ">
@@ -22,17 +25,18 @@ function Memberitem({ member }) {
             src={user.image}
           />
           <div className="items-center">
-            <h1 className=""> {user.fname +" "+ user.lname}</h1>
+            <h1 className=""> {user.fname + " " + user.lname}</h1>
             <h5 className="text-[10px]">View Profile</h5>
           </div>
         </div>
         <div className="flex items-center p-[10px] h-[100%] w-[80px] rounded-lg  place-content-center">
-         { boardStore.userIsCreater() ?
-          <button onClick={handleOnClick}>
-            <img className="w-[20px]" src={deleteButton} />
-          </button>
-          : <div/>
-}
+          {boardStore.userIsCreater() ? (
+            <button onClick={handleOnClick}>
+              <img className="w-[20px]" src={deleteButton} />
+            </button>
+          ) : (
+            <div />
+          )}
         </div>
       </div>
     </div>

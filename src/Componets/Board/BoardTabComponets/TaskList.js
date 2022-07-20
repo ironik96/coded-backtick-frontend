@@ -5,7 +5,6 @@ import TaskForm from "./TaskForm";
 import taskStore from "../../../stores/taskStore";
 import { useDrop } from "react-dnd";
 import userStore from "../../../stores/userStore";
-import boardStore from "../../../stores/boardStore";
 import boardMembersStore from "../../../stores/boardMembersStore";
 
 const listWithButtons = ["Icebox", "Todo"];
