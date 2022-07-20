@@ -16,6 +16,7 @@ const AssignButton = ({ task }) => {
   const isAssigned = !!task.assignedTo;
   const isAdmin = boardStore.userIsAdmin();
   const assignedToCurrentUser = currentMember?._id === task.assignedTo;
+  const isDone = task.list === "done";
 
   const onClickAssign = () =>
     taskStore.updateTask({ _id: task._id, assignedTo: currentMember._id });
@@ -40,6 +41,7 @@ const AssignButton = ({ task }) => {
         onClickUnassign={onClickUnassign}
         setStyles={setStyles}
         styles={styles}
+        isDone={isDone}
       />
       <div
         style={{ ...styles.tooltip, display: tooltipDisplay }}
@@ -55,6 +57,7 @@ const AssignButton = ({ task }) => {
 const Placeholder = ({
   isAssigned,
   isAdmin,
+  isDone,
   assignedToCurrentUser,
   image,
   onClickAssign,
@@ -67,6 +70,11 @@ const Placeholder = ({
   const onLeave = () =>
     setStyles({ tooltip: { opacity: 0 }, icon: { fill: "#869199" } });
 
+  if (isDone)
+    return (
+      <img className="rounded-full w-[24px] h-[24px]" src={image} alt="" />
+    );
+
   if (isAssigned && (isAdmin || assignedToCurrentUser))
     return (
       <button
@@ -74,18 +82,12 @@ const Placeholder = ({
         onMouseLeave={onLeave}
         onClick={onClickUnassign}
       >
-        <img
-          className="rounded-full"
-          width={24}
-          height={24}
-          src={image}
-          alt=""
-        />
+        <img className="rounded-full w-[24px] h-[24px]" src={image} alt="" />
       </button>
     );
   if (isAssigned)
     return (
-      <img className="rounded-full" width={24} height={24} src={image} alt="" />
+      <img className="rounded-full w-[24px] h-[24px]" src={image} alt="" />
     );
   if (isAdmin) return <div></div>;
 

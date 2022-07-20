@@ -31,12 +31,13 @@ class BoardMembersStore {
     return response.data;
   };
 
-  deleteMember = async (boardId, memberId) => {
+  deleteMember = async (boardId, memberId,userId) => {
     boardStore.board.boardMembers = boardStore.board.boardMembers.filter(
       (member) => member._id != memberId
     );
+    
     const [response, error] = await tryCatch(() =>
-      instance.delete(`${URL}/${boardId}/${memberId}`)
+      instance.delete(`${URL}/${boardId}/${memberId}/${userId}`)
     );
     if (error) return console.error(error);
   };

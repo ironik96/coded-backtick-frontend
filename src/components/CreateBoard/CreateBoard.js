@@ -92,12 +92,12 @@ const CreateBoard = () => {
                 className="bg-red text-white font-bold py-2 px-20 rounded focus:outline-none"
                 onClick={openModal}
               >
-                delete
+                Delete
               </button>
             )}
             <button
               type="submit"
-              className="bg-blue text-white font-bold py-2 px-20 rounded focus:outline-none"
+              className="bg-green text-white font-bold py-2 px-20 rounded focus:outline-none"
             >
               {isNew ? "Create" : "Update"}
             </button>
@@ -107,21 +107,20 @@ const CreateBoard = () => {
       <BasicModal closeModal={closeModal} showModal={showModal}>
         <div className="h-40 min-w-[12rem] flex flex-col justify-around">
           <h1 className="text-lg self-start text-black">
-            {" "}
             {`Delete ${board.title} ?`}
           </h1>
-          <div className="flex justify-end gap-2 self-end">
-            <button
-              onClick={closeModal}
-              className="bg-blue px-2 py-1 rounded-md text-white"
-            >
-              Cancel
-            </button>
+          <div className="flex justify-end gap-2 self-center">
             <button
               onClick={handleDelete}
               className="bg-red px-2 py-1 rounded-md text-white"
             >
               Delete
+            </button>
+            <button
+              onClick={closeModal}
+              className="bg-grey px-2 py-1 rounded-md text-white"
+            >
+              Cancel
             </button>
           </div>
         </div>
