@@ -7,6 +7,7 @@ import Alert from "../../../components/shared/Alert";
 
 function ReviewTask({ task }) {
   const { assignedTo } = task;
+  if (!assignedTo) return <div></div>;
   let member = boardStore.board.boardMembers.filter(
     (member) => member._id === assignedTo
   );

@@ -14,9 +14,13 @@ function Task({ task, listLength }) {
   const closeModal = () => setShowModal(false);
   const deleteTask = () => taskStore.deleteTask(task._id);
 
+  const isDone = task.list === "done";
+  const buttonDisplay = isDone ? "hidden" : "";
+
   const [, drag] = useDrag(() => ({
     type: "TASK",
     item: task,
+    canDrag: () => !isDone,
   }));
   return (
     <>
@@ -29,7 +33,7 @@ function Task({ task, listLength }) {
             Points: {task.points}
           </p>
           <ModifyTaskButton
-            className="group-hover:opacity-100 transition-opacity"
+            className={`group-hover:opacity-100 transition-opacity ${buttonDisplay}`}
             openModal={openModal}
             listLength={listLength}
             deleteTask={deleteTask}

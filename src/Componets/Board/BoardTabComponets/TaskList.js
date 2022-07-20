@@ -19,6 +19,8 @@ const TaskList = ({ listTitle, taskList }) => {
     setShowModal(false);
   };
 
+  const isDone = listTitle.toLowerCase() === "done";
+
   const showAddTask =
     listWithButtons.includes(listTitle) && boardStore.userIsAdmin();
 
@@ -27,25 +29,31 @@ const TaskList = ({ listTitle, taskList }) => {
 
     const moveTask = { _id: item._id };
     moveTask.list = listTitle;
-    if (moveTask.list === "review" || moveTask.list === "doing") {
-      const member = boardMembersStore.getMemberByUserId(userStore.user._id);
-      moveTask = { _id: item._id, assignedTo: member._id };
-      console.log(
-        "🚀 ~ file: TaskList.js ~ line 28 ~ handleDrop ~ moveTask",
-        moveTask
-      );
-    }
+    // if (moveTask.list === "review" || moveTask.list === "doing") {
+    //   const member = boardMembersStore.getMemberByUserId(userStore.user._id);
+    //   moveTask = { _id: item._id, assignedTo: member._id };
+    //   console.log(
+    //     "🚀 ~ file: TaskList.js ~ line 28 ~ handleDrop ~ moveTask",
+    //     moveTask
+    //   );
+    // }
     taskStore.updateTask(moveTask);
   };
 
   const [, drop] = useDrop(() => ({
     accept: "TASK",
     drop: handleDrop,
+    canDrop: () => !isDone,
   }));
+
+  const listStyle = isDone ? { opacity: 0.5 } : {};
 
   return (
     <>
-      <div className="bg-theme-grey shrink-0 w-[220px] max-h-full rounded-3xl p-[10px] flex flex-col gap-3">
+      <div
+        style={listStyle}
+        className="bg-theme-grey shrink-0 w-[220px] max-h-full rounded-3xl p-[10px] flex flex-col gap-3"
+      >
         <div className="rounded-lg bg-white w-fit p-[5px] h-[30px]">
           {listTitle}: {taskList.length}
         </div>
