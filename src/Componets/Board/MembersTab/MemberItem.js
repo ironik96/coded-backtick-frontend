@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import deleteButton from "../../../images/deleteCross.png";
 import boardMembersStore from "../../../stores/boardMembersStore";
 import boardStore from "../../../stores/boardStore";
-import MemberTab from "./MemberTab";
 import { observer } from "mobx-react";
 import AlertWithButton from "../../../components/shared/Alerts/AlertWithButton";
 function Memberitem({ member }) {
@@ -13,7 +12,7 @@ function Memberitem({ member }) {
       "Are you sure you want to delete",
       "warning",
       boardStore.board._id,
-      member._id
+      member
     );
   };
   return (

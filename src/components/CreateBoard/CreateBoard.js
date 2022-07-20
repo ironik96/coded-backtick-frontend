@@ -4,8 +4,10 @@ import TextInput from "../shared/TextInput";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import userStore from "../../stores/userStore";
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 import Alert from "../shared/Alerts/Alert";
+import BasicModal from "../shared/BasicModal";
+import AlertWithButton from "../shared/Alerts/AlertWithButton";
 
 const CreateBoard = () => {
   const { boardSlug } = useParams();
@@ -28,9 +30,25 @@ const CreateBoard = () => {
       navigate("/dashboard", { replace: true });
     } else {
       await boardStore.updateBoard(board, userStore.user._id);
+      setBoard(userStore.getEditableBoard(boardSlug));
       Alert("Board updated successfully", "success");
     }
   };
+
+  const handleDelete = async () => {
+    AlertWithButton(
+      `Delete ${board.title}`,
+      "warning",
+      null,
+      null,
+      async () => {
+        await boardStore.deleteBoard(board._id);
+        navigate("/dashboard", { replace: true });
+      }
+    );
+  };
+
+  const showDelete = !isNew && boardStore.userIsCreater();
 
   return (
     <form
@@ -70,12 +88,23 @@ const CreateBoard = () => {
             twClass="grow"
           />
         </div>
-        <button
-          type="submit"
-          className="bg-blue text-white font-bold py-2 px-20 rounded self-end focus:outline-none"
-        >
-          {isNew ? "Create" : "Update"}
-        </button>
+        <div className="flex justify-end gap-2">
+          {showDelete && (
+            <button
+              type="button"
+              className="bg-red text-white font-bold py-2 px-20 rounded focus:outline-none"
+              onClick={handleDelete}
+            >
+              Delete
+            </button>
+          )}
+          <button
+            type="submit"
+            className="bg-green text-white font-bold py-2 px-20 rounded focus:outline-none"
+          >
+            {isNew ? "Create" : "Update"}
+          </button>
+        </div>
       </div>
     </form>
   );

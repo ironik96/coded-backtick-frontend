@@ -13,7 +13,11 @@ const TaskForm = ({ task, setTask, closeModal }) => {
     event.preventDefault();
     isNew
       ? taskStore.createTask(boardStore.board._id, task)
-      : taskStore.updateTask(task);
+      : taskStore.updateTask({
+          _id: task._id,
+          points: task.points,
+          title: task.title,
+        });
     closeModal();
   };
 

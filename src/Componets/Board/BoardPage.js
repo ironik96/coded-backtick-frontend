@@ -10,6 +10,7 @@ import Loading from "../../components/shared/Loading";
 import MemberTab from "./MembersTab/MemberTab";
 import CreateBoard from "../../components/CreateBoard/CreateBoard";
 import ReviewTab from "./ReviewTab/ReviewTab";
+import boardIcon from "../../images/blackboard.png";
 
 CustomTab.tabsRole = "Tab";
 function BoardPage() {
@@ -22,6 +23,15 @@ function BoardPage() {
 
   if (!boardStore.board) return <Loading />;
 
+  const boardTitle = (
+    <div className="absolute left-[20px] top-1/2 -translate-y-1/2 flex items-center gap-3 bg-light-grey px-2 py-1 rounded-xl">
+      <img src={boardIcon} className="object-cover w-6 h-6" alt="board" />
+      <h1 className=" text-2xl font-bold text-black ">
+        {boardStore.board.title}
+      </h1>
+    </div>
+  );
+
   return (
     <div className="h-full bg-theme-light-grey text-sm font-medium text-center text-gray-500  dark:text-gray-400">
       <Tabs
@@ -30,7 +40,8 @@ function BoardPage() {
         className="h-full"
         selectedTabPanelClassName="h-[calc(100%-52px)]"
       >
-        <TabList className="h-[52px] bg-white flex justify-center">
+        <TabList className="h-[52px] bg-white flex justify-center relative">
+          {boardTitle}
           <CustomTab>Board</CustomTab>
           <CustomTab>Leaderboard</CustomTab>
           <CustomTab>Members</CustomTab>
