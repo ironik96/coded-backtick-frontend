@@ -21,7 +21,6 @@ function Register() {
           <input
             onChange={handleChange}
             className="appearance-none block pl-[14px] w-60 bg-lightGray text-gray-700 border border-transparent rounded py-3  mb-3 leading-tight focus:outline-none"
-            id="grid-first-name"
             type="text"
             name="fname"
             placeholder="First Name"
@@ -29,7 +28,6 @@ function Register() {
           <input
             onChange={handleChange}
             className="appearance-none block pl-[14px] w-60 bg-lightGray text-gray-700 border border-transparent rounded py-3  mb-3 leading-tight focus:outline-none"
-            id="grid-first-name"
             type="text"
             name="lname"
             placeholder="Last Name"
@@ -37,7 +35,6 @@ function Register() {
           <input
             onChange={handleChange}
             className="appearance-none block pl-[14px] w-60 bg-lightGray text-gray-700 border border-transparent rounded py-3  mb-3 leading-tight focus:outline-none"
-            id="grid-first-name"
             type="text"
             name="email"
             placeholder="Email"
@@ -45,7 +42,6 @@ function Register() {
           <input
             onChange={handleChange}
             className="appearance-none block pl-[14px] w-60 bg-lightGray text-gray-700 border border-transparent rounded py-3  mb-3 leading-tight focus:outline-none"
-            id="grid-first-name"
             type="password"
             name="password"
             placeholder="Password"

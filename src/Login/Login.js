@@ -24,7 +24,6 @@ function Login() {
             name="email"
             onChange={handleChange}
             className="appearance-none block pl-[14px] w-60 bg-lightGray text-gray-700 border border-transparent rounded py-3  mb-3 leading-tight focus:outline-none"
-            id="grid-first-name"
             type="text"
             placeholder="Email"
           />
@@ -32,7 +31,6 @@ function Login() {
             name="password"
             onChange={handleChange}
             className="appearance-none block pl-[14px] w-60 bg-lightGray text-gray-700 border border-transparent rounded py-3  mb-3 leading-tight focus:outline-none"
-            id="grid-first-name"
             type="password"
             placeholder="Password"
           />

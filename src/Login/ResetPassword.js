@@ -5,13 +5,11 @@ function ResetPassword() {
       <div className="relative grid content-center gap-3 pt-20">
         <input
           className="appearance-none block pl-[14px] w-60 bg-lightGray text-gray-700 border border-transparent rounded py-3  mb-3 leading-tight focus:outline-none"
-          id="grid-first-name"
           type="password"
           placeholder="New password"
         />
         <input
           className="appearance-none block pl-[14px] w-60 bg-lightGray text-gray-700 border border-transparent rounded py-3  mb-3 leading-tight focus:outline-none"
-          id="grid-first-name"
           type="password"
           placeholder="Confirm New Password"
         />
