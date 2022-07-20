@@ -64,11 +64,13 @@ class BoardMembersStore {
     if (error) return console.error(error.message);
     this.users = response.data;
   };
-  getMemberByUserId = async (userId) => {
+  getMemberByUserId = (userId) => {
     return boardStore.board.boardMembers.find(
-      (member) => member.userId === userId
+      (member) => member.userId._id === userId
     );
   };
+  getMemberByMemberId = (memberId) =>
+    boardStore.board.boardMembers.find(({ _id }) => _id === memberId);
 
   getMemberTaskList = (userId) => {
     const { _id: memberId } = this.getMemberByUserId(userId);
