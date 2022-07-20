@@ -4,6 +4,7 @@ import Welcome from "./Welcome/Welcome";
 import Login from "./Login/Login";
 import Register from "./Login/Register";
 import Profile from "./Profile/Profile";
+import Shop from "./Shop/Shop";
 import EditProfile from "./Profile/EditProfile";
 import ResetPassword from "./Login/ResetPassword";
 import BoardPage from "./Componets/Board/BoardPage";
@@ -55,6 +56,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/dashboard" element={<Home />} />
+      <Route path="/Shop" element={<Shop />} />
       <Route path="/Profile" element={<Profile />} />
       <Route path="/EditProfile" element={<EditProfile />} />
       <Route path="/ResetPassword" element={<ResetPassword />} />
