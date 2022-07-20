@@ -13,9 +13,13 @@ function Memberitem({ member }) {
   const closeModal = () => setShowModal(false);
 
   const handleOnClick = async (e) => {
-    boardMembersStore.deleteMember(boardStore.board._id, member._id);
+    boardMembersStore.deleteMember(
+      boardStore.board._id,
+      member._id,
+      member.userId._id
+    );
     closeModal();
-    Alert("Member removed successfully ");
+    Alert("Removed successfully ", "success");
   };
   return (
     <>
@@ -47,7 +51,7 @@ function Memberitem({ member }) {
           <h1 className="text-lg self-start text-black">
             {`Remove ${user.fname} from board ?`}
           </h1>
-          <div className="flex justify-end gap-2 self-end">
+          <div className="flex justify-end gap-2 self-center">
             <button
               onClick={closeModal}
               className="bg-blue px-2 py-1 rounded-md text-white"

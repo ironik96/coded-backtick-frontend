@@ -6,6 +6,7 @@ import authStore from "../../stores/authStore";
 import { observer } from "mobx-react";
 import notificationStore from "../../stores/notificationStore";
 import NotificationItem from "./NotificationItem";
+import userStore from "../../stores/userStore";
 
 const logoSize = 48;
 const iconSize = 36;
@@ -79,10 +80,9 @@ const ProfileTrailing = observer(() => {
 
       <Link to={"/Profile"}>
         <img
+          style={{ width: iconSize, height: iconSize }}
           className="rounded-full hover:outline hover:outline-blue cursor-pointer"
-          src={avatar}
-          width={iconSize}
-          height={iconSize}
+          src={userStore.user?.image}
           alt="avatar"
         />
       </Link>
