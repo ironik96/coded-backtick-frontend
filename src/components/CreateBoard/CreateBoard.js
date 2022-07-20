@@ -107,7 +107,6 @@ const CreateBoard = () => {
       <BasicModal closeModal={closeModal} showModal={showModal}>
         <div className="h-40 min-w-[12rem] flex flex-col justify-around">
           <h1 className="text-lg self-start text-black">
-            {" "}
             {`Delete ${board.title} ?`}
           </h1>
           <div className="flex justify-end gap-2 self-end">
