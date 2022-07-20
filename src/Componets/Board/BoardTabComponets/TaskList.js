@@ -5,8 +5,8 @@ import TaskForm from "./TaskForm";
 import taskStore from "../../../stores/taskStore";
 import { useDrop } from "react-dnd";
 import userStore from "../../../stores/userStore";
-import boardStore from "../../../stores/boardStore";
 import boardMembersStore from "../../../stores/boardMembersStore";
+import boardStore from "../../../stores/boardStore";
 
 const listWithButtons = ["Icebox", "Todo"];
 const TaskList = ({ listTitle, taskList }) => {
@@ -19,30 +19,33 @@ const TaskList = ({ listTitle, taskList }) => {
     setShowModal(false);
   };
 
+  const isDone = listTitle.toLowerCase() === "done";
+
+  const showAddTask =
+    listWithButtons.includes(listTitle) && boardStore.userIsAdmin();
+
   const handleDrop = (item) => {
     if (item.list === listTitle.toLowerCase()) return;
 
     const moveTask = { _id: item._id };
     moveTask.list = listTitle;
-    if (moveTask.list === "review" || moveTask.list === "doing") {
-      const member = boardMembersStore.getMemberByUserId(userStore.user._id);
-      moveTask = { _id: item._id, assignedTo: member._id };
-      console.log(
-        "🚀 ~ file: TaskList.js ~ line 28 ~ handleDrop ~ moveTask",
-        moveTask
-      )
-    }
     taskStore.updateTask(moveTask);
   };
 
   const [, drop] = useDrop(() => ({
     accept: "TASK",
     drop: handleDrop,
+    canDrop: () => !isDone,
   }));
+
+  const listStyle = isDone ? { opacity: 0.5 } : {};
 
   return (
     <>
-      <div className="bg-theme-grey shrink-0 w-[220px] max-h-full rounded-3xl p-[10px] flex flex-col gap-3">
+      <div
+        style={listStyle}
+        className="bg-theme-grey shrink-0 w-[220px] max-h-full rounded-3xl p-[10px] flex flex-col gap-3"
+      >
         <div className="rounded-lg bg-white w-fit p-[5px] h-[30px]">
           {listTitle}: {taskList.length}
         </div>
@@ -52,7 +55,7 @@ const TaskList = ({ listTitle, taskList }) => {
         >
           {taskList}
         </div>
-        {listWithButtons.includes(listTitle) && (
+        {showAddTask && (
           <button
             className="w-full hover:bg-light-grey active:bg-grey active:text-white rounded-lg h-[20px]"
             onClick={openModal}

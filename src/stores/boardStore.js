@@ -42,6 +42,15 @@ class BoardStore {
     );
     if (error) return console.error(error.message, response.data);
     userStore.updateBoard(response.data);
+    if (this.board) this.board.title = response.data.title;
+  };
+
+  deleteBoard = async (boardId) => {
+    const [response, error] = await tryCatch(() =>
+      instance.delete(`${BASE_URL}/${boardId}`)
+    );
+    if (error) return console.error(error.message, response.data);
+    userStore.deleteBoard(boardId);
   };
 
   makeBoardEditable = (board) => {

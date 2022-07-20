@@ -31,12 +31,13 @@ class BoardMembersStore {
     return response.data;
   };
 
-  deleteMember = async (boardId, memberId) => {
+  deleteMember = async (boardId, memberId,userId) => {
     boardStore.board.boardMembers = boardStore.board.boardMembers.filter(
       (member) => member._id != memberId
     );
+    
     const [response, error] = await tryCatch(() =>
-      instance.delete(`${URL}/${boardId}/${memberId}`)
+      instance.delete(`${URL}/${boardId}/${memberId}/${userId}`)
     );
     if (error) return console.error(error);
   };
@@ -64,11 +65,13 @@ class BoardMembersStore {
     if (error) return console.error(error.message);
     this.users = response.data;
   };
-  getMemberByUserId = async (userId) => {
+  getMemberByUserId = (userId) => {
     return boardStore.board.boardMembers.find(
-      (member) => member.userId === userId
+      (member) => member.userId._id === userId
     );
   };
+  getMemberByMemberId = (memberId) =>
+    boardStore.board.boardMembers.find(({ _id }) => _id === memberId);
 
   getMemberTaskList = (userId) => {
     const { _id: memberId } = this.getMemberByUserId(userId);

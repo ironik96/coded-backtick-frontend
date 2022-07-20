@@ -3,10 +3,11 @@ import { observer } from "mobx-react";
 import boardMembersStore from "../../../stores/boardMembersStore";
 import boardStore from "../../../stores/boardStore";
 import taskStore from "../../../stores/taskStore";
-import Alert from "../../../components/shared/Alert";
+import Alert from "../../../components/shared/Alerts/Alert"
 
 function ReviewTask({ task }) {
   const { assignedTo } = task;
+  if (!assignedTo) return <div></div>;
   let member = boardStore.board.boardMembers.filter(
     (member) => member._id === assignedTo
   );
@@ -32,16 +33,17 @@ function ReviewTask({ task }) {
           alt="avatar"
         />
         <div className="px-2 text-left">
-          <h1>{user.fname + " " + user.lname}</h1>
-          <h6 className="justify-start text-[12px]">{task.title}</h6>
+        <h1 className="justify-start text-[20px]">{task.title}</h1>
+          <h6>{user.fname + " " + user.lname}</h6>
+        
         </div>
       </div>
       <div className="flex place-content-end m-2">
         <button
-          className="text-white bg-theme-red w-[100px] rounded-lg"
+          className="text-white bg-theme-green w-[100px] rounded-lg"
           onClick={handleOnClick}
         >
-          Review
+          Mark Done
         </button>
       </div>
     </div>

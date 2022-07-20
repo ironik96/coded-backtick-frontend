@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { useDrag } from "react-dnd";
 import BasicModal from "../../../components/shared/BasicModal";
 import taskStore from "../../../stores/taskStore";
+import AssignButton from "./AssignButton";
 import ModifyTaskButton from "./ModifyTaskButton";
 import TaskForm from "./TaskForm";
+import { observer } from "mobx-react";
 
 function Task({ task, listLength }) {
   const [showModal, setShowModal] = useState(false);
@@ -12,9 +14,13 @@ function Task({ task, listLength }) {
   const closeModal = () => setShowModal(false);
   const deleteTask = () => taskStore.deleteTask(task._id);
 
+  const isDone = task.list === "done";
+  const buttonDisplay = isDone ? "hidden" : "";
+
   const [, drag] = useDrag(() => ({
     type: "TASK",
     item: task,
+    canDrag: () => !isDone,
   }));
   return (
     <>
@@ -27,14 +33,16 @@ function Task({ task, listLength }) {
             Points: {task.points}
           </p>
           <ModifyTaskButton
-            className="group-hover:opacity-100 transition-opacity"
+            className={`group-hover:opacity-100 transition-opacity ${buttonDisplay}`}
             openModal={openModal}
             listLength={listLength}
             deleteTask={deleteTask}
           />
         </div>
-
-        <p className="text-black group-hover:text-black/70">{task.title}</p>
+        <div className="flex justify-between w-full">
+          <p className="text-black group-hover:text-black/70">{task.title}</p>
+          <AssignButton task={task} />
+        </div>
       </div>
       <BasicModal showModal={showModal} closeModal={closeModal}>
         <TaskForm
@@ -46,4 +54,4 @@ function Task({ task, listLength }) {
     </>
   );
 }
-export default Task;
+export default observer(Task);
