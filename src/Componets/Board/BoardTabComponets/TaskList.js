@@ -19,6 +19,9 @@ const TaskList = ({ listTitle, taskList }) => {
     setShowModal(false);
   };
 
+  const showAddTask =
+    listWithButtons.includes(listTitle) && boardStore.userIsAdmin();
+
   const handleDrop = (item) => {
     if (item.list === listTitle.toLowerCase()) return;
 
@@ -30,7 +33,7 @@ const TaskList = ({ listTitle, taskList }) => {
       console.log(
         "🚀 ~ file: TaskList.js ~ line 28 ~ handleDrop ~ moveTask",
         moveTask
-      )
+      );
     }
     taskStore.updateTask(moveTask);
   };
@@ -52,7 +55,7 @@ const TaskList = ({ listTitle, taskList }) => {
         >
           {taskList}
         </div>
-        {listWithButtons.includes(listTitle) && (
+        {showAddTask && (
           <button
             className="w-full hover:bg-light-grey active:bg-grey active:text-white rounded-lg h-[20px]"
             onClick={openModal}
