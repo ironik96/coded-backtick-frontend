@@ -13,7 +13,7 @@ const BasicModal = ({ showModal, closeModal, children }) => {
 
   return (
     <div
-      className={`${outerClassName} absolute flex justify-center items-center delay-75 bg-black/50 inset-0 z-10`}
+      className={`${outerClassName} fixed flex justify-center items-center delay-75 bg-black/50 inset-0 z-10`}
       style={{ margin: 0 }}
       onMouseDown={handleClose}
       onMouseUp={handleClose}
