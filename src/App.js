@@ -16,8 +16,9 @@ import authStore from "./stores/authStore";
 import { useEffect } from "react";
 import Loading from "./components/shared/Loading";
 import notificationStore from "./stores/notificationStore";
-
+import Test from "./Shop/Paypal/test"
 function App() {
+  
   const id = authStore.user?._id;
   useEffect(() => {
     userStore.updateUserStore(id);
@@ -56,6 +57,7 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/Test" element={<Test />} />
       <Route path="/dashboard" element={<Home />} />
       <Route path="/Shop" element={<Shop />} />
       <Route path="/Profile" element={<Profile />} />

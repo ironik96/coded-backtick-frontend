@@ -154,7 +154,7 @@ function Profile() {
                   Edit profile
                 </button>
               </Link>
-              <button
+              {/* <button
                 className="bg-green text-white font-light py-1 px-2 rounded-[10px]"
                 onClick={() => phantom_balance()}
               >
@@ -165,7 +165,7 @@ function Profile() {
                 onClick={() => checkBalance()}
               >
                 Check BT Balance
-              </button>
+              </button> */}
             </div>
           </div>
           <div className="flex justify-around w-auto mt-3 h-full overflow-hidden rounded-[20px] bg-softgray">

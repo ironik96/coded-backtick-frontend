@@ -1,4 +1,5 @@
 import { PayPalButtons } from "@paypal/react-paypal-js";
+import PaypalCheckoutButton from "./PaypalCheckoutButton";
 
 const PaypalCheckoutButton = (props) => {
   const { product } = props;
@@ -13,3 +14,4 @@ const PaypalCheckoutButton = (props) => {
       }} />
   );
 }
+export default PaypalCheckoutButton;

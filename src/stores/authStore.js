@@ -1,7 +1,7 @@
 import { makeAutoObservable,configure} from "mobx";
 import instance from "./instance";
 import jwt_decode from "jwt-decode";
-
+import userStore from "./userStore";
 class AuthStore {
   constructor() {
     makeAutoObservable(this ,configure({
@@ -45,6 +45,7 @@ class AuthStore {
     try {
       const response = await instance.post(`/update/${user._id}`,user);
       this.profile = response.data;
+      userStore.user = response.data;
     } catch (error) {
       console.error(error.message);
     }

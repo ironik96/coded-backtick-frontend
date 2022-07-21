@@ -22,7 +22,7 @@ const Wallet = () => {
     try {
       const resp = await provider.connect();
       const wallet = resp.publicKey.toString();
-      checkBalance(wallet)
+      checkBalance(wallet);
     } catch (err) {
       console.log(err);
     }

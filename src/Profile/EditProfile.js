@@ -2,6 +2,7 @@ import coin from "./../images/coin.png";
 import edit from "./../images/edit.png";
 import { useState } from "react";
 import authStore from "../stores/authStore";
+import userStore from "../stores/userStore";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react";
 import TextInput from "./../components/shared/TextInput";
@@ -21,14 +22,11 @@ function Profile() {
   const handleImage = async (event) => {
     setImage(event.target.files[0]);
     sendimage(event);
-    authStore.UpdateProfile({
-      ...user,
-      image: `http://localhost:8000/images/${user._id}-avatar.jpg`,
-    });
+    authStore.UpdateProfile({ ...user, image: `http://localhost:8000/images/${user._id}-avatar.jpg?${new Date().getSeconds()}`});
   };
   const sendimage = async (event) => {
     const formData = new FormData();
-    formData.append("avatar", image, `${user._id}-avatar.jpg`);
+    formData.append("avatar", event.target.files[0], `${user._id}-avatar.jpg`);
     fetch("http://localhost:8000/profile", {
       method: "POST",
       type: "image/png",
