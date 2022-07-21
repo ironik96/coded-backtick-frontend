@@ -24,9 +24,9 @@ function BoardPage() {
   if (!boardStore.board) return <Loading />;
 
   const boardTitle = (
-    <div className="absolute left-[20px] top-1/2 -translate-y-1/2 flex items-center gap-3 bg-light-grey px-2 py-1 rounded-xl">
+    <div className="flex items-center gap-3 bg-light-grey px-2 py-1 rounded-t-xl w-fit mr-auto shrink">
       <img src={boardIcon} className="object-cover w-6 h-6" alt="board" />
-      <h1 className=" text-2xl font-bold text-black ">
+      <h1 className=" text-2xl font-bold text-black truncate">
         {boardStore.board.title}
       </h1>
     </div>
@@ -40,7 +40,7 @@ function BoardPage() {
         className="h-full"
         selectedTabPanelClassName="h-[calc(100%-52px)]"
       >
-        <TabList className="h-[52px] bg-white flex justify-center relative">
+        <TabList className="h-[52px] bg-white flex ">
           {boardTitle}
           <CustomTab>Board</CustomTab>
           <CustomTab>Leaderboard</CustomTab>
@@ -48,6 +48,7 @@ function BoardPage() {
           <CustomTab>Reward</CustomTab>
           {boardStore.userIsAdmin() ? <CustomTab>Review</CustomTab> : <div />}
           {boardStore.userIsAdmin() && <CustomTab>Settings</CustomTab>}
+          <div className="ml-auto invisible">{boardTitle}</div>
         </TabList>
 
         <TabPanel>

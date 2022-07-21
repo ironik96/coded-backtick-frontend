@@ -11,8 +11,9 @@ const AssignButton = ({ task }) => {
     icon: { fill: "#869199" },
   });
   const currentMember = boardMembersStore.getMemberByUserId(userStore.user._id);
-  const memberImage = boardMembersStore.getMemberByMemberId(task.assignedTo)
-    ?.userId.image;
+  const assignedMember = boardMembersStore.getMemberByMemberId(task.assignedTo);
+  const assignedImage = assignedMember?.userId.image;
+  const assignedName = `${assignedMember?.userId.fname} ${assignedMember?.userId.lname}`;
   const isAssigned = !!task.assignedTo;
   const isAdmin = boardStore.userIsAdmin();
   const assignedToCurrentUser = currentMember?._id === task.assignedTo;
@@ -36,7 +37,8 @@ const AssignButton = ({ task }) => {
         isAssigned={isAssigned}
         isAdmin={isAdmin}
         assignedToCurrentUser={assignedToCurrentUser}
-        image={memberImage}
+        image={assignedImage}
+        name={assignedName}
         onClickAssign={onClickAssign}
         onClickUnassign={onClickUnassign}
         setStyles={setStyles}
@@ -60,6 +62,7 @@ const Placeholder = ({
   isDone,
   assignedToCurrentUser,
   image,
+  name,
   onClickAssign,
   onClickUnassign,
   setStyles,
@@ -70,10 +73,16 @@ const Placeholder = ({
   const onLeave = () =>
     setStyles({ tooltip: { opacity: 0 }, icon: { fill: "#869199" } });
 
-  if (isDone)
-    return (
-      <img className="rounded-full w-[24px] h-[24px]" src={image} alt="" />
-    );
+  const imgTag = (
+    <img
+      title={name}
+      className="rounded-full w-[24px] h-[24px] inline"
+      src={image}
+      alt=""
+    />
+  );
+
+  if (isDone) return { imgTag };
 
   if (isAssigned && (isAdmin || assignedToCurrentUser))
     return (
@@ -82,13 +91,10 @@ const Placeholder = ({
         onMouseLeave={onLeave}
         onClick={onClickUnassign}
       >
-        <img className="rounded-full w-[24px] h-[24px]" src={image} alt="" />
+        {imgTag}
       </button>
     );
-  if (isAssigned)
-    return (
-      <img className="rounded-full w-[24px] h-[24px]" src={image} alt="" />
-    );
+  if (isAssigned) return { imgTag };
   if (isAdmin) return <div></div>;
 
   return (

@@ -59,7 +59,7 @@ const CreateBoard = () => {
         <h1 className="font-bold text-3xl">{isNew ? "Create board" : ""}</h1>
         <TextInput
           handleChange={handleChange}
-          placeholder={"Title"}
+          placeholder={"Title*"}
           name={"title"}
           value={board.title}
         />
