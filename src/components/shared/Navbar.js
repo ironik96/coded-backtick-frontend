@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import logo from "../../icons/Logo.svg";
-import avatar from "../../images/avatar.png";
+import lazy from "../../images/lazy.png";
 import { Link } from "react-router-dom";
 import authStore from "../../stores/authStore";
 import { observer } from "mobx-react";
@@ -82,7 +82,7 @@ const ProfileTrailing = observer(() => {
         <img
           style={{ width: iconSize, height: iconSize }}
           className="rounded-full hover:outline hover:outline-blue cursor-pointer"
-          src={userStore.user?.image}
+          src={(userStore.user?.image)? userStore.user?.image : lazy}
           alt="avatar"
         />
       </Link>

@@ -2,13 +2,12 @@ import coin from "./../images/coin.png";
 import edit from "./../images/edit.png";
 import { useState } from "react";
 import authStore from "../stores/authStore";
-import userStore from "../stores/userStore";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react";
 import TextInput from "./../components/shared/TextInput";
 function Profile() {
   const navigate = useNavigate();
-  const [user, setUser] = useState(userStore.user);
+  const [user, setUser] = useState(authStore.profile);
   const [avatar, setAvatar] = useState(user.image);
   const [image, setImage] = useState({});
   const handleChange = (event) => {

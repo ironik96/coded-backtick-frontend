@@ -11,7 +11,7 @@ import MemberTab from "./MembersTab/MemberTab";
 import CreateBoard from "../../components/CreateBoard/CreateBoard";
 import ReviewTab from "./ReviewTab/ReviewTab";
 import boardIcon from "../../images/blackboard.png";
-
+import RewardTab from "./RewardTab/RewardTab"
 CustomTab.tabsRole = "Tab";
 function BoardPage() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -59,7 +59,9 @@ function BoardPage() {
         <TabPanel>
           <MemberTab />
         </TabPanel>
-        <TabPanel></TabPanel>
+        <TabPanel>
+        <RewardTab />
+        </TabPanel>
         {boardStore.userIsAdmin() && (
           <TabPanel>
             <ReviewTab />

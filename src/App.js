@@ -21,6 +21,7 @@ function App() {
   const id = authStore.user?._id;
   useEffect(() => {
     userStore.updateUserStore(id);
+    authStore.Profile(id);
     notificationStore.fetchNotifications(id);
   }, [id]);
 

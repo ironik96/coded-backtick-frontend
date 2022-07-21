@@ -2,19 +2,57 @@ import React from "react";
 import token from "../../../icons/token.png";
 import { Link } from "react-router-dom";
 import { observer } from "mobx-react";
-import userStore from "../../../stores/userStore";
-
+import authStore from "../../../stores/authStore";
+import { useState } from "react";
 const tokenSize = 40;
-
 const Wallet = () => {
-  const { backtick } = userStore.user;
+  const [user, setUser] = useState(authStore.profile);
+  const getProvider = () => {
+    if ("phantom" in window) {
+      const provider = window.phantom?.solana;
+      if (provider?.isPhantom) {
+        return provider;
+      }
+    }
+    window.open("https://phantom.app/", "_blank");
+  };
+  const provider = getProvider(); // see "Detecting the Provider"
 
-  return backtick == null ? (
+  const LinkWallet = async () => {
+    try {
+      const resp = await provider.connect();
+      const wallet = resp.publicKey.toString();
+      checkBalance(wallet)
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const checkBalance = async (wallet) => {
+    var body = {
+      public_key: wallet,
+      network: "mainnet-beta",
+      mint_address: "FUDyPRvxaXpS6wiQVY8a5q3ZwgojRFua475gSNeMeXfK",
+    };
+    const rawResponse = await fetch("https://api.blockchainapi.com/v1/solana/wallet/balance", {
+      method: "POST",
+      type: "application/json",
+      headers: {
+        "Content-Type": "application/json",
+        APIKeyID: "QQoNUxIBBk7dHYu",
+        APISecretKey: "FLmtZ2PGN5sTpeo",
+      },
+      body: JSON.stringify(body),
+    })
+    const content = await rawResponse.json();
+    await authStore.UpdateProfile({ ...user, backtick: content.balance, walletId: wallet  });
+    setUser({ ...user, backtick: content.balance, walletId: wallet  })
+  };
+  return user.backtick == null ? (
     <div className="flex w-full h-full justify-center items-center">
-      <Button text={"Link your wallet"} />
+    <button onClick={() => LinkWallet()} className="bg-green rounded px-3 py-1 text-white" > Link Wallet</button>    
     </div>
   ) : (
-    <LinkedWallet backtick={backtick} />
+    <LinkedWallet backtick={user.backtick} />
   );
 };
 
@@ -32,7 +70,7 @@ const LinkedWallet = ({ backtick }) => {
 
 const Button = ({ text }) => {
   return (
-    <Link className="bg-green rounded px-3 py-1 text-white" to={"/Profile"}>
+    <Link className="bg-green rounded px-3 py-1 text-white" to={"/shop"}>
       {text}
     </Link>
   );

@@ -1,7 +1,6 @@
 import coin from "./../images/coin.png";
 import { observer } from "mobx-react";
 import authStore from "../stores/authStore";
-import userStore from "../stores/userStore";
 import { Link } from "react-router-dom";
 import Logout from "./../Login/SignoutButton";
 import { useState } from "react";
@@ -43,7 +42,7 @@ function Profile() {
   //       console.log(account.value[0].pubkey.toString());
   //       getTokenAccountBalance(account.value[0].pubkey.toString())
   // })();
-  const user = userStore.user;
+  const user = authStore.profile;
   const getProvider = () => {
     if ("phantom" in window) {
       const provider = window.phantom?.solana;
@@ -115,7 +114,7 @@ function Profile() {
             <h1 className="absolute left-52 bottom-5 text-[27px] font-bold text-white">{`${user.fname} ${user.lname}`}</h1>
             <div className="absolute right-6 top-5 py-2 px-4 h-10 rounded-[70px] bg-white text-coingray">
               <div className="flex justify-between">
-                <h1 className="mr-1">300</h1>
+                <h1 className="mr-1">{user.backtick}</h1>
                 <img
                   alt="profile"
                   className="bg-white rounded-[100px] w-[25px]  h-[25px]"
