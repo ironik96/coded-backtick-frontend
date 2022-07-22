@@ -73,7 +73,7 @@ const Placeholder = ({
   const onLeave = () =>
     setStyles({ tooltip: { opacity: 0 }, icon: { fill: "#869199" } });
 
-  const imgTag = (
+  const ImgTag = () => (
     <img
       title={name}
       className="rounded-full w-[24px] h-[24px] inline"
@@ -82,8 +82,7 @@ const Placeholder = ({
     />
   );
 
-  if (isDone) return { imgTag };
-
+  if (isDone) return <ImgTag />;
   if (isAssigned && (isAdmin || assignedToCurrentUser))
     return (
       <button
@@ -91,10 +90,10 @@ const Placeholder = ({
         onMouseLeave={onLeave}
         onClick={onClickUnassign}
       >
-        {imgTag}
+        <ImgTag />
       </button>
     );
-  if (isAssigned) return { imgTag };
+  if (isAssigned) return <ImgTag />;
   if (isAdmin) return <div></div>;
 
   return (
