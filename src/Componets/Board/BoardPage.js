@@ -1,7 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import BoardTab from "./BoardTabComponets/BoardTab";
 import LeaderboardTab from "./LeaderBoardTab/LeaderboardTab";
 import { useLocation } from "react-router-dom";
@@ -11,9 +11,13 @@ import MemberTab from "./MembersTab/MemberTab";
 import CreateBoard from "../../components/CreateBoard/CreateBoard";
 import ReviewTab from "./ReviewTab/ReviewTab";
 import boardIcon from "../../images/blackboard.png";
-import RewardTab from "./RewardTab/RewardTab"
+import RewardTab from "./RewardTab/RewardTab";
+import point from "../../images/coin.png";
+import boardMembersStore from "../../stores/boardMembersStore";
+import userStore from "../../stores/userStore";
 CustomTab.tabsRole = "Tab";
 function BoardPage() {
+  const titleRef = useRef();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const { id } = useLocation().state;
   useEffect(() => {
@@ -24,7 +28,10 @@ function BoardPage() {
   if (!boardStore.board) return <Loading />;
 
   const boardTitle = (
-    <div className="flex items-center gap-3 bg-light-grey px-2 py-1 rounded-t-xl w-fit mr-auto shrink">
+    <div
+      ref={titleRef}
+      className="flex items-center gap-3 bg-light-grey px-2 py-1 rounded-t-xl w-fit mr-auto shrink"
+    >
       <img src={boardIcon} className="object-cover w-6 h-6" alt="board" />
       <h1 className=" text-2xl font-bold text-black truncate">
         {boardStore.board.title}
@@ -46,9 +53,9 @@ function BoardPage() {
           <CustomTab>Leaderboard</CustomTab>
           <CustomTab>Members</CustomTab>
           <CustomTab>Reward</CustomTab>
-          {boardStore.userIsAdmin() ? <CustomTab>Review</CustomTab> : <div />}
+          {boardStore.userIsAdmin() && <CustomTab>Review</CustomTab>}
           {boardStore.userIsAdmin() && <CustomTab>Settings</CustomTab>}
-          <div className="ml-auto invisible">{boardTitle}</div>
+          <BoardPoints titleRef={titleRef} />
         </TabList>
 
         <TabPanel>
@@ -61,7 +68,7 @@ function BoardPage() {
           <MemberTab />
         </TabPanel>
         <TabPanel>
-        <RewardTab />
+          <RewardTab />
         </TabPanel>
         {boardStore.userIsAdmin() && (
           <TabPanel>
@@ -77,6 +84,27 @@ function BoardPage() {
     </div>
   );
 }
+
+const BoardPoints = observer(({ titleRef }) => {
+  const [width, setWidth] = useState(0);
+  useEffect(() => {
+    setWidth(titleRef.current.offsetWidth);
+  }, [titleRef]);
+
+  if (boardStore.userIsAdmin())
+    return <div style={{ width: width }} className="ml-auto shrink"></div>;
+  const { points } = boardMembersStore.getMemberByUserId(userStore.user._id);
+
+  return (
+    <div
+      style={{ width: width }}
+      className="flex items-center justify-end pr-2 text-grey ml-auto shrink"
+    >
+      <img src={point} alt="points" className="w-5 h-5" />
+      {points} Points
+    </div>
+  );
+});
 
 function CustomTab(props) {
   const selectedStyle = props.selected

@@ -14,12 +14,11 @@ const Navbar = () => {
   const trailing = authStore.user ? <ProfileTrailing /> : <AuthTrailing />;
 
   return (
-    <nav className="w-full h-full flex bg-white items-center p-4">
+    <nav className="w-full h-full flex bg-white items-center p-4 justify-between">
       <Link to={"/"} className="flex gap-3 items-center">
         <img src={logo} width={logoSize} height={logoSize} alt="logo" />
         <div className="text-3xl font-bold">Backtick</div>
       </Link>
-      <div className="grow"></div>
       {trailing}
     </nav>
   );
@@ -82,7 +81,7 @@ const ProfileTrailing = observer(() => {
         <img
           style={{ width: iconSize, height: iconSize }}
           className="rounded-full hover:outline hover:outline-blue cursor-pointer"
-          src={(userStore.user?.image)? userStore.user?.image : lazy}
+          src={userStore.user?.image ? userStore.user?.image : lazy}
           alt="avatar"
         />
       </Link>
