@@ -33,8 +33,17 @@ class UserStore {
   deleteBoard = (boardId) =>
     (this.user.boards = this.user.boards.filter(({ _id }) => _id !== boardId));
 
+  getBoardRole = (board) => {
+    const id = this.user._id;
+    if (board.createdBy === id) return "creater";
+    const member = board.boardMembers.find(({ userId }) => userId._id === id);
+    return member.role;
+  };
+
   boardChartInfo = (board) => {
-    const { boardMembers } = board;
+    const boardMembers = board.boardMembers.filter(
+      ({ role }) => role === "member"
+    );
 
     if (boardMembers.length === 0) return null;
 
