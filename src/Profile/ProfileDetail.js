@@ -1,17 +1,31 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import BoardList from "./BoardList";
 
 export function ProfileDetail({ Walletconnection, LinkWallet }) {
+  const [showCreated, setShowCreated] = useState(true);
+  const clickCreated = () => setShowCreated(true);
+  const clickJoined = () => setShowCreated(false);
   return (
     <div className="flex justify-around m-10 h-1/2">
       <div className="relative content-start w-10/12 h-full rounded-[20px]">
         <div className="w-full flex pt-5 justify-between h-1/6">
           <div className="flex">
             <div className="pr-5">
-              <button className="border-b-2">Created</button>
+              <button
+                className={`${showCreated && "border-b-2"}`}
+                onClick={clickCreated}
+              >
+                Created
+              </button>
             </div>
             <div className="pr-5">
-              <button className="">Joined</button>
+              <button
+                className={`${!showCreated && "border-b-2"}`}
+                onClick={clickJoined}
+              >
+                Joined
+              </button>
             </div>
           </div>
           <div>
@@ -46,7 +60,7 @@ export function ProfileDetail({ Walletconnection, LinkWallet }) {
           </button> */}
           </div>
         </div>
-        <BoardList />
+        <BoardList showCreated={showCreated}/>
       </div>
     </div>
   );

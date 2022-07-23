@@ -2,8 +2,14 @@ import { observer } from "mobx-react";
 import { BoardItem } from "./BoardItem";
 import userStore from "./../stores/userStore";
 
-const BoardList = () => {
-  const boardItems = userStore.user.boards.map((board) => (
+const BoardList = ({ showCreated }) => {
+  let boards = userStore.user.boards;
+  const userId = userStore.user._id;
+  if (showCreated)
+    boards = boards.filter(({ createdBy }) => createdBy === userId);
+  if (!showCreated)
+    boards = boards.filter(({ createdBy }) => createdBy !== userId);
+  const boardItems = boards.map((board) => (
     <BoardItem key={board._id} board={board} />
   ));
 
