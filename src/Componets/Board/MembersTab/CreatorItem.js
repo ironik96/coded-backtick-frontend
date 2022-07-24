@@ -3,24 +3,6 @@ import boardMembersStore from "../../../stores/boardMembersStore";
 import { observer } from "mobx-react";
 import boardStore from "../../../stores/boardStore";
 function Creatoritem() {
-//  // const [users, setUsers] = useState([]);
-
-//   useEffect(() => {
-//     (async () => {
-//       boardMembersStore.getByUserId(boardStore.board.createdBy)
-//       console(boardMembersStore.admin ,"//////")
-//       // await boardMembersStore.getUsers();
-//       // setUsers(boardMembersStore.users);
-//     })();
-//     // setcurrentCreator(users.filter( (currentUser) => currentUser._id === user))
-
-//   }, []);
-//   // setUsers(boardMembersStore.users);
-
-//     // setcurrentCreator(users.filter( (currentUser) => currentUser._id === user))
-// setcurrentCreator(boardMembersStore.admin)
-// console.log(currentCreator)
-
 boardMembersStore.getByUserId(boardStore.board.createdBy)
 const [currentCreator, setcurrentCreator] = useState(boardMembersStore.admin);
 
