@@ -11,6 +11,8 @@ const TaskForm = ({ task, setTask, closeModal }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (task.points === "") task.points = 0;
+    else task.points = +task.points;
     isNew
       ? taskStore.createTask(boardStore.board._id, task)
       : taskStore.updateTask({
@@ -29,6 +31,7 @@ const TaskForm = ({ task, setTask, closeModal }) => {
         type="number"
         name="points"
         placeholder="Points"
+        pattern="\d"
         value={task.points}
         onChange={handleChange}
       ></input>

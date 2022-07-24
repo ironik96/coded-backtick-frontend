@@ -22,8 +22,11 @@ const AssignButton = ({ task }) => {
   const onClickAssign = () =>
     taskStore.updateTask({ _id: task._id, assignedTo: currentMember._id });
 
-  const onClickUnassign = () =>
+  const onClickUnassign = () => {
     taskStore.updateTask({ _id: task._id, assignedTo: null });
+    if (isAdmin)
+      setStyles({ tooltip: { opacity: 0 }, icon: { fill: "#869199" } });
+  };
 
   let tooltipTitle = "Assign Me";
   let tooltipDisplay = "block";

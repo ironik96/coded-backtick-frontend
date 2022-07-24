@@ -13,7 +13,7 @@ class TaskStore {
     title: "",
     boardId: "",
     list: "",
-    points: 0,
+    points: "",
     assignedTo: "",
   };
 
