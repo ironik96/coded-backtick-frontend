@@ -23,9 +23,13 @@ function Memberitem({ member }) {
             className="rounded-[100%] w-[60px] h-[60px] object-cover relative left-[20px]"
             src={user.image}
           />
-          <div className="items-center">
+          <div className="item-center ">
             <h1 className=""> {user.fname + " " + user.lname}</h1>
-            <h5 className="text-[10px]">View Profile</h5>
+            { member.role == "admin" ?  <h5 className="text-[10px] text-left">Admin</h5> :
+            <h5 className="text-[10px] text-left pl-1">Member</h5>
+            
+             }
+           
           </div>
         </div>
         <div className="flex items-center p-[10px] h-[100%] w-[80px] rounded-lg  place-content-center">

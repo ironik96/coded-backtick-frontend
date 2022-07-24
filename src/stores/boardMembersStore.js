@@ -10,6 +10,7 @@ class BoardMembersStore {
   constructor() {
     makeAutoObservable(this);
   }
+  admin = null
 
   addMember = async (notification) => {
     if (!notification) return;
@@ -64,6 +65,13 @@ class BoardMembersStore {
     const [response, error] = await tryCatch(() => instance.get(`/users`));
     if (error) return console.error(error.message);
     this.users = response.data;
+  };
+  getByUserId = async (userId) => {
+    const [response, error] = await tryCatch(() => instance.get(`/user/${userId}`));
+    if (error) return console.error(error);
+
+  this.admin = response.data
+  
   };
   getMemberByUserId = (userId) => {
     return boardStore.board.boardMembers.find(
