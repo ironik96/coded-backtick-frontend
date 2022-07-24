@@ -40,12 +40,6 @@ class NotificationStore {
   setNotifications = (notifications) =>
     (this.notifications = [...notifications]);
 
-  handleNotificationSocket = (notification) => {
-    if (!userStore.user) return;
-    if (notification.userId === userStore.user._id)
-      this.addNotification(notification);
-  };
-
   updateNotificationLocally = (notification) =>
     (this.notifications = this.notifications.map((not) =>
       not._id === notification._id ? notification : not

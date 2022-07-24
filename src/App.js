@@ -17,9 +17,7 @@ import { useEffect } from "react";
 import Loading from "./components/shared/Loading";
 import notificationStore from "./stores/notificationStore";
 import Test from "./Shop/Paypal/test";
-import io from "socket.io-client";
-
-export const socket = io("http://localhost:8000");
+import { connectAppSocket } from "./socket.controllers/appSockets";
 
 function App() {
   const id = authStore.user?._id;
@@ -29,21 +27,8 @@ function App() {
     authStore.Profile(id);
     notificationStore.fetchNotifications(id);
   }, [id]);
-  useEffect(() => {
-    socket.on("connection", () => {});
-    socket.on("notification", notificationStore.handleNotificationSocket);
 
-    socket.on("disconnect", () => {
-      // setIsConnected(false);
-      console.log("disconnected");
-    });
-
-    return () => {
-      socket.off("connect");
-      socket.off("notification");
-      socket.off("disconnect");
-    };
-  }, []);
+  useEffect(connectAppSocket, []);
 
   const Routes = () => {
     if (!authStore.user) return <AuthRoutes />;
