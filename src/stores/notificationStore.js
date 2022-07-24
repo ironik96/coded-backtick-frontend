@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import instance from "./instance";
+import userStore from "./userStore";
 
 const BASE_URL = "/notifications";
 
@@ -38,6 +39,12 @@ class NotificationStore {
 
   setNotifications = (notifications) =>
     (this.notifications = [...notifications]);
+
+  handleNotificationSocket = (notification) => {
+    if (!userStore.user) return;
+    if (notification.userId === userStore.user._id)
+      this.addNotification(notification);
+  };
 
   updateNotificationLocally = (notification) =>
     (this.notifications = this.notifications.map((not) =>

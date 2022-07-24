@@ -16,13 +16,12 @@ import authStore from "./stores/authStore";
 import { useEffect } from "react";
 import Loading from "./components/shared/Loading";
 import notificationStore from "./stores/notificationStore";
-import Test from "./Shop/Paypal/test"
+import Test from "./Shop/Paypal/test";
 import io from "socket.io-client";
 
 export const socket = io("http://localhost:8000");
 
 function App() {
-  
   const id = authStore.user?._id;
   // const [isConnected, setIsConnected] = useState(socket.connected);
   useEffect(() => {
@@ -32,7 +31,7 @@ function App() {
   }, [id]);
   useEffect(() => {
     socket.on("connection", () => {});
-    socket.on("message", (msg) => console.log(msg));
+    socket.on("notification", notificationStore.handleNotificationSocket);
 
     socket.on("disconnect", () => {
       // setIsConnected(false);
@@ -41,6 +40,7 @@ function App() {
 
     return () => {
       socket.off("connect");
+      socket.off("notification");
       socket.off("disconnect");
     };
   }, []);
