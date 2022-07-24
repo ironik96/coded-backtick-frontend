@@ -4,7 +4,9 @@ import MemberItem from "./MemberItem";
 import boardStore from "../../../stores/boardStore";
 import SearchBar from "./Searchbar";
 import Loading from "../../../components/shared/Loading";
+import CreatorItem from "./CreatorItem";
 function MemberTab() {
+  
   const boardMembers = boardStore.board.boardMembers;
   if (!boardMembers) return <Loading />;
 
@@ -18,7 +20,10 @@ function MemberTab() {
             <SearchBar/>
         : <div/>}
       </div>
+<CreatorItem />
+
       {memberList}
+
     </div>
   );
 }

@@ -10,7 +10,7 @@ function RankLeaderboard({ member }) {
       <div className="bg-white h-[70px] rounded-lg px-6 py-2 flex items-center gap-4  w-[70%]">
         <RankAvatar
           rank={member.rank}
-          image="https://ichef.bbci.co.uk/news/976/cpsprodpb/FD27/production/_101970846_aubreyblanche.jpg" //{user.image}
+          image= {user.image}
           alt="profile"
         />
         <h1>{user.fname + " " + user.lname}</h1>
