@@ -1,6 +1,7 @@
 import io from "socket.io-client";
 import { handleNotificationSocket } from "./notification";
 import { handleAddMember } from "./boardMembers";
+import { handleBoardAddMember } from "./board";
 
 const socket = io("http://localhost:8000");
 
@@ -20,5 +21,13 @@ export const connectAppSocket = () => {
     socket.off("notification");
     socket.off("add-member");
     socket.off("disconnect");
+  };
+};
+
+export const connectBoardSocket = () => {
+  socket.on("board-add-member", handleBoardAddMember);
+
+  return () => {
+    socket.off("board-add-member");
   };
 };

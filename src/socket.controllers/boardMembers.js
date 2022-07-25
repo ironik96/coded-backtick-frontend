@@ -4,7 +4,7 @@ export const handleAddMember = (response) => {
   const currentUser = userStore.user;
   if (!currentUser) return;
 
-  const [board, incomingUser, notification] = response;
+  const [board, incomingUser] = response;
   if (incomingUser._id === currentUser._id) return;
 
   if (userHasBoard(currentUser, board))

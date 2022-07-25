@@ -21,7 +21,6 @@ import { connectAppSocket } from "./socket.controllers/appSockets";
 
 function App() {
   const id = authStore.user?._id;
-  // const [isConnected, setIsConnected] = useState(socket.connected);
   useEffect(() => {
     userStore.updateUserStore(id);
     authStore.Profile(id);
