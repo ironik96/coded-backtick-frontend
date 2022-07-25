@@ -23,9 +23,6 @@ class TaskStore {
       instance.post(BASE_URL, task)
     );
     if (error) return console.error(error.message, response.data);
-
-    // add it locally
-    boardStore.addTask(response.data);
   };
 
   updateTask = async (task) => {
@@ -33,9 +30,6 @@ class TaskStore {
       instance.put(BASE_URL, task)
     );
     if (error) return console.error(error.message, response.data);
-
-    // update it locally
-    boardStore.updateTask(response.data);
   };
 
   deleteTask = async (id) => {
@@ -43,9 +37,6 @@ class TaskStore {
       instance.delete(`${BASE_URL}/${id}`)
     );
     if (error) return console.error(error.message, response.data);
-
-    // delete it locally
-    boardStore.deleteTask(id);
   };
 
   isNew = (task) =>

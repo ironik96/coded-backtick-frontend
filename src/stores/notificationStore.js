@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import instance from "./instance";
+import userStore from "./userStore";
 
 const BASE_URL = "/notifications";
 

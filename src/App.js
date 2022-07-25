@@ -16,15 +16,18 @@ import authStore from "./stores/authStore";
 import { useEffect } from "react";
 import Loading from "./components/shared/Loading";
 import notificationStore from "./stores/notificationStore";
-import Test from "./Shop/Paypal/test"
+import Test from "./Shop/Paypal/test";
+import { connectAppSocket } from "./socket.controllers/appSockets";
+
 function App() {
-  
   const id = authStore.user?._id;
   useEffect(() => {
     userStore.updateUserStore(id);
     authStore.Profile(id);
     notificationStore.fetchNotifications(id);
   }, [id]);
+
+  useEffect(connectAppSocket, []);
 
   const Routes = () => {
     if (!authStore.user) return <AuthRoutes />;
