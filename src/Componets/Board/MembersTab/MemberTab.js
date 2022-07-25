@@ -20,7 +20,7 @@ function MemberTab() {
             <SearchBar/>
         : <div/>}
       </div>
-<CreatorItem />
+      <CreatorItem/>
 
       {memberList}
 

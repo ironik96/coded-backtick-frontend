@@ -22,11 +22,12 @@ function BoardPage() {
   const { id } = useLocation().state;
   useEffect(() => {
     boardStore.fetchBoard(id);
+   
     return () => boardStore.dispose();
   }, []);
 
   if (!boardStore.board) return <Loading />;
-
+  boardMembersStore.getByUserId(boardStore.board.createdBy)
   const boardTitle = (
     <div
       ref={titleRef}

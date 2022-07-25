@@ -69,7 +69,6 @@ class BoardMembersStore {
   getByUserId = async (userId) => {
     const [response, error] = await tryCatch(() => instance.get(`/user/${userId}`));
     if (error) return console.error(error);
-
   this.admin = response.data
   
   };

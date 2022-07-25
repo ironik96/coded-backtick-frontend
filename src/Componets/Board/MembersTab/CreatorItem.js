@@ -3,17 +3,22 @@ import boardMembersStore from "../../../stores/boardMembersStore";
 import { observer } from "mobx-react";
 import boardStore from "../../../stores/boardStore";
 function Creatoritem() {
-boardMembersStore.getByUserId(boardStore.board.createdBy)
-const [currentCreator, setcurrentCreator] = useState(boardMembersStore.admin);
+  const [currentCreator, setcurrentCreator] = useState(boardMembersStore.admin);
+  useEffect(() => {
+    (async () => {
+      await boardMembersStore.getByUserId(boardStore.board.createdBy)
+      setcurrentCreator(boardMembersStore.admin)
+    })();
 
-console.log(currentCreator)
+  }, []);
+
   return (
     <div className=" flex place-content-center ">
       <div className=" bg-white h-[70px] rounded-lg p-2 flex justify-between  w-[70%]">
         <div className="flex items-center  space-x-10 ">
           <img
             className="rounded-[100%] w-[60px] h-[60px] object-cover relative left-[20px]"
-            src={currentCreator.image}
+            src={ (currentCreator.image === null) ? "https://cdn-icons-png.flaticon.com/512/149/149071.png" : currentCreator.image} 
           />
           <div className="item-center ">
             <h1 className=""> {currentCreator.fname + " " + currentCreator.lname}</h1>

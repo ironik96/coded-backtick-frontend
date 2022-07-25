@@ -3,6 +3,7 @@ import React from "react";
 import boardStore from "../../../stores/boardStore";
 import Task from "./Task";
 import TaskList from "./TaskList";
+import EndBoardConfetti from "../../../components/shared/EndBoardConfetti";
 
 function BoardTab() {
   const taskList = (tasks) =>
@@ -32,6 +33,7 @@ function BoardTab() {
         listTitle={"Done"}
         taskList={taskList(tasks.filter((task) => task.list === "done"))}
       />
+     <EndBoardConfetti status={"Closed"} />
     </div>
   );
 }
