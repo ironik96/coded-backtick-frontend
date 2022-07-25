@@ -75,6 +75,11 @@ class BoardStore {
   addBoardMember = (boardMember) =>
     (this.board.boardMembers = [...this.board.boardMembers, boardMember]);
 
+  updateBoardMember = (boardMember) => {
+    this.board.boardMembers = this.board.boardMembers.map((member) =>
+      member._id === boardMember._id ? boardMember : member
+    );
+  };
   updateTask = (updatedTask) => {
     this.board.tasks = this.board.tasks.map((task) =>
       task._id === updatedTask._id ? updatedTask : task

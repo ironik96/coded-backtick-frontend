@@ -1,7 +1,7 @@
 import io from "socket.io-client";
 import { handleNotificationSocket } from "./notification";
 import { handleAddMember } from "./boardMembers";
-import { handleBoardAddMember } from "./board";
+import { handleBoardAddMember, handleBoardTask } from "./board";
 
 const socket = io("http://localhost:8000");
 
@@ -26,8 +26,10 @@ export const connectAppSocket = () => {
 
 export const connectBoardSocket = () => {
   socket.on("board-add-member", handleBoardAddMember);
+  socket.on("board-task", handleBoardTask);
 
   return () => {
     socket.off("board-add-member");
+    socket.off("board-task");
   };
 };
