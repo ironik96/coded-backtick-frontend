@@ -42,7 +42,10 @@ class BoardStore {
     );
     if (error) return console.error(error.message, response.data);
     userStore.updateBoard(response.data);
-    if (this.board) this.board.title = response.data.title;
+    if (this.board) {
+      this.board.title = response.data.title;
+      this.board.boardStatus = response.data.boardStatus;
+    }
   };
 
   deleteBoard = async (boardId) => {

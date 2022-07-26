@@ -15,14 +15,6 @@ const CreateBoard = () => {
   const initialBoard = isNew
     ? boardStore.emptyBoard
     : userStore.getEditableBoard(boardSlug);
-    const [status, setStatus] = React.useState("Active");
-
-
-    const handleChangeDrop = (event) => {
-      setStatus(event.target.value);
-      console.log(event.target.name, event.target.value)
-      setBoard({ ...board, [event.target.name]: event.target.value });
-    };
   const [board, setBoard] = useState(initialBoard);
   const navigate = useNavigate();
 
@@ -94,21 +86,22 @@ const CreateBoard = () => {
             type={"date"}
             twClass="grow"
           />
-    
         </div>
-  
-       {!isNew ? <DropdownList
-        label="Board Status"
-        options={[
-          { label: 'Active', value: 'Active' },
-          { label: 'Closed', value: 'Closed' },
-        ]}
-        name="boardStatus"
-        value={board.boardStatus}
-        onChange={handleChangeDrop}
-      />
-      : <div/>
-      }
+
+        {!isNew ? (
+          <DropdownList
+            label="Board Status"
+            options={[
+              { label: "Active", value: "Active" },
+              { label: "Closed", value: "Closed" },
+            ]}
+            name="boardStatus"
+            value={board.boardStatus}
+            onChange={handleChange}
+          />
+        ) : (
+          <div />
+        )}
         <div className="flex justify-end gap-2">
           {showDelete && (
             <button

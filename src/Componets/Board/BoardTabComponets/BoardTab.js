@@ -7,9 +7,12 @@ import EndBoardConfetti from "../../../components/shared/EndBoardConfetti";
 
 function BoardTab() {
   const taskList = (tasks) =>
-    tasks.map((task) => <Task key={task._id} task={task} listLength={tasks.length} />);
+    tasks.map((task) => (
+      <Task key={task._id} task={task} listLength={tasks.length} />
+    ));
 
   const { tasks } = boardStore.board;
+  const isClosed = boardStore.board.boardStatus === "Closed";
 
   return (
     <div className="w-full p-[20px] flex items-start h-full overflow-x-auto gap-5 scroll-event-div">
@@ -33,9 +36,8 @@ function BoardTab() {
         listTitle={"Done"}
         taskList={taskList(tasks.filter((task) => task.list === "done"))}
       />
-      
-     {/* <EndBoardConfetti status={"Closed"} /> */}
 
+      {isClosed && <EndBoardConfetti />}
     </div>
   );
 }

@@ -7,7 +7,7 @@ const canvasStyles = {
   width: "100%",
   height: "100%",
   top: 0,
-  left: 0
+  left: 0,
 };
 
 function getAnimationSettings(angle, originX) {
@@ -16,17 +16,12 @@ function getAnimationSettings(angle, originX) {
     angle,
     spread: 55,
     origin: { x: originX },
-    colors: ["#bb0000", "#ffffff"]
+    colors: ["#fdca4b", "#df6d45", "#1dad91"],
   };
 }
 
-export default function EndBoardConfetti({status} ) {
+export default function EndBoardConfetti() {
   const refAnimationInstance = useRef(null);
-  const [intervalId, setIntervalId] = useState();
-
-  const getInstance = useCallback((instance) => {
-    refAnimationInstance.current = instance;
-  }, []);
 
   const nextTickAnimation = useCallback(() => {
     if (refAnimationInstance.current) {
@@ -34,23 +29,13 @@ export default function EndBoardConfetti({status} ) {
       refAnimationInstance.current(getAnimationSettings(120, 1));
     }
   }, []);
+  const [intervalId, setIntervalId] = useState(
+    setInterval(nextTickAnimation, 120)
+  );
 
-  const startAnimation = useCallback(() => {
-    if (!intervalId) {
-      setIntervalId(setInterval(nextTickAnimation, 16));
-    }
-  }, [nextTickAnimation, intervalId]);
-
-  const pauseAnimation = useCallback(() => {
-    clearInterval(intervalId);
-    setIntervalId(null);
-  }, [intervalId]);
-
-  const stopAnimation = useCallback(() => {
-    clearInterval(intervalId);
-    setIntervalId(null);
-    refAnimationInstance.current && refAnimationInstance.current.reset();
-  }, [intervalId]);
+  const getInstance = useCallback((instance) => {
+    refAnimationInstance.current = instance;
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -58,17 +43,5 @@ export default function EndBoardConfetti({status} ) {
     };
   }, [intervalId]);
 
-  return (
-    <>
-
-
-{(status === "Closed") ? startAnimation : stopAnimation }
-      <div>
-        <button onClick={startAnimation}>Start</button>
-   
-        <button onClick={stopAnimation}>Stop</button>
-      </div>
-      <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
-    </>
-  );
+  return <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />;
 }
