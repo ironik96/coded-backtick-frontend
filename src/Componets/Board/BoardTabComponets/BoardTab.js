@@ -33,7 +33,9 @@ function BoardTab() {
         listTitle={"Done"}
         taskList={taskList(tasks.filter((task) => task.list === "done"))}
       />
-     <EndBoardConfetti status={"Closed"} />
+      
+     {/* <EndBoardConfetti status={"Closed"} /> */}
+
     </div>
   );
 }
