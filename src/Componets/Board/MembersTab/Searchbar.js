@@ -55,7 +55,7 @@ function SearchBar() {
         "
           src={user.image}
         />
-        <h1>{user.fname}</h1>
+        <h1>{user.fname} {user.lname}</h1>
       </div>
       <button className="p-5" onClick={() => handleClick(user)}>
         <img src={plusIcon} className="w-[12px]" />

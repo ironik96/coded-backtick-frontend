@@ -7,7 +7,7 @@ export function ProfileHeader({ user }) {
       <div className="w-full flex justify-between">
         <img
           alt="profile"
-          className="absolute h-36 left-6 bottom-[-25px] bg-white rounded-[100px] ml-5 w-36 object-fill"
+          className="absolute h-36 left-6 bottom-[-25px] bg-white rounded-full ml-5 w-36 object-cover"
           src={user.image}
         />
         <h1 className="absolute left-52 bottom-5 text-[27px] font-bold text-white">{`${user.fname} ${user.lname}`}</h1>

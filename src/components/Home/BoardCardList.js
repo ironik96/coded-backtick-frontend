@@ -5,9 +5,9 @@ import ScrollContainer from "react-indiana-drag-scroll";
 import BoardChart from "./card_components/BoardChart";
 import userStore from "../../stores/userStore";
 import { Link } from "react-router-dom";
-import creater from "../../images/crown.png";
-import admin from "../../images/admin.png";
-import member from "../../images/account.png";
+// import creater from "../../images/crown.png";
+// import admin from "../../images/admin.png";
+// import member from "../../images/account.png";
 
 const BoardCardList = () => {
   const cardListWidth =
@@ -28,9 +28,10 @@ const BoardCardList = () => {
 function BoardCard({ board }) {
   let src;
   const role = userStore.getBoardRole(board);
-  if (role === "creater") src = creater;
-  if (role === "admin") src = admin;
-  if (role === "member") src = member;
+  if (role === "creater")
+    src = "https://cdn-icons-png.flaticon.com/512/891/891024.png";
+  // if (role === "admin") src = admin;
+  // if (role === "member") src = member;
 
   return (
     <Link
@@ -42,7 +43,9 @@ function BoardCard({ board }) {
       <Card
         leading={board.title}
         content={<BoardChart {...userStore.boardChartInfo(board)} />}
-        trailing={<img alt={`board ${role}`} src={src} className="w-5 h-5" />}
+        trailing={
+          src && <img alt={`board ${role}`} src={src} className="w-5 h-5" />
+        }
       />
     </Link>
   );

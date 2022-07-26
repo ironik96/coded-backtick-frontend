@@ -6,6 +6,8 @@ const RankAvatar = ({ rank, image }) => {
   if (rank === 2) fillColor = "fill-theme-yellow";
   if (rank === 3) fillColor = "fill-theme-red";
   if (rank > 3) fillColor = "fill-theme-dark-grey";
+
+  const spaceX = rank >= 10 ? 32 : 26;
   return (
     <div className="relative overflow-hidden">
       <svg
@@ -26,7 +28,12 @@ const RankAvatar = ({ rank, image }) => {
         src={image}
         alt="avatar"
       />
-      <div className="absolute left-1/2 -translate-x-[26px] top-3 text-lg text-white font-bold">
+      <div
+        style={{
+          transform: `translateX(-${spaceX}px)`,
+        }}
+        className={`absolute left-1/2 -translate-x-[26px] top-3 text-lg text-white font-bold`}
+      >
         {rank}
       </div>
     </div>

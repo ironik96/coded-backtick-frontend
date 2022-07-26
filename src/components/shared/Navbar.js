@@ -80,7 +80,7 @@ const ProfileTrailing = observer(() => {
       <Link to={"/Profile"}>
         <img
           style={{ width: iconSize, height: iconSize }}
-          className="rounded-full hover:outline hover:outline-blue cursor-pointer"
+          className="rounded-full object-cover hover:outline hover:outline-blue cursor-pointer"
           src={userStore.user?.image ? userStore.user?.image : lazy}
           alt="avatar"
         />

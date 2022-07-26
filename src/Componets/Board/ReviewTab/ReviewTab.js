@@ -5,16 +5,16 @@ import boardStore from "../../../stores/boardStore";
 
 import ReviewTask from "./ReviewTask";
 function ReviewTab() {
-    let { tasks } = boardStore.board;
-    tasks= tasks.filter((task) => task.list === "review")
-    const taskList =  tasks.map((task) => <ReviewTask key={task._id} task={task} />)
+  let { tasks } = boardStore.board;
+  tasks = tasks.filter((task) => task.list === "review");
+  const taskList = tasks.map((task) => (
+    <ReviewTask key={task._id} task={task} />
+  ));
 
   return (
     <div className="bg-theme-light-grey w-screen p-[20px] space-y-4 flex-col place-content-center">
-      <div className="flex justify-center">
-        {taskList}
-</div>
-</div>
+      <div className="flex justify-center gap-4">{taskList}</div>
+    </div>
   );
 }
 export default observer(ReviewTab);

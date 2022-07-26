@@ -5,7 +5,7 @@ export function BoardItem({ board }) {
       <h1 className="bg-lightgreen text-green h-8 w-[95%] pt-2 m-2 text-center rounded-[10px]">
         {title}
       </h1>
-      <p className="overflow-hidden wrap">{description}</p>
+      <p className="overflow-hidden wrap p-2">{description}</p>
     </div>
   );
 }

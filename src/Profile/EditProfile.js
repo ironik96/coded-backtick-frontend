@@ -22,7 +22,12 @@ function Profile() {
   const handleImage = async (event) => {
     setImage(event.target.files[0]);
     sendimage(event);
-    authStore.UpdateProfile({ ...user, image: `http://localhost:8000/images/${user._id}-avatar.jpg?${new Date().getSeconds()}`});
+    authStore.UpdateProfile({
+      ...user,
+      image: `http://localhost:8000/images/${
+        user._id
+      }-avatar.jpg?${new Date().getSeconds()}`,
+    });
   };
   const sendimage = async (event) => {
     const formData = new FormData();
@@ -76,7 +81,7 @@ function Profile() {
                 className="absolute w-40 left-96 bottom-5 text-[27px] font-bold border-2 border-viewgray rounded-md bg-transparent text-white"
                 value={user.lname}
               />
-              <div className="absolute right-6 top-5 py-2 px-4 h-10 rounded-[70px] bg-white text-coingray">
+              {/* <div className="absolute right-6 top-5 py-2 px-4 h-10 rounded-[70px] bg-white text-coingray">
                 <div className="flex justify-between">
                   <h1 className="mr-1">300</h1>
                   <img
@@ -85,7 +90,7 @@ function Profile() {
                     src={coin}
                   />
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

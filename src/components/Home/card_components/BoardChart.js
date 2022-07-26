@@ -1,5 +1,5 @@
 import React from "react";
-import crown from "../../../icons/crown.svg";
+import crown from "../../../icons/cup.png";
 
 const iconSize = 16;
 
@@ -57,7 +57,7 @@ const Bar = ({ placementStyle, name, firstplace }) => {
       <div className="absolute t-0 -translate-y-8 inset-x-0 text-[10px] flex flex-col h-8 justify-end items-center">
         {firstplace && (
           <img
-            className="grow"
+            className="pb-1"
             src={crown}
             width={iconSize}
             height={iconSize}

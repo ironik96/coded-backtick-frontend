@@ -21,7 +21,7 @@ function LeaderboardTab() {
   ));
 
   return (
-    <div className="w-screen p-[20px] space-y-4 flex-col place-content-center">
+    <div className="w-screen p-[20px] space-y-4 flex-col place-content-center h-full overflow-y-auto">
       {memberList}
     </div>
   );

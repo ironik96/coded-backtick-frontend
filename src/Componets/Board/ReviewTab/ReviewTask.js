@@ -28,7 +28,7 @@ function ReviewTask({ task }) {
       <div className="flex m-3 space-x-2">
         <img
           className="rounded-full w-[49px] h-[49px]  object-cover"
-          src="https://ichef.bbci.co.uk/news/976/cpsprodpb/FD27/production/_101970846_aubreyblanche.jpg"
+          src={user.image}
           alt="avatar"
         />
         <div className="px-2 text-left">

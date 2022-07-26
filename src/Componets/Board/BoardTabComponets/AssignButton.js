@@ -79,7 +79,7 @@ const Placeholder = ({
   const ImgTag = () => (
     <img
       title={name}
-      className="rounded-full w-[24px] h-[24px] inline"
+      className="rounded-full w-[24px] h-[24px] inline object-cover"
       src={image}
       alt=""
     />
