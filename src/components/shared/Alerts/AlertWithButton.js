@@ -18,11 +18,9 @@ export default function AlertWithButton(
     confirmButtonColor: "#1DAD91",
   }).then((result) => {
     if (result.isConfirmed) {
-      if (onConfirm) {
-        onConfirm();
-      } else {
+      if (onConfirm) onConfirm();
+      else {
         boardMembersStore.deleteMember(board, member._id, member.userId._id);
-        console.log(board, member);
         Alert("Deleted ", "success");
       }
     } else if (result.isDenied) {

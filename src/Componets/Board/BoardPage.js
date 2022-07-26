@@ -15,6 +15,7 @@ import RewardTab from "./RewardTab/RewardTab";
 import point from "../../images/coin.png";
 import boardMembersStore from "../../stores/boardMembersStore";
 import userStore from "../../stores/userStore";
+import { connectBoardSocket } from "../../socket.controllers/appSockets";
 CustomTab.tabsRole = "Tab";
 function BoardPage() {
   const titleRef = useRef();
@@ -25,6 +26,7 @@ function BoardPage() {
    
     return () => boardStore.dispose();
   }, []);
+  useEffect(connectBoardSocket, []);
 
   if (!boardStore.board) return <Loading />;
   boardMembersStore.getByUserId(boardStore.board.createdBy)

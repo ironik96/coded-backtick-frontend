@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 import boardMembersStore from "../../../stores/boardMembersStore";
 import boardStore from "../../../stores/boardStore";
 import taskStore from "../../../stores/taskStore";
-import Alert from "../../../components/shared/Alerts/Alert"
+import Alert from "../../../components/shared/Alerts/Alert";
 
 function ReviewTask({ task }) {
   const { assignedTo } = task;
@@ -12,7 +12,6 @@ function ReviewTask({ task }) {
     (member) => member._id === assignedTo
   );
   const { userId: user } = member[0];
-  console.log(member, "member");
   member = member[0];
 
   const handleOnClick = (e) => {
@@ -21,7 +20,7 @@ function ReviewTask({ task }) {
     task.list = "done";
     taskStore.updateTask(task);
     member.points = task.points + member.points;
-    member.points = boardMembersStore.updateMember(member);
+    boardMembersStore.updateMember(member);
     Alert("Review Marked ", "success");
   };
   return (
@@ -33,9 +32,8 @@ function ReviewTask({ task }) {
           alt="avatar"
         />
         <div className="px-2 text-left">
-        <h1 className="justify-start text-[20px]">{task.title}</h1>
+          <h1 className="justify-start text-[20px]">{task.title}</h1>
           <h6>{user.fname + " " + user.lname}</h6>
-        
         </div>
       </div>
       <div className="flex place-content-end m-2">

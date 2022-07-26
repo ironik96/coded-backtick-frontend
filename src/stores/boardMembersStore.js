@@ -29,14 +29,13 @@ class BoardMembersStore {
       instance.put(`${URL}/member/${member._id}/`, member)
     );
     if (error) return console.error(error);
-    return response.data;
   };
 
-  deleteMember = async (boardId, memberId,userId) => {
+  deleteMember = async (boardId, memberId, userId) => {
     boardStore.board.boardMembers = boardStore.board.boardMembers.filter(
       (member) => member._id != memberId
     );
-    
+
     const [response, error] = await tryCatch(() =>
       instance.delete(`${URL}/${boardId}/${memberId}/${userId}`)
     );
